@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import SkillChecklist from '../../components/SkillChecklist.jsx';
+import { careers, author } from '../../data/careers.js';
+
+export function getStaticPaths() {
+  return careers.map(career => ({
+    params: { slug: career.slug },
+    props: { career },
+  }));
+}
+
+const { career } = Astro.props;
+
+const relatedCareers = careers.filter(c => c.slug !== career.slug).slice(0, 3);
+
+const getBarColor = (score) => {
+  if (score <= 40) return '#10b981';
+  if (score <= 70) return '#f59e0b';
+  return '#f43f5e';
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `${career.title} AI Risk Score: ${career.baseRiskScore}% — How to Future-Proof Your Career`,
+  "description": career.aioSummary,
+  "url": `https://aicareer.me/risk/${career.slug}/`,
+  "author": { "@type": "Person", "name": author.name },
+  "publisher": { "@type": "Organization", "name": "AI Career Risk", "url": "https://aicareer.me" },
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-03-01"
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": `What is the AI risk score for a ${career.title}?`, "acceptedAnswer": { "@type": "Answer", "text": career.aioSummary } },
+    { "@type": "Question", "name": `What tasks does AI already perform for a ${career.title}?`, "acceptedAnswer": { "@type": "Answer", "text": `AI currently automates the following tasks in the ${career.title} role: ${career.automatedTasks.join('; ')}.` } },
+    { "@type": "Question", "name": `How to prepare for AI impact as a ${career.title}?`, "acceptedAnswer": { "@type": "Answer", "text": career.howToFutureProof } },
+    { "@type": "Question", "name": `What skills reduce AI risk for a ${career.title}?`, "acceptedAnswer": { "@type": "Answer", "text": `The most effective skills to reduce AI risk for a ${career.title} include: ${career.skills.map(s => s.name).join(', ')}.` } },
+    { "@type": "Question", "name": `Will AI completely replace ${career.title}s?`, "acceptedAnswer": { "@type": "Answer", "text": `While AI will automate many tasks in the ${career.title} role, complete replacement is unlikely in the near term. Professionals who proactively develop AI-adjacent skills and focus on human-judgment work can significantly reduce their displacement risk.` } }
+  ]
+};
+---
+
+<BaseLayout
+  title={`${career.title} AI Risk Score: ${career.baseRiskScore}% | Future-Proof Your Career | aicareer.me`}
+  description={`${career.title} AI automation risk is ${career.baseRiskScore}% (${career.riskLabel}). See which tasks AI already performs, learn the skills to reduce your risk, and get a free upskilling roadmap.`}
+  canonical={`https://aicareer.me/risk/${career.slug}/`}
+  ogType="article"
+  schema={[articleSchema, faqSchema]}
+>
+  <Nav />
+
+  <div class="min-h-screen bg-[#06070f]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <!-- Breadcrumb -->
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center space-x-2 text-sm text-[#4b5280]">
+          <li><a href="/" class="hover:text-[#06B6D4] transition-colors">Home</a></li>
+          <li><span class="mx-2 text-[#1e2340]">/</span></li>
+          <li><span class="text-[#e2e6f5] font-medium" aria-current="page">{career.title} Risk Assessment</span></li>
+        </ol>
+      </nav>
+
+      <a href="/" class="inline-flex mb-8 px-4 py-2 rounded-lg border border-[#1e2340] text-[#e2e6f5] hover:border-[#06B6D4] transition-all items-center gap-2 text-sm">
+        ← All Careers
+      </a>
+
+      <!-- Header -->
+      <div class="text-center mb-10">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#e2e6f5] mb-4">{career.title}</h1>
+        <p class="text-lg text-[#4b5280]">AI Displacement Risk Assessment & Upskilling Roadmap</p>
+      </div>
+
+      <!-- AIO Summary — static, citable, in the HTML -->
+      <div class="bg-[#0d1120] border-l-4 border-[#06B6D4] rounded-xl p-6 mb-8">
+        <p class="text-sm text-[#e2e6f5] leading-relaxed font-medium">{career.aioSummary}</p>
+      </div>
+
+      <!-- Interactive Risk Gauge + Skill Checklist (React island) -->
+      <SkillChecklist
+        client:load
+        skills={career.skills}
+        slug={career.slug}
+        baseRiskScore={career.baseRiskScore}
+      />
+
+      <!-- What AI Already Does — static HTML -->
+      <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+        <h2 class="text-xl font-bold text-[#e2e6f5] mb-4">What AI Already Does in This Role</h2>
+        <p class="text-sm text-[#4b5280] mb-4">
+          These are the specific tasks that AI tools currently perform for {career.title}s, reducing demand for human execution:
+        </p>
+        <ul class="space-y-3">
+          {career.automatedTasks.map(task => (
+            <li class="flex items-start gap-3 text-sm text-[#4b5280]">
+              <span class="text-[#f43f5e] mt-0.5 flex-shrink-0">⚠</span>
+              <span>{task}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Article — rich static content for SEO -->
+      <article class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-4">
+          Why {career.title}s Are at Risk from AI Automation
+        </h2>
+        <p class="text-[#4b5280] mb-6 leading-relaxed">
+          The role of a {career.title} is undergoing a significant transformation driven by rapid advances in artificial intelligence.
+          With a baseline AI displacement risk score of <strong class="text-[#e2e6f5]">{career.baseRiskScore}%</strong>,
+          professionals in this field face some of the most acute automation pressure in the current labor market. {career.whyAtRisk}
+        </p>
+        <p class="text-[#4b5280] mb-8 leading-relaxed">
+          As companies adopt machine learning and natural language processing at scale, demand for traditional, routine-based execution continues to decline.
+          The professionals who will thrive are those who pivot toward work requiring complex judgment, contextual expertise,
+          and trust-based human relationships that AI cannot replicate.
+        </p>
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-4">
+          How to Future-Proof Your Career as a {career.title}
+        </h2>
+        <p class="text-[#4b5280] leading-relaxed">
+          {career.howToFutureProof} The key is to reposition yourself as an AI-augmented professional — someone who leverages
+          AI tools to deliver higher output while focusing human energy on the strategic, creative, and relationship-driven
+          dimensions of the role.
+        </p>
+      </article>
+
+      <!-- FAQ — visible section -->
+      <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-6">Frequently Asked Questions</h2>
+        <div class="space-y-5">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border-b border-[#1e2340] pb-5 last:border-0 last:pb-0">
+              <h3 class="text-base font-bold text-[#e2e6f5] mb-2">{faq.name}</h3>
+              <p class="text-sm text-[#4b5280] leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Related Careers -->
+      <div class="mb-8">
+        <h2 class="text-xl font-bold text-[#e2e6f5] mb-4">Other At-Risk Career Assessments</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          {relatedCareers.map(rc => (
+            <a href={`/risk/${rc.slug}/`} class="bg-[#0d1120] border border-[#1e2340] rounded-lg p-4 hover:border-[#06B6D4] transition-all">
+              <h3 class="font-bold text-[#e2e6f5] mb-1 text-sm">{rc.title}</h3>
+              <span class="text-sm text-[#f43f5e]">{rc.baseRiskScore}% Risk</span>
+            </a>
+          ))}
+        </div>
+
+        <div class="border border-[#06B6D4] rounded-xl p-8 text-center" style="background: linear-gradient(135deg, #0d1120, #1e2340)">
+          <h2 class="text-xl font-bold text-[#e2e6f5] mb-3">Want to be AI-Ready in Any Job?</h2>
+          <p class="text-[#4b5280] mb-6 text-sm">Discover the universal AI skills that protect any career, regardless of industry.</p>
+          <a href="/special/ai-ready/" class="inline-block px-8 py-4 rounded-lg font-bold text-white"
+            style="background: linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%); box-shadow: 0 4px 12px rgba(6,182,212,0.3)">
+            Learn Universal AI Skills →
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a href="/" class="inline-block px-8 py-4 rounded-lg border border-[#1e2340] font-bold text-[#e2e6f5] hover:border-[#06B6D4] hover:text-[#06B6D4] transition-all">
+          ← Explore All Careers
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

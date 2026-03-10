@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { author, methodology } from '../data/careers.js';
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": author.name,
+  "jobTitle": author.role,
+  "description": author.bio,
+  "url": "https://aicareer.me/about/",
+  "knowsAbout": author.expertise
+};
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": `About AI Career Risk — Built by ${author.name}`,
+  "url": "https://aicareer.me/about/",
+  "description": "About the AI Career Risk calculator, its research-backed methodology, and the data professional who built it.",
+  "author": { "@type": "Person", "name": author.name }
+};
+
+const sources = [
+  { org: "Oxford University (Frey & Osborne)", work: "The Future of Employment: How Susceptible Are Jobs to Computerisation?" },
+  { org: "McKinsey Global Institute", work: "The Future of Work After COVID-19 / Generative AI and the Future of Work" },
+  { org: "World Economic Forum", work: "Future of Jobs Report 2025" },
+  { org: "Stanford Human-Centered AI Institute", work: "AI Index Report 2024" },
+  { org: "PwC", work: "Global AI Survey 2025" },
+];
+---
+
+<BaseLayout
+  title={`About AI Career Risk | Built by ${author.name} | aicareer.me`}
+  description="Learn about the AI Career Risk calculator, its research-backed methodology, and the data professional who built it."
+  canonical="https://aicareer.me/about/"
+  schema={[personSchema, aboutSchema]}
+>
+  <Nav />
+
+  <div class="min-h-screen bg-[#06070f]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center space-x-2 text-sm text-[#4b5280]">
+          <li><a href="/" class="hover:text-[#06B6D4] transition-colors">Home</a></li>
+          <li><span class="mx-2 text-[#1e2340]">/</span></li>
+          <li><span class="text-[#e2e6f5] font-medium" aria-current="page">About</span></li>
+        </ol>
+      </nav>
+
+      <a href="/" class="inline-flex mb-8 px-4 py-2 rounded-lg border border-[#1e2340] text-[#e2e6f5] hover:border-[#06B6D4] transition-all items-center gap-2 text-sm">
+        ← Back to Home
+      </a>
+
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#e2e6f5] mb-4">About This Tool</h1>
+      <p class="text-[#4b5280] mb-12 leading-relaxed text-lg">
+        AI Career Risk is a free, research-backed tool designed to help working professionals understand and respond to the AI-driven transformation of the job market — before it's too late to adapt.
+      </p>
+
+      <!-- Who built it -->
+      <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-6">Who Built This</h2>
+        <div class="flex items-start gap-6">
+          <div class="flex-shrink-0 w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold text-white"
+            style="background: linear-gradient(135deg, #06B6D4, #7C3AED)">
+            {author.name.charAt(0)}
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-[#e2e6f5] mb-1">{author.name}</h3>
+            <p class="text-sm text-[#06B6D4] mb-4">{author.role}</p>
+            <p class="text-[#4b5280] leading-relaxed mb-4">{author.bio}</p>
+            <div class="flex flex-wrap gap-2">
+              {author.expertise.map(skill => (
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#1e2340] text-[#e2e6f5]">{skill}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Methodology -->
+      <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-3">{methodology.title}</h2>
+        <p class="text-[#4b5280] mb-6 leading-relaxed text-sm">{methodology.description}</p>
+        <div class="space-y-4">
+          {methodology.dimensions.map(dim => (
+            <div class="border-l-2 border-[#06B6D4] pl-4">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-[#e2e6f5] text-sm">{dim.name}</h3>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-[#06B6D4] bg-opacity-20 text-[#06B6D4]">{dim.weight}</span>
+              </div>
+              <p class="text-sm text-[#4b5280] leading-relaxed">{dim.description}</p>
+            </div>
+          ))}
+        </div>
+        <div class="mt-6 pt-6 border-t border-[#1e2340]">
+          <p class="text-sm text-[#4b5280]"><span class="text-[#e2e6f5] font-medium">Note: </span>{methodology.note}</p>
+        </div>
+      </div>
+
+      <!-- Sources -->
+      <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-4">Research Sources</h2>
+        <ul class="space-y-3 text-sm text-[#4b5280]">
+          {sources.map(source => (
+            <li class="flex items-start gap-2">
+              <span class="text-[#06B6D4] mt-0.5">→</span>
+              <span><strong class="text-[#e2e6f5]">{source.org}:</strong> {source.work}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-6 mb-8">
+        <h2 class="text-base font-bold text-[#e2e6f5] mb-2">Disclaimer</h2>
+        <p class="text-sm text-[#4b5280] leading-relaxed">
+          This tool covers career and professional development topics (YMYL — Your Money or Your Life). Risk scores are based on publicly available labor economics research and are intended for informational and educational purposes only. Individual career outcomes depend on many factors beyond what our model captures. For major career decisions, consult qualified career counselors or professionals in your field.
+        </p>
+      </div>
+
+      <div class="text-center">
+        <a href="/" class="inline-block px-8 py-4 rounded-lg font-bold text-white"
+          style="background: linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%); box-shadow: 0 4px 12px rgba(6,182,212,0.3)">
+          Check Your Career Risk →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

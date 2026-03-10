@@ -1,0 +1,45 @@
+---
+import { careers, specialOptions, author } from '../data/careers.js';
+---
+
+<footer class="border-t border-[#1e2340] bg-[#06070f] mt-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div>
+        <h3 class="text-base font-bold text-[#e2e6f5] mb-4">Career Risk Assessments</h3>
+        <ul class="space-y-2">
+          {careers.map(career => (
+            <li>
+              <a href={`/risk/${career.slug}/`} class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm">
+                {career.title} AI Risk — {career.baseRiskScore}%
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-base font-bold text-[#e2e6f5] mb-4">Special Resources</h3>
+        <ul class="space-y-2">
+          {specialOptions.map(option => (
+            <li>
+              <a href={`/special/${option.value}/`} class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm">
+                {option.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-base font-bold text-[#e2e6f5] mb-4">About</h3>
+        <ul class="space-y-2">
+          <li><a href="/about/" class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm">About This Tool</a></li>
+          <li><a href="/#methodology" class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm">Methodology</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-sm text-[#4b5280] pt-8 border-t border-[#1e2340]">
+      <p class="mb-1">© 2026 aicareer.me — Free AI Career Risk Assessment Tool</p>
+      <p>Built by {author.name} · Based on research from Oxford, McKinsey & WEF</p>
+    </div>
+  </div>
+</footer>
