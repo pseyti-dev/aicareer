@@ -17,13 +17,17 @@ const pageTitle = type === 'ai-ready'
   ? 'AI Literacy Skills | Future-Proof Any Career | aicareer.me'
   : 'Make Money with AI | AI Business Ideas & Skills | aicareer.me';
 
-const schema = {
+const faqSchema = {
   "@context": "https://schema.org",
-  "@type": "LearningResource",
-  "name": content.title,
-  "description": content.description,
-  "learningResourceType": "Course List",
-  "url": `https://aicareer.me/special/${type}/`
+  "@type": "FAQPage",
+  "mainEntity": content.cards.map(card => ({
+    "@type": "Question",
+    "name": card.title,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": `${card.description} Free resource: ${card.freeResource.label} (${card.freeResource.url}). Paid course: ${card.paidResource.label} on ${card.paidResource.platform}.`
+    }
+  }))
 };
 ---
 
