@@ -47,7 +47,7 @@ grep -c "AI replacement risk" dist/risk/bookkeeper/index.html
 ## GitHub Actions Auto-Deploy
 
 On every push to `main`, GitHub Actions:
-1. Installs dependencies
+1. Installs dependencies 
 2. Runs `npm run build`
 3. Deploys `dist/` to Hostinger via FTP
 
