@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://aicareer.me/</loc><lastmod>2026-03-18</lastmod><priority>1.0</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://aicareer.me/about/</loc><lastmod>2026-03-18</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://aicareer.me/risk/data-entry-clerk/</loc><lastmod>2026-03-18</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://aicareer.me/risk/bookkeeper/</loc><lastmod>2026-03-18</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://aicareer.me/risk/customer-service-rep/</loc><lastmod>2026-03-18</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://aicareer.me/risk/paralegal/</loc><lastmod>2026-03-18</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://aicareer.me/risk/medical-coder/</loc><lastmod>2026-03-18</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://aicareer.me/risk/loan-officer/</loc><lastmod>2026-03-18</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://aicareer.me/risk/sales-representative/</loc><lastmod>2026-03-18</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://aicareer.me/special/ai-ready/</loc><lastmod>2026-03-18</lastmod><priority>0.7</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://aicareer.me/special/ai-entrepreneur/</loc><lastmod>2026-03-18</lastmod><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/</loc><lastmod>2026-03-21</lastmod><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://aicareer.me/about/</loc><lastmod>2026-03-21</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/data-entry-clerk/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/bookkeeper/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/customer-service-rep/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/paralegal/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/medical-coder/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/loan-officer/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/sales-representative/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/software-developer/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/it-support-specialist/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/data-analyst/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/cybersecurity-analyst/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/product-manager/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/accountant/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/financial-analyst/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/insurance-underwriter/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/tax-preparer/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/risk/investment-banker/</loc><lastmod>2026-03-21</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/special/ai-ready/</loc><lastmod>2026-03-21</lastmod><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://aicareer.me/special/ai-entrepreneur/</loc><lastmod>2026-03-21</lastmod><priority>0.7</priority><changefreq>monthly</changefreq></url>
 </urlset>
