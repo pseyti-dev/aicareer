@@ -45,6 +45,25 @@ const faqSchema = {
     { "@type": "Question", "name": `Will AI completely replace ${career.title}s?`, "acceptedAnswer": { "@type": "Answer", "text": `While AI will automate many tasks in the ${career.title} role, complete replacement is unlikely in the near term. Professionals who proactively develop AI-adjacent skills and focus on human-judgment work can significantly reduce their displacement risk.` } }
   ]
 };
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://aicareer.me/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": `${career.title} AI Risk Assessment`,
+      "item": `https://aicareer.me/risk/${career.slug}/`
+    }
+  ]
+};
 ---
 
 <BaseLayout
@@ -52,7 +71,7 @@ const faqSchema = {
   description={`${career.title} AI automation risk is ${career.baseRiskScore}% (${career.riskLabel}). See which tasks AI already performs, learn the skills to reduce your risk, and get a free upskilling roadmap.`}
   canonical={`https://aicareer.me/risk/${career.slug}/`}
   ogType="article"
-  schema={[articleSchema, faqSchema]}
+  schema={[articleSchema, faqSchema, breadcrumbSchema]}
 >
   <Nav />
 
