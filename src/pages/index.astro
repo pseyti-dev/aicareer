@@ -28,6 +28,19 @@ const faqSchema = {
   ]
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://aicareer.me/"
+    }
+  ]
+};
+
 const getBarColor = (score) => {
   if (score <= 40) return '#10b981';
   if (score <= 70) return '#f59e0b';
@@ -39,7 +52,7 @@ const getBarColor = (score) => {
   title="Free AI Career Risk Calculator: Is Your Job Safe from AI? | aicareer.me"
   description="Check your AI job displacement risk score instantly. Free calculator for 7 high-risk careers. Get a personalized upskilling roadmap to future-proof your career."
   canonical="https://aicareer.me/"
-  schema={[orgSchema, faqSchema]}
+  schema={[orgSchema, faqSchema, breadcrumbSchema]}
 >
   <Nav />
 
