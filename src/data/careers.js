@@ -197,6 +197,236 @@ export const careers = [
       { id: 'negotiation', name: 'Advanced Negotiation', description: 'Develop expert negotiation skills for complex, high-stakes deals — the irreplaceable human edge in closing enterprise contracts', riskReduction: 13, difficulty: 'medium', freeResource: { label: 'Harvard PON Negotiation Resources', url: 'https://www.pon.harvard.edu/freemium/' }, paidResource: { label: 'Successful Negotiation', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/negotiation' } }
     ]
   }
+  // ─── 10 NEW CAREERS — append these inside the `careers` array in careers.js ──
+// Add after the last entry (sales-representative), before the closing bracket ]
+
+  // ── TECH ────────────────────────────────────────────────────────────────────
+
+  {
+    slug: 'software-developer',
+    title: 'Software Developer',
+    baseRiskScore: 38,
+    riskLabel: 'Low Risk',
+    aioSummary: "The AI replacement risk for a Software Developer is currently estimated at 38% (Low Risk). While AI coding assistants like GitHub Copilot and Cursor can generate boilerplate code and automate repetitive programming tasks, software development still requires complex system design, architectural judgment, debugging, and cross-functional collaboration that AI cannot fully replicate.",
+    automatedTasks: [
+      "Generating boilerplate code and standard functions via AI coding assistants",
+      "Writing unit tests and basic documentation using LLMs",
+      "Code review suggestions and style enforcement via automated tools",
+      "Bug detection and simple refactoring via static analysis AI",
+      "Translating specifications into starter code scaffolding"
+    ],
+    whyAtRisk: 'AI coding assistants like GitHub Copilot, Cursor, and Claude can now generate functional code from natural language prompts, automate repetitive coding tasks, and accelerate development cycles significantly. Junior-level tasks involving standard CRUD operations and boilerplate are increasingly automated. However, complex system architecture, performance optimization, and novel problem-solving remain deeply human-dependent.',
+    howToFutureProof: 'Focus on system architecture, technical leadership, and AI-augmented development workflows. Master the AI coding tools themselves — developers who use Copilot and Cursor effectively are measurably more productive. Specialize in areas requiring deep domain expertise such as distributed systems, security, or ML engineering where AI tooling is still immature.',
+    skills: [
+      { id: 'system-design', name: 'System Design & Architecture', description: 'Master distributed systems, microservices, and scalable architecture patterns — the highest-leverage skill in software engineering', riskReduction: 18, difficulty: 'hard', freeResource: { label: 'System Design Primer (GitHub)', url: 'https://github.com/donnemartin/system-design-primer' }, paidResource: { label: 'Software Design & Architecture', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/software-design-architecture' } },
+      { id: 'ai-augmented-dev', name: 'AI-Augmented Development', description: 'Master GitHub Copilot, Cursor, and Claude for coding to become dramatically more productive than peers who avoid AI tools', riskReduction: 20, difficulty: 'medium', freeResource: { label: 'GitHub Copilot Docs', url: 'https://docs.github.com/en/copilot' }, paidResource: { label: 'Generative AI for Software Development', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/generative-ai-for-software-development' } },
+      { id: 'cloud-devops', name: 'Cloud & DevOps Engineering', description: 'Learn AWS, GCP, or Azure combined with CI/CD, Kubernetes, and infrastructure-as-code to move into high-demand platform roles', riskReduction: 15, difficulty: 'hard', freeResource: { label: 'AWS Free Tier + Training', url: 'https://aws.amazon.com/training/' }, paidResource: { label: 'Cloud Engineering Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/cloud-engineering-gcp' } },
+      { id: 'security-engineering', name: 'Security Engineering', description: 'Cybersecurity skills are in critical shortage and highly resistant to AI automation — especially penetration testing, threat modeling, and incident response', riskReduction: 14, difficulty: 'hard', freeResource: { label: 'OWASP Learning Resources', url: 'https://owasp.org/www-project-web-security-testing-guide/' }, paidResource: { label: 'IBM Cybersecurity Analyst', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/professional-certificates/ibm-cybersecurity-analyst' } }
+    ]
+  },
+
+  {
+    slug: 'it-support-specialist',
+    title: 'IT Support Specialist',
+    baseRiskScore: 65,
+    riskLabel: 'Moderate',
+    aioSummary: "The AI replacement risk for an IT Support Specialist is currently estimated at 65% (Moderate). AI-powered helpdesk tools and chatbots now handle tier-1 support tickets, password resets, and common troubleshooting automatically, though complex infrastructure issues, on-site support, and security incidents remain human-dependent.",
+    automatedTasks: [
+      "Tier-1 helpdesk ticket resolution via AI chatbots and knowledge bases",
+      "Password resets and account provisioning via automated workflows",
+      "Network monitoring and alert triage using AI anomaly detection",
+      "Software installation and patch management via automated deployment tools",
+      "FAQ responses and guided troubleshooting via virtual agents"
+    ],
+    whyAtRisk: 'AI-powered IT service management tools now auto-resolve a significant percentage of helpdesk tickets without human intervention. Virtual agents handle common issues like password resets and software access requests instantly. RPA automates repetitive tasks like onboarding and offboarding workflows, reducing demand for tier-1 support headcount.',
+    howToFutureProof: 'Transition from reactive support to proactive infrastructure management and cybersecurity. Develop expertise in cloud platforms, endpoint security, and IT automation. Become the person who builds and manages the AI support tools, rather than the one they replace.',
+    skills: [
+      { id: 'cybersecurity-ops', name: 'Cybersecurity & Endpoint Security', description: 'Master endpoint protection, threat detection, and incident response — the fastest-growing area in IT with severe talent shortages', riskReduction: 22, difficulty: 'hard', freeResource: { label: 'CompTIA Security+ Study Resources', url: 'https://www.comptia.org/certifications/security' }, paidResource: { label: 'Google Cybersecurity Certificate', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/professional-certificates/google-cybersecurity' } },
+      { id: 'cloud-administration', name: 'Cloud Administration', description: 'Learn to manage Azure, AWS, or GCP environments — cloud admin roles are growing faster than traditional on-prem IT is declining', riskReduction: 20, difficulty: 'medium', freeResource: { label: 'Microsoft Learn (Azure Free)', url: 'https://learn.microsoft.com/en-us/training/azure/' }, paidResource: { label: 'Microsoft Azure Fundamentals', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/microsoft-azure-fundamentals-az-900' } },
+      { id: 'it-automation', name: 'IT Automation & Scripting', description: 'Use Python, PowerShell, and Ansible to automate infrastructure tasks — become the engineer who builds automation, not the one replaced by it', riskReduction: 18, difficulty: 'medium', freeResource: { label: 'Google IT Automation with Python', url: 'https://www.coursera.org/professional-certificates/google-it-automation' }, paidResource: { label: 'IT Automation with Python', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/professional-certificates/google-it-automation' } }
+    ]
+  },
+
+  {
+    slug: 'data-analyst',
+    title: 'Data Analyst',
+    baseRiskScore: 45,
+    riskLabel: 'Moderate',
+    aioSummary: "The AI replacement risk for a Data Analyst is currently estimated at 45% (Moderate). AI tools can now automate data cleaning, generate SQL queries from natural language, and produce standard reports automatically. However, defining business questions, interpreting results in context, and communicating insights to stakeholders remain deeply human skills.",
+    automatedTasks: [
+      "Automated data cleaning and normalization using AI-powered ETL tools",
+      "Natural language to SQL query generation via tools like Databricks AI and BigQuery",
+      "Standard report generation and dashboard updates on schedule",
+      "Anomaly detection and trend identification in structured datasets",
+      "Data visualization suggestions and auto-chart generation"
+    ],
+    whyAtRisk: 'AI tools like Databricks Assistant, GitHub Copilot for SQL, and business intelligence platforms with AI features can now generate queries, clean data, and produce reports automatically. The portion of a data analyst\'s job that involves mechanical data manipulation is increasingly automated, compressing demand for junior analyst roles.',
+    howToFutureProof: 'Evolve from data manipulation to strategic insight generation. Develop expertise in machine learning, predictive modeling, and business strategy. The most resilient data analysts are those who translate complex analysis into actionable business decisions — combining technical depth with communication skills.',
+    skills: [
+      { id: 'machine-learning', name: 'Machine Learning & Predictive Analytics', description: 'Move beyond descriptive analytics into predictive and prescriptive modeling using Python, scikit-learn, and cloud ML platforms', riskReduction: 20, difficulty: 'hard', freeResource: { label: 'Fast.ai Practical Deep Learning', url: 'https://course.fast.ai/' }, paidResource: { label: 'Machine Learning Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/machine-learning-introduction' } },
+      { id: 'data-storytelling', name: 'Data Storytelling & Executive Communication', description: 'Translate complex analysis into compelling narratives for non-technical stakeholders — the skill AI cannot replicate in business contexts', riskReduction: 16, difficulty: 'medium', freeResource: { label: 'Storytelling with Data Blog', url: 'https://www.storytellingwithdata.com/blog' }, paidResource: { label: 'Data Visualization with Tableau', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/data-visualization' } },
+      { id: 'advanced-sql', name: 'Advanced SQL & Data Engineering', description: 'Master window functions, query optimization, dbt, and data pipeline design to move into higher-value data engineering roles', riskReduction: 14, difficulty: 'medium', freeResource: { label: 'Mode SQL Tutorial', url: 'https://mode.com/sql-tutorial/' }, paidResource: { label: 'Data Engineering Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/data-engineering' } },
+      { id: 'ai-analytics-tools', name: 'AI-Powered Analytics Tools', description: 'Master Databricks, Snowflake Cortex, and LLM-integrated BI tools to stay ahead as the analytics stack becomes AI-native', riskReduction: 12, difficulty: 'medium', freeResource: { label: 'Databricks Academy (Free)', url: 'https://www.databricks.com/learn/training/home' }, paidResource: { label: 'Data Analytics on Google Cloud', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/data-analytics-google-cloud' } }
+    ]
+  },
+
+  {
+    slug: 'cybersecurity-analyst',
+    title: 'Cybersecurity Analyst',
+    baseRiskScore: 28,
+    riskLabel: 'Low Risk',
+    aioSummary: "The AI replacement risk for a Cybersecurity Analyst is currently estimated at 28% (Low Risk). While AI automates threat detection, log analysis, and vulnerability scanning, cybersecurity is a fundamentally adversarial field where human judgment, creative threat modeling, and incident response leadership remain irreplaceable — and demand continues to significantly outpace supply.",
+    automatedTasks: [
+      "Log analysis and SIEM alert triage using AI-powered security platforms",
+      "Vulnerability scanning and patch prioritization via automated tools",
+      "Phishing email detection and quarantine via ML classifiers",
+      "Threat intelligence aggregation and IOC matching",
+      "Compliance reporting and audit trail generation"
+    ],
+    whyAtRisk: 'AI-powered security operations platforms like CrowdStrike Falcon and Microsoft Sentinel automate significant portions of threat detection and alert triage, reducing the volume of manual work for tier-1 SOC analysts. However, sophisticated attacks, zero-day exploits, and nation-state threats require creative human adversarial thinking that AI tools cannot match.',
+    howToFutureProof: 'Specialize in offensive security, threat hunting, and incident response leadership — the most adversarial and creative aspects of cybersecurity where AI remains weakest. Develop expertise in cloud security and AI security (LLM red teaming, model security), two of the fastest-growing and least-automated sub-disciplines.',
+    skills: [
+      { id: 'penetration-testing', name: 'Penetration Testing & Red Teaming', description: 'Master ethical hacking, exploit development, and adversarial simulation — the most creative and AI-resistant area of cybersecurity', riskReduction: 18, difficulty: 'hard', freeResource: { label: 'TryHackMe (Free Tier)', url: 'https://tryhackme.com/' }, paidResource: { label: 'Penetration Testing & Ethical Hacking', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/ibm-cybersecurity-analyst' } },
+      { id: 'cloud-security', name: 'Cloud Security Architecture', description: 'Secure AWS, Azure, and GCP environments — cloud security is one of the most understaffed and highest-paying cybersecurity specializations', riskReduction: 16, difficulty: 'hard', freeResource: { label: 'AWS Security Learning Path', url: 'https://aws.amazon.com/training/learning-paths/security/' }, paidResource: { label: 'Cloud Security Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/palo-alto-networks-cybersecurity' } },
+      { id: 'incident-response', name: 'Incident Response & Forensics', description: 'Lead containment, investigation, and recovery during active breaches — a high-stakes, judgment-intensive role AI cannot lead', riskReduction: 14, difficulty: 'hard', freeResource: { label: 'SANS Incident Response Resources', url: 'https://www.sans.org/blog/incident-response/' }, paidResource: { label: 'IBM Cybersecurity Analyst', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/professional-certificates/ibm-cybersecurity-analyst' } }
+    ]
+  },
+
+  {
+    slug: 'product-manager',
+    title: 'Product Manager',
+    baseRiskScore: 32,
+    riskLabel: 'Low Risk',
+    aioSummary: "The AI replacement risk for a Product Manager is currently estimated at 32% (Low Risk). AI tools automate user research synthesis, backlog grooming assistance, and metrics dashboards, but product management is fundamentally a role of strategic judgment, stakeholder alignment, and customer empathy — capabilities where AI remains a tool, not a replacement.",
+    automatedTasks: [
+      "User research synthesis and theme extraction from interview transcripts",
+      "Backlog prioritization suggestions based on effort/impact scoring",
+      "Automated product metrics dashboards and anomaly alerts",
+      "Competitive analysis aggregation from public sources",
+      "Draft PRD generation from feature briefs using LLMs"
+    ],
+    whyAtRisk: 'AI tools now assist with significant portions of the PM workflow — from synthesizing user research with tools like Dovetail AI to generating PRD drafts with Claude or GPT-4. Automated analytics platforms surface insights that previously required manual analysis. However, the core of product management — making hard tradeoff decisions, aligning cross-functional teams, and developing product vision — is deeply human.',
+    howToFutureProof: 'Develop deep product strategy and business model expertise. Build strong engineering relationships and technical credibility. Focus on the qualitative, judgment-intensive work: customer discovery, vision setting, and stakeholder influence. PMs who use AI tools to move faster will outcompete those who do not.',
+    skills: [
+      { id: 'product-strategy', name: 'Product Strategy & Business Models', description: 'Master competitive positioning, monetization strategy, and market sizing — the highest-leverage PM skills that AI cannot replicate', riskReduction: 16, difficulty: 'hard', freeResource: { label: 'Lenny\'s Newsletter (Free)', url: 'https://www.lennysnewsletter.com/' }, paidResource: { label: 'Product Management Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/product-management' } },
+      { id: 'data-driven-pm', name: 'Data-Driven Product Management', description: 'Use SQL, analytics platforms, and A/B testing frameworks to make rigorous product decisions backed by quantitative evidence', riskReduction: 14, difficulty: 'medium', freeResource: { label: 'Mixpanel Product Analytics Guide', url: 'https://mixpanel.com/blog/product-analytics/' }, paidResource: { label: 'Data-Driven Product Management', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/data-driven-product-management' } },
+      { id: 'ai-product-development', name: 'AI Product Development', description: 'Learn to design, evaluate, and ship AI-powered features — PMs who understand LLMs and ML systems are commanding significant salary premiums', riskReduction: 18, difficulty: 'medium', freeResource: { label: 'a16z AI Product Resources', url: 'https://a16z.com/ai/' }, paidResource: { label: 'AI Product Management', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/ai-product-management' } }
+    ]
+  },
+
+  // ── FINANCE ──────────────────────────────────────────────────────────────────
+
+  {
+    slug: 'accountant',
+    title: 'Accountant',
+    baseRiskScore: 80,
+    riskLabel: 'Critical',
+    aioSummary: "The AI replacement risk for an Accountant is currently estimated at 80% (Critical). AI-powered accounting platforms can now automate transaction classification, reconciliation, financial statement preparation, and tax filing for standard business cases, placing high automation pressure on general accounting roles — particularly at the staff and senior accountant levels.",
+    automatedTasks: [
+      "Transaction classification and journal entry automation via ML",
+      "Month-end close automation including reconciliations and accruals",
+      "Financial statement generation from trial balance data",
+      "Accounts payable and receivable processing via OCR and automation",
+      "Tax preparation for standard individual and small business returns"
+    ],
+    whyAtRisk: 'AI-powered platforms like QuickBooks AI, Xero, and Sage Intacct now automate the core of general accounting — from transaction processing to financial reporting. Large accounting firms are deploying AI to handle audit sampling, compliance checking, and report generation. The volume of manual accounting work is declining rapidly as AI handles routine processing with higher accuracy.',
+    howToFutureProof: 'Transition from transactional accounting to financial advisory, forensic accounting, or management accounting roles requiring strategic judgment. Pursue CPA or CMA credentials to access higher-value advisory work. Specialize in complex areas like international tax, M&A due diligence, or forensic accounting where human expertise is irreplaceable.',
+    skills: [
+      { id: 'cpa-advisory', name: 'CPA & Financial Advisory Services', description: 'Pursue CPA certification and develop advisory capabilities — licensed CPAs providing strategic financial guidance are far more insulated from automation', riskReduction: 22, difficulty: 'hard', freeResource: { label: 'AICPA CPA Exam Resources', url: 'https://www.aicpa-cima.com/professional-insights/topic/cpa-exam' }, paidResource: { label: 'Accounting Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/accounting-fundamentals' } },
+      { id: 'forensic-accounting', name: 'Forensic Accounting & Fraud Detection', description: 'Investigate financial fraud, litigation support, and valuation disputes — a specialty requiring judgment and adversarial thinking AI cannot replicate', riskReduction: 20, difficulty: 'hard', freeResource: { label: 'ACFE Fraud Resources (Free)', url: 'https://www.acfe.com/fraud-resources/' }, paidResource: { label: 'Forensic Accounting & Fraud Examination', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/forensic-accounting' } },
+      { id: 'accounting-tech', name: 'Accounting Technology & AI Tools', description: 'Master AI-powered accounting platforms and become the expert who configures, audits, and optimizes automated accounting systems', riskReduction: 16, difficulty: 'medium', freeResource: { label: 'QuickBooks Training (Free)', url: 'https://quickbooks.intuit.com/learn-support/en-us/training/' }, paidResource: { label: 'Intuit Academy Bookkeeping', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/professional-certificates/intuit-bookkeeping' } },
+      { id: 'management-accounting', name: 'Management Accounting & FP&A', description: 'Move into financial planning and analysis, budgeting, and business performance management — strategic roles with significantly lower automation risk', riskReduction: 18, difficulty: 'medium', freeResource: { label: 'CIMA Management Accounting Resources', url: 'https://www.cimaglobal.com/Starting-CIMA/' }, paidResource: { label: 'Financial Planning & Analysis', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/financial-planning-analysis' } }
+    ]
+  },
+
+  {
+    slug: 'financial-analyst',
+    title: 'Financial Analyst',
+    baseRiskScore: 55,
+    riskLabel: 'Moderate',
+    aioSummary: "The AI replacement risk for a Financial Analyst is currently estimated at 55% (Moderate). AI tools now automate financial modeling templates, earnings analysis, and market data aggregation, compressing junior analyst workloads significantly. However, investment thesis development, client advisory work, and complex valuation judgment remain strongly human-dependent.",
+    automatedTasks: [
+      "Financial model building from templates using AI-assisted tools",
+      "Earnings call transcript summarization and sentiment analysis",
+      "Market data aggregation and competitor benchmarking reports",
+      "Variance analysis and budget vs. actual reporting automation",
+      "Automated DCF and comparable company analysis from public filings"
+    ],
+    whyAtRisk: 'Bloomberg Terminal AI, FactSet, and emerging AI research tools now automate significant portions of junior financial analyst work — from pulling and formatting data to generating initial draft research reports. The time required to build financial models and compile market analysis has dropped dramatically, compressing headcount at the junior level.',
+    howToFutureProof: 'Develop deep sector expertise and investment judgment that AI cannot replicate. Move toward buy-side roles, portfolio management, or specialized M&A advisory where relationship capital and proprietary insight matter more than spreadsheet mechanics. Pursue CFA certification to signal commitment to the analytical depth the market still values.',
+    skills: [
+      { id: 'cfa-investment', name: 'CFA & Investment Analysis', description: 'Pursue CFA certification to develop rigorous investment analysis skills and access buy-side roles with significantly lower automation risk', riskReduction: 20, difficulty: 'hard', freeResource: { label: 'CFA Institute Study Materials', url: 'https://www.cfainstitute.org/en/programs/cfa' }, paidResource: { label: 'Investment Management Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/investment-management' } },
+      { id: 'financial-modeling', name: 'Advanced Financial Modeling & Valuation', description: 'Master LBO, M&A, and DCF modeling at an expert level — complex deal structuring and bespoke valuation remain high-value human work', riskReduction: 16, difficulty: 'hard', freeResource: { label: 'Wall Street Prep Free Resources', url: 'https://www.wallstreetprep.com/knowledge/' }, paidResource: { label: 'Financial Modeling & Valuation', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/financial-modeling' } },
+      { id: 'fp-and-a', name: 'FP&A & Strategic Finance', description: 'Move into financial planning and analysis to work directly with business leaders on strategy — high-judgment work with strong growth trajectory', riskReduction: 14, difficulty: 'medium', freeResource: { label: 'FP&A Trends Resources', url: 'https://www.fpandtrends.com/' }, paidResource: { label: 'Business Analytics Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/business-analytics' } },
+      { id: 'ai-finance-tools', name: 'AI-Powered Finance Tools', description: 'Master Bloomberg AI, FactSet, and Python for finance to remain the analyst who extracts insight from AI output rather than being replaced by it', riskReduction: 12, difficulty: 'medium', freeResource: { label: 'Python for Finance (Free)', url: 'https://www.youtube.com/watch?v=_eQ_8U5MRHY' }, paidResource: { label: 'Python & Statistics for Financial Analysis', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/python-statistics-financial-analysis' } }
+    ]
+  },
+
+  {
+    slug: 'insurance-underwriter',
+    title: 'Insurance Underwriter',
+    baseRiskScore: 74,
+    riskLabel: 'High Risk',
+    aioSummary: "The AI replacement risk for an Insurance Underwriter is currently estimated at 74% (High Risk). AI-powered underwriting platforms can now assess risk profiles, price standard policies, and approve straightforward applications automatically, significantly reducing the need for human underwriters in personal lines and small commercial insurance.",
+    automatedTasks: [
+      "Risk scoring and premium calculation for standard personal lines policies",
+      "Automated policy approval for low-complexity applications within defined parameters",
+      "Document verification and application data extraction via OCR and NLP",
+      "Claims history analysis and fraud flag detection using ML models",
+      "Renewal pricing adjustments based on loss experience data"
+    ],
+    whyAtRisk: 'Insurtech platforms and traditional carriers alike are deploying AI underwriting engines that assess risk and price standard policies in seconds without human review. Personal auto, home, and small business insurance — which represent the majority of underwriting volume — are increasingly automated end-to-end, compressing demand for traditional underwriters significantly.',
+    howToFutureProof: 'Specialize in complex commercial lines, specialty insurance, and high-value accounts where bespoke risk assessment and relationship management remain essential. Develop expertise in emerging risk categories — cyber insurance, climate risk, and parametric products — where AI models lack sufficient historical data to operate reliably.',
+    skills: [
+      { id: 'commercial-underwriting', name: 'Complex Commercial Underwriting', description: 'Specialize in large commercial accounts, specialty lines, and excess & surplus — areas where AI models lack sufficient data and human judgment is premium', riskReduction: 22, difficulty: 'hard', freeResource: { label: 'The Institutes Learning Resources', url: 'https://www.theinstitutes.org/' }, paidResource: { label: 'Insurance & Risk Management', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/insurance-risk-management' } },
+      { id: 'cyber-risk', name: 'Cyber Risk Assessment', description: 'Develop expertise in cyber insurance underwriting — one of the fastest-growing and most underserved specialty lines with acute talent shortages', riskReduction: 20, difficulty: 'hard', freeResource: { label: 'CISA Cyber Risk Resources', url: 'https://www.cisa.gov/resources-tools/resources/cyber-risk-institute' }, paidResource: { label: 'Cybersecurity Risk Management', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/cyber-risk-management' } },
+      { id: 'actuarial-skills', name: 'Actuarial & Predictive Modeling', description: 'Develop quantitative risk modeling skills to work alongside AI underwriting systems as a model validator and complex case specialist', riskReduction: 16, difficulty: 'hard', freeResource: { label: 'Casualty Actuarial Society Resources', url: 'https://www.casact.org/learn' }, paidResource: { label: 'Actuarial Science Fundamentals', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/actuarial-science' } }
+    ]
+  },
+
+  {
+    slug: 'tax-preparer',
+    title: 'Tax Preparer',
+    baseRiskScore: 88,
+    riskLabel: 'Critical',
+    aioSummary: "The AI replacement risk for a Tax Preparer is currently estimated at 88% (Critical). AI-powered tax software can now handle the full preparation workflow for standard individual and small business returns with minimal human intervention, making non-credentialed tax preparation one of the most acutely at-risk occupations in financial services.",
+    automatedTasks: [
+      "Automated data import from W-2s, 1099s, and financial accounts",
+      "Standard deduction optimization and form selection via rule-based AI",
+      "Individual and small business tax return preparation end-to-end",
+      "Error checking and IRS compliance validation before filing",
+      "Prior year comparison and refund maximization analysis"
+    ],
+    whyAtRisk: 'TurboTax AI, H&R Block AI Tax Assist, and similar platforms now guide taxpayers through complex returns with AI assistance, significantly reducing the need for human tax preparers for standard cases. The IRS Direct File program further compresses demand by offering free automated filing directly. Non-credentialed preparers handling straightforward returns face the highest displacement pressure.',
+    howToFutureProof: 'Pursue Enrolled Agent (EA) or CPA credentials to access complex tax strategy work that software cannot handle. Specialize in business tax planning, international taxation, or tax controversy representation before the IRS — advisory and advocacy roles where professional credentials provide both legal standing and client trust that AI cannot replicate.',
+    skills: [
+      { id: 'enrolled-agent', name: 'Enrolled Agent (EA) Certification', description: 'Become an IRS Enrolled Agent to represent taxpayers in audits and appeals — a federally licensed role that AI cannot fill and that commands significant fee premiums', riskReduction: 25, difficulty: 'hard', freeResource: { label: 'IRS Enrolled Agent Information', url: 'https://www.irs.gov/tax-professionals/enrolled-agents' }, paidResource: { label: 'Tax Preparation & Law 2024-2026', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/tax-preparation-law' } },
+      { id: 'business-tax-strategy', name: 'Business Tax Strategy & Planning', description: 'Develop expertise in business entity structuring, pass-through taxation, and proactive tax minimization strategy — high-value advisory work that requires human judgment', riskReduction: 22, difficulty: 'hard', freeResource: { label: 'SBA Tax Guide for Small Business', url: 'https://www.sba.gov/business-guide/manage-your-business/pay-taxes' }, paidResource: { label: 'US Federal Taxation Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/us-federal-taxation' } },
+      { id: 'international-tax', name: 'International Tax & Expat Returns', description: 'Specialize in foreign income, FBAR reporting, and expatriate taxation — a high-complexity niche where software still struggles and human expertise commands premium fees', riskReduction: 18, difficulty: 'hard', freeResource: { label: 'IRS International Tax Resources', url: 'https://www.irs.gov/individuals/international-taxpayers' }, paidResource: { label: 'International Business Taxation', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/international-business-taxation' } }
+    ]
+  },
+
+  {
+    slug: 'investment-banker',
+    title: 'Investment Banker',
+    baseRiskScore: 42,
+    riskLabel: 'Moderate',
+    aioSummary: "The AI replacement risk for an Investment Banker is currently estimated at 42% (Moderate). AI is compressing junior banker workloads by automating pitch book creation, financial model templates, and comparable analysis, but the core of investment banking — deal origination, client relationships, negotiation, and regulatory navigation — remains deeply human and relationship-driven.",
+    automatedTasks: [
+      "Pitch book template generation and formatting via AI design tools",
+      "Comparable company and precedent transaction analysis from public databases",
+      "Initial financial model scaffolding and sensitivity table generation",
+      "Due diligence document review and data room organization",
+      "Market update and industry overview section drafting using LLMs"
+    ],
+    whyAtRisk: 'AI tools are significantly compressing the analyst and associate workload in investment banking. Tasks that once took junior bankers all night — building comps, formatting pitch books, drafting market overviews — now take hours with AI assistance. Banks are beginning to hire fewer junior staff as AI multiplies individual productivity, though deal volume growth partially offsets this compression.',
+    howToFutureProof: 'Build deep sector coverage expertise and a proprietary deal network — the two things that generate mandates and cannot be replicated by AI. Develop skills in complex structured products, cross-border transactions, and distressed situations where judgment and relationship capital matter most. Senior bankers with strong client relationships face minimal automation risk.',
+    skills: [
+      { id: 'deal-origination', name: 'Deal Origination & Client Coverage', description: 'Build a proprietary network and sector expertise that generates deal mandates — the most valuable and AI-resistant skill in investment banking', riskReduction: 20, difficulty: 'hard', freeResource: { label: 'Wall Street Oasis IB Resources', url: 'https://www.wallstreetoasis.com/finance-dictionary/investment-banking' }, paidResource: { label: 'Investment Banking Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/investment-banking' } },
+      { id: 'structured-finance', name: 'Structured Finance & Complex Products', description: 'Develop expertise in CLOs, project finance, or structured credit — high-complexity products where bespoke structuring judgment remains essential', riskReduction: 18, difficulty: 'hard', freeResource: { label: 'SIFMA Structured Finance Resources', url: 'https://www.sifma.org/resources/research/structured-finance/' }, paidResource: { label: 'Financial Engineering & Risk Management', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/financialengineering' } },
+      { id: 'ai-banking-tools', name: 'AI-Augmented Banking Workflows', description: 'Master AI tools for pitch books, financial modeling, and research to be dramatically more productive than peers — the new baseline expectation at top firms', riskReduction: 14, difficulty: 'medium', freeResource: { label: 'Breaking Into Wall Street Free Resources', url: 'https://breakingintowallstreet.com/biws/free-tutorials/' }, paidResource: { label: 'Advanced Financial Modeling', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/advanced-financial-modeling' } }
+    ]
+  },
 ];
 
 // ─── Special Content ─────────────────────────────────────────────────────────
@@ -228,6 +458,7 @@ export const specialContent = {
       { id: 'prompt-consulting', title: 'Prompt Engineering Consulting', description: 'Help companies optimize their AI interactions, create prompt libraries, and train teams on effective AI communication for their specific industry.', freeResource: { label: 'Prompting Guide', url: 'https://www.promptingguide.ai/' }, paidResource: { label: 'Generative AI for Business', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/ai-consulting' } }
     ]
   }
+  
 };
 
 // ─── Author / E-E-A-T ────────────────────────────────────────────────────────
