@@ -17,7 +17,11 @@ const pageTitle = type === 'ai-ready'
   ? 'AI Literacy Skills | Future-Proof Any Career | aicareer.me'
   : 'Make Money with AI | AI Business Ideas & Skills | aicareer.me';
 
-const faqSchema = {
+const pageDescription = type === 'ai-ready'
+  ? 'Learn the 5 essential AI skills that future-proof any career in 2026. Free resources and courses for AI literacy, prompt engineering, data literacy, and workflow automation.'
+  : 'Turn AI skills into real income in 2026. Discover 5 proven ways to earn money with AI — from content services and affiliate marketing to automation consulting. Free and paid resources included.';
+
+const faqSchema = content.cards ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": content.cards.map(card => ({
@@ -28,20 +32,37 @@ const faqSchema = {
       "text": `${card.description} Free resource: ${card.freeResource.label} (${card.freeResource.url}). Paid course: ${card.paidResource.label} on ${card.paidResource.platform}.`
     }
   }))
+} : null;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://aicareer.me/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": type === 'ai-ready' ? 'AI Literacy Skills' : 'Make Money with AI',
+      "item": `https://aicareer.me/special/${type}/`
+    }
+  ]
 };
 ---
 
 <BaseLayout
   title={pageTitle}
-  description={content.description}
+  description={pageDescription}
   canonical={`https://aicareer.me/special/${type}/`}
-  schema={faqSchema}
+  schema={[faqSchema ?? undefined, breadcrumbSchema].filter(Boolean)}
 >
   <Nav />
-
   <div class="min-h-screen bg-[#06070f]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
       <nav aria-label="Breadcrumb" class="mb-6">
         <ol class="flex items-center space-x-2 text-sm text-[#4b5280]">
           <li><a href="/" class="hover:text-[#06B6D4] transition-colors">Home</a></li>
@@ -49,16 +70,13 @@ const faqSchema = {
           <li><span class="text-[#e2e6f5] font-medium" aria-current="page">{content.title}</span></li>
         </ol>
       </nav>
-
       <a href="/" class="inline-flex mb-8 px-4 py-2 rounded-lg border border-[#1e2340] text-[#e2e6f5] hover:border-[#06B6D4] transition-all items-center gap-2 text-sm">
         ← Back to Home
       </a>
-
       <div class="text-center mb-12">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#e2e6f5] mb-4">{content.title}</h1>
         <p class="text-lg text-[#4b5280] max-w-3xl mx-auto">{content.description}</p>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         {content.cards.map(card => (
           <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-6 hover:border-[#06B6D4] transition-all">
@@ -78,7 +96,6 @@ const faqSchema = {
           </div>
         ))}
       </div>
-
       <div class="text-center">
         <a href="/" class="inline-block px-8 py-4 rounded-lg font-bold text-white"
           style="background: linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%); box-shadow: 0 4px 12px rgba(6,182,212,0.3)">
@@ -87,6 +104,5 @@ const faqSchema = {
       </div>
     </div>
   </div>
-
   <Footer />
 </BaseLayout>
