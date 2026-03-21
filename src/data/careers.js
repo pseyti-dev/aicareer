@@ -36,11 +36,21 @@ export const marketStats = [
 export const riskRankings = [
   { rank: 1, title: "Data Entry Clerk", risk: 95, reason: "repetitive data processing fully automatable by OCR and NLP" },
   { rank: 2, title: "Bookkeeper", risk: 90, reason: "transaction categorization and reconciliation automated by QuickBooks AI and Xero" },
-  { rank: 3, title: "Customer Service Representative", risk: 82, reason: "FAQ handling and tier-1 support replaced by LLM-powered chatbots" },
-  { rank: 4, title: "Paralegal", risk: 78, reason: "legal document review and research automated by LawGeex and ROSS Intelligence" },
-  { rank: 5, title: "Medical Coder", risk: 72, reason: "ICD-10 code assignment automated by NLP trained on clinical notes" },
-  { rank: 6, title: "Loan Officer", risk: 65, reason: "creditworthiness assessment and underwriting automated by ML scoring models" },
-  { rank: 7, title: "Sales Representative", risk: 58, reason: "lead qualification and outreach personalization handled by AI sales platforms" }
+  { rank: 3, title: "Tax Preparer", risk: 88, reason: "standard tax return preparation automated by TurboTax AI and H&R Block AI" },
+  { rank: 4, title: "Customer Service Representative", risk: 82, reason: "FAQ handling and tier-1 support replaced by LLM-powered chatbots" },
+  { rank: 5, title: "Accountant", risk: 80, reason: "transaction classification, reconciliation, and financial reporting automated by AI accounting platforms" },
+  { rank: 6, title: "Paralegal", risk: 78, reason: "legal document review and research automated by LawGeex and ROSS Intelligence" },
+  { rank: 7, title: "Insurance Underwriter", risk: 74, reason: "standard policy risk scoring and approval automated by AI underwriting engines" },
+  { rank: 8, title: "Medical Coder", risk: 72, reason: "ICD-10 code assignment automated by NLP trained on clinical notes" },
+  { rank: 9, title: "Loan Officer", risk: 65, reason: "creditworthiness assessment and underwriting automated by ML scoring models" },
+  { rank: 10, title: "IT Support Specialist", risk: 65, reason: "tier-1 helpdesk tickets and common troubleshooting automated by AI virtual agents" },
+  { rank: 11, title: "Financial Analyst", risk: 55, reason: "financial modeling templates and market data aggregation automated by AI finance tools" },
+  { rank: 12, title: "Sales Representative", risk: 58, reason: "lead qualification and outreach personalization handled by AI sales platforms" },
+  { rank: 13, title: "Data Analyst", risk: 45, reason: "data cleaning, SQL generation, and standard reporting automated by AI analytics platforms" },
+  { rank: 14, title: "Investment Banker", risk: 42, reason: "pitch book creation and comparable analysis automated by AI tools" },
+  { rank: 15, title: "Software Developer", risk: 38, reason: "boilerplate code generation and unit testing automated by AI coding assistants" },
+  { rank: 16, title: "Product Manager", risk: 32, reason: "user research synthesis and backlog assistance automated by AI product tools" },
+  { rank: 17, title: "Cybersecurity Analyst", risk: 28, reason: "log analysis and vulnerability scanning automated by AI security platforms" }
 ];
 
 // ─── Careers Data ────────────────────────────────────────────────────────────
@@ -50,9 +60,7 @@ export const careers = [
     title: 'Data Entry Clerk',
     baseRiskScore: 95,
     riskLabel: 'Critical',
-    // AIO natural language sentence (crawlable, citable)
     aioSummary: "The AI replacement risk for a Data Entry Clerk is currently estimated at 95% — one of the highest of any profession — due to the near-complete automation of repetitive data processing tasks by optical character recognition (OCR), robotic process automation (RPA), and large language models.",
-    // Tasks AI already does
     automatedTasks: [
       "Extracting and inputting data from invoices, forms, and documents using OCR",
       "Validating data fields against existing database records",
@@ -196,9 +204,7 @@ export const careers = [
       { id: 'account-management', name: 'Strategic Account Management', description: 'Manage key accounts, identify upsell opportunities, and drive long-term revenue growth from existing relationships', riskReduction: 18, difficulty: 'hard', freeResource: { label: 'Salesforce Account Management Guide', url: 'https://www.salesforce.com/resources/articles/account-management/' }, paidResource: { label: 'Strategic Account Management', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/account-management' } },
       { id: 'negotiation', name: 'Advanced Negotiation', description: 'Develop expert negotiation skills for complex, high-stakes deals — the irreplaceable human edge in closing enterprise contracts', riskReduction: 13, difficulty: 'medium', freeResource: { label: 'Harvard PON Negotiation Resources', url: 'https://www.pon.harvard.edu/freemium/' }, paidResource: { label: 'Successful Negotiation', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/negotiation' } }
     ]
-  }
-  // ─── 10 NEW CAREERS — append these inside the `careers` array in careers.js ──
-// Add after the last entry (sales-representative), before the closing bracket ]
+  },
 
   // ── TECH ────────────────────────────────────────────────────────────────────
 
@@ -224,7 +230,6 @@ export const careers = [
       { id: 'security-engineering', name: 'Security Engineering', description: 'Cybersecurity skills are in critical shortage and highly resistant to AI automation — especially penetration testing, threat modeling, and incident response', riskReduction: 14, difficulty: 'hard', freeResource: { label: 'OWASP Learning Resources', url: 'https://owasp.org/www-project-web-security-testing-guide/' }, paidResource: { label: 'IBM Cybersecurity Analyst', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/professional-certificates/ibm-cybersecurity-analyst' } }
     ]
   },
-
   {
     slug: 'it-support-specialist',
     title: 'IT Support Specialist',
@@ -246,7 +251,6 @@ export const careers = [
       { id: 'it-automation', name: 'IT Automation & Scripting', description: 'Use Python, PowerShell, and Ansible to automate infrastructure tasks — become the engineer who builds automation, not the one replaced by it', riskReduction: 18, difficulty: 'medium', freeResource: { label: 'Google IT Automation with Python', url: 'https://www.coursera.org/professional-certificates/google-it-automation' }, paidResource: { label: 'IT Automation with Python', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/professional-certificates/google-it-automation' } }
     ]
   },
-
   {
     slug: 'data-analyst',
     title: 'Data Analyst',
@@ -269,7 +273,6 @@ export const careers = [
       { id: 'ai-analytics-tools', name: 'AI-Powered Analytics Tools', description: 'Master Databricks, Snowflake Cortex, and LLM-integrated BI tools to stay ahead as the analytics stack becomes AI-native', riskReduction: 12, difficulty: 'medium', freeResource: { label: 'Databricks Academy (Free)', url: 'https://www.databricks.com/learn/training/home' }, paidResource: { label: 'Data Analytics on Google Cloud', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/data-analytics-google-cloud' } }
     ]
   },
-
   {
     slug: 'cybersecurity-analyst',
     title: 'Cybersecurity Analyst',
@@ -291,7 +294,6 @@ export const careers = [
       { id: 'incident-response', name: 'Incident Response & Forensics', description: 'Lead containment, investigation, and recovery during active breaches — a high-stakes, judgment-intensive role AI cannot lead', riskReduction: 14, difficulty: 'hard', freeResource: { label: 'SANS Incident Response Resources', url: 'https://www.sans.org/blog/incident-response/' }, paidResource: { label: 'IBM Cybersecurity Analyst', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/professional-certificates/ibm-cybersecurity-analyst' } }
     ]
   },
-
   {
     slug: 'product-manager',
     title: 'Product Manager',
@@ -308,7 +310,7 @@ export const careers = [
     whyAtRisk: 'AI tools now assist with significant portions of the PM workflow — from synthesizing user research with tools like Dovetail AI to generating PRD drafts with Claude or GPT-4. Automated analytics platforms surface insights that previously required manual analysis. However, the core of product management — making hard tradeoff decisions, aligning cross-functional teams, and developing product vision — is deeply human.',
     howToFutureProof: 'Develop deep product strategy and business model expertise. Build strong engineering relationships and technical credibility. Focus on the qualitative, judgment-intensive work: customer discovery, vision setting, and stakeholder influence. PMs who use AI tools to move faster will outcompete those who do not.',
     skills: [
-      { id: 'product-strategy', name: 'Product Strategy & Business Models', description: 'Master competitive positioning, monetization strategy, and market sizing — the highest-leverage PM skills that AI cannot replicate', riskReduction: 16, difficulty: 'hard', freeResource: { label: 'Lenny\'s Newsletter (Free)', url: 'https://www.lennysnewsletter.com/' }, paidResource: { label: 'Product Management Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/product-management' } },
+      { id: 'product-strategy', name: 'Product Strategy & Business Models', description: 'Master competitive positioning, monetization strategy, and market sizing — the highest-leverage PM skills that AI cannot replicate', riskReduction: 16, difficulty: 'hard', freeResource: { label: "Lenny's Newsletter (Free)", url: 'https://www.lennysnewsletter.com/' }, paidResource: { label: 'Product Management Specialization', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/product-management' } },
       { id: 'data-driven-pm', name: 'Data-Driven Product Management', description: 'Use SQL, analytics platforms, and A/B testing frameworks to make rigorous product decisions backed by quantitative evidence', riskReduction: 14, difficulty: 'medium', freeResource: { label: 'Mixpanel Product Analytics Guide', url: 'https://mixpanel.com/blog/product-analytics/' }, paidResource: { label: 'Data-Driven Product Management', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/data-driven-product-management' } },
       { id: 'ai-product-development', name: 'AI Product Development', description: 'Learn to design, evaluate, and ship AI-powered features — PMs who understand LLMs and ML systems are commanding significant salary premiums', riskReduction: 18, difficulty: 'medium', freeResource: { label: 'a16z AI Product Resources', url: 'https://a16z.com/ai/' }, paidResource: { label: 'AI Product Management', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/ai-product-management' } }
     ]
@@ -338,7 +340,6 @@ export const careers = [
       { id: 'management-accounting', name: 'Management Accounting & FP&A', description: 'Move into financial planning and analysis, budgeting, and business performance management — strategic roles with significantly lower automation risk', riskReduction: 18, difficulty: 'medium', freeResource: { label: 'CIMA Management Accounting Resources', url: 'https://www.cimaglobal.com/Starting-CIMA/' }, paidResource: { label: 'Financial Planning & Analysis', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/financial-planning-analysis' } }
     ]
   },
-
   {
     slug: 'financial-analyst',
     title: 'Financial Analyst',
@@ -361,7 +362,6 @@ export const careers = [
       { id: 'ai-finance-tools', name: 'AI-Powered Finance Tools', description: 'Master Bloomberg AI, FactSet, and Python for finance to remain the analyst who extracts insight from AI output rather than being replaced by it', riskReduction: 12, difficulty: 'medium', freeResource: { label: 'Python for Finance (Free)', url: 'https://www.youtube.com/watch?v=_eQ_8U5MRHY' }, paidResource: { label: 'Python & Statistics for Financial Analysis', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/python-statistics-financial-analysis' } }
     ]
   },
-
   {
     slug: 'insurance-underwriter',
     title: 'Insurance Underwriter',
@@ -383,7 +383,6 @@ export const careers = [
       { id: 'actuarial-skills', name: 'Actuarial & Predictive Modeling', description: 'Develop quantitative risk modeling skills to work alongside AI underwriting systems as a model validator and complex case specialist', riskReduction: 16, difficulty: 'hard', freeResource: { label: 'Casualty Actuarial Society Resources', url: 'https://www.casact.org/learn' }, paidResource: { label: 'Actuarial Science Fundamentals', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/actuarial-science' } }
     ]
   },
-
   {
     slug: 'tax-preparer',
     title: 'Tax Preparer',
@@ -405,7 +404,6 @@ export const careers = [
       { id: 'international-tax', name: 'International Tax & Expat Returns', description: 'Specialize in foreign income, FBAR reporting, and expatriate taxation — a high-complexity niche where software still struggles and human expertise commands premium fees', riskReduction: 18, difficulty: 'hard', freeResource: { label: 'IRS International Tax Resources', url: 'https://www.irs.gov/individuals/international-taxpayers' }, paidResource: { label: 'International Business Taxation', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/international-business-taxation' } }
     ]
   },
-
   {
     slug: 'investment-banker',
     title: 'Investment Banker',
@@ -426,7 +424,7 @@ export const careers = [
       { id: 'structured-finance', name: 'Structured Finance & Complex Products', description: 'Develop expertise in CLOs, project finance, or structured credit — high-complexity products where bespoke structuring judgment remains essential', riskReduction: 18, difficulty: 'hard', freeResource: { label: 'SIFMA Structured Finance Resources', url: 'https://www.sifma.org/resources/research/structured-finance/' }, paidResource: { label: 'Financial Engineering & Risk Management', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/specializations/financialengineering' } },
       { id: 'ai-banking-tools', name: 'AI-Augmented Banking Workflows', description: 'Master AI tools for pitch books, financial modeling, and research to be dramatically more productive than peers — the new baseline expectation at top firms', riskReduction: 14, difficulty: 'medium', freeResource: { label: 'Breaking Into Wall Street Free Resources', url: 'https://breakingintowallstreet.com/biws/free-tutorials/' }, paidResource: { label: 'Advanced Financial Modeling', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/advanced-financial-modeling' } }
     ]
-  },
+  }
 ];
 
 // ─── Special Content ─────────────────────────────────────────────────────────
@@ -458,7 +456,6 @@ export const specialContent = {
       { id: 'prompt-consulting', title: 'Prompt Engineering Consulting', description: 'Help companies optimize their AI interactions, create prompt libraries, and train teams on effective AI communication for their specific industry.', freeResource: { label: 'Prompting Guide', url: 'https://www.promptingguide.ai/' }, paidResource: { label: 'Generative AI for Business', platform: 'Coursera', affiliateUrl: 'https://www.coursera.org/learn/ai-consulting' } }
     ]
   }
-  
 };
 
 // ─── Author / E-E-A-T ────────────────────────────────────────────────────────
