@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-
 export interface Props {
   title: string;
   description: string;
@@ -9,7 +8,6 @@ export interface Props {
   ogImage?: string;
   schema?: object | object[];
 }
-
 const {
   title,
   description,
@@ -18,16 +16,13 @@ const {
   ogImage = 'https://aicareer.me/og-image.png',
   schema,
 } = Astro.props;
-
 const schemaArray = schema
   ? Array.isArray(schema) ? schema : [schema]
   : [];
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
-
     <!-- Google Analytics GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5725XSLSGP"></script>
     <script>
@@ -36,24 +31,20 @@ const schemaArray = schema
       gtag('js', new Date());
       gtag('config', 'G-5725XSLSGP');
     </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="google-site-verification" content="J5-A8mBPDIDz6MT7bH3zfHahL5lFWtte3OcjgpHVXlk" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Paulo Seyti" />
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -62,13 +53,11 @@ const schemaArray = schema
     <meta property="og:site_name" content="AI Career Risk" />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="en_US" />
-
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-
     <!-- JSON-LD Schemas -->
     {schemaArray.map(s => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
