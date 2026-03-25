@@ -4,7 +4,6 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CareerSelector from '../components/CareerSelector.jsx';
 import { careers, specialOptions, methodology, marketStats, riskRankings, author } from '../data/careers.js';
-
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -16,7 +15,6 @@ const orgSchema = {
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "author": { "@type": "Person", "name": author.name }
 };
-
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -27,7 +25,6 @@ const faqSchema = {
     { "@type": "Question", "name": "Can I reduce my AI displacement risk?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our interactive tool lets you check off skills as you acquire them, and your personal risk score decreases accordingly. Professionals who proactively learn AI-adjacent skills typically reduce their displacement risk by 30-50 percentage points." } }
   ]
 };
-
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -40,14 +37,12 @@ const breadcrumbSchema = {
     }
   ]
 };
-
 const getBarColor = (score) => {
   if (score <= 40) return '#10b981';
   if (score <= 70) return '#f59e0b';
   return '#f43f5e';
 };
 ---
-
 <BaseLayout
   title="Free AI Career Risk Calculator: Is Your Job Safe from AI? | aicareer.me"
   description="Check your AI job displacement risk score instantly. Free calculator for 7 high-risk careers. Get a personalized upskilling roadmap to future-proof your career."
@@ -55,9 +50,7 @@ const getBarColor = (score) => {
   schema={[orgSchema, faqSchema, breadcrumbSchema]}
 >
   <Nav />
-
   <main>
-
     <!-- ── Hero ── -->
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
       <nav aria-label="Breadcrumb" class="mb-6 flex justify-center">
@@ -65,7 +58,6 @@ const getBarColor = (score) => {
           <li><span class="text-[#e2e6f5] font-medium" aria-current="page">Home</span></li>
         </ol>
       </nav>
-
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#e2e6f5] mb-6 leading-tight">
         Is Your Job
         <span class="bg-clip-text text-transparent" style="background-image: linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%)">
@@ -78,18 +70,15 @@ const getBarColor = (score) => {
       <p class="text-base text-[#4b5280] mb-10 max-w-2xl mx-auto">
         Get your personal risk score and a step-by-step upskilling roadmap — based on research from Oxford, McKinsey, and the World Economic Forum.
       </p>
-
       <div class="flex flex-wrap justify-center gap-3 mb-10">
         <span class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]">🎯 7 High-Risk Careers</span>
         <span class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]">📊 Instant Risk Score</span>
         <span class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]">🚀 Free Upskilling Path</span>
         <span class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]">🔒 No Sign-Up Required</span>
       </div>
-
       <!-- React island — only the dropdown is interactive -->
       <CareerSelector client:load careers={careers} specialOptions={specialOptions} />
     </section>
-
     <!-- ── Market Stats ── -->
     <section class="border-t border-[#1e2340] bg-[#0a0c18] py-14">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -110,7 +99,6 @@ const getBarColor = (score) => {
         </div>
       </div>
     </section>
-
     <!-- ── Career Cards ── AIO static content lives here -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-3 text-center">
@@ -119,14 +107,12 @@ const getBarColor = (score) => {
       <p class="text-[#4b5280] text-center mb-10 max-w-2xl mx-auto">
         Each career has a dedicated risk assessment with specific skills to reduce your personal risk score.
       </p>
-
       <!-- AIO crawlable summary — always in HTML, visible to all crawlers -->
       <div class="sr-only">
         {riskRankings.map(r => (
           <p>#{r.rank}: The AI replacement risk for a {r.title} is {r.risk}% due to {r.reason}.</p>
         ))}
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {careers.map(career => {
           const color = getBarColor(career.baseRiskScore);
@@ -149,7 +135,6 @@ const getBarColor = (score) => {
         })}
       </div>
     </section>
-
     <!-- ── Future-Proof Framework ── -->
     <section class="border-t border-[#1e2340] bg-[#0a0c18] py-16">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -174,7 +159,6 @@ const getBarColor = (score) => {
         </div>
       </div>
     </section>
-
     <!-- ── Methodology ── -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16" id="methodology">
       <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-3 text-center">
@@ -202,7 +186,6 @@ const getBarColor = (score) => {
         </p>
       </div>
     </section>
-
     <!-- ── About / E-E-A-T ── -->
     <section class="border-t border-[#1e2340] bg-[#0a0c18] py-16" id="about">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -226,7 +209,6 @@ const getBarColor = (score) => {
         </div>
       </div>
     </section>
-
     <!-- ── FAQ ── -->
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-10 text-center">Frequently Asked Questions</h2>
@@ -239,8 +221,6 @@ const getBarColor = (score) => {
         ))}
       </div>
     </section>
-
   </main>
-
   <Footer />
 </BaseLayout>
