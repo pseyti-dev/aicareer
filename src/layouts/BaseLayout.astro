@@ -1,5 +1,74 @@
+web application/stitch/projects/17554603487425955486/screens/d1cb72a68ca949299ac96601d99fe415
+# Updated Astro Source Code: Obsidian Intelligence Implementation
+
+Use the following code blocks to overwrite your existing files in your Astro project.
+
+---
+
+## 1. File: `src/styles/global.css`
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --obsidian-bg: #06070f;
+    --obsidian-surface: #0d1120;
+    --obsidian-border: #1e2340;
+    --obsidian-cyan: #00f0ff;
+    --obsidian-purple: #7c3aed;
+    --obsidian-text: #e2e6f5;
+    --obsidian-text-muted: #4b5280;
+  }
+
+  body {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--obsidian-bg);
+    color: var(--obsidian-text);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code, pre {
+    font-family: 'DM Mono', 'Courier New', monospace;
+  }
+
+  /* Modern Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--obsidian-bg); }
+  ::-webkit-scrollbar-thumb { 
+    background: var(--obsidian-border); 
+    border-radius: 10px;
+    border: 2px solid var(--obsidian-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--obsidian-cyan); }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-opacity-20 backdrop-blur-lg border border-white/10 rounded-2xl;
+  }
+  
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00f0ff] to-[#7c3aed];
+  }
+}
+```
+
+---
+
+## 2. File: `src/layouts/BaseLayout.astro`
+
+```astro
 ---
 import '../styles/global.css';
+
 export interface Props {
   title: string;
   description: string;
@@ -8,6 +77,7 @@ export interface Props {
   ogImage?: string;
   schema?: object | object[];
 }
+
 const {
   title,
   description,
@@ -16,35 +86,40 @@ const {
   ogImage = 'https://aicareer.me/og-image.png',
   schema,
 } = Astro.props;
+
 const schemaArray = schema
   ? Array.isArray(schema) ? schema : [schema]
   : [];
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <!-- Google Analytics GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5725XSLSGP"></script>
-    <script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-5725XSLSGP');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="google-site-verification" content="J5-A8mBPDIDz6MT7bH3zfHahL5lFWtte3OcjgpHVXlk" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Paulo Seyti" />
-    <!-- Fonts -->
+
+    <!-- Google Fonts: Space Grotesk & DM Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -53,17 +128,151 @@ const schemaArray = schema
     <meta property="og:site_name" content="AI Career Risk" />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="en_US" />
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
     <!-- JSON-LD Schemas -->
     {schemaArray.map(s => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
     ))}
   </head>
-  <body>
+  <body class="bg-[#06070f] text-[#e2e6f5] selection:bg-[#00f0ff]/30 selection:text-[#00f0ff]">
     <slot />
   </body>
 </html>
+```
+
+---
+
+## 3. File: `src/pages/special/index.astro`
+
+```astro
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import CareerSelector from '../../components/CareerSelector.jsx';
+import { careers, methodology, marketStats, author } from '../../data/careers.js';
+
+// Schema and color logic (kept same for SEO continuity)
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AI Career Risk Calculator",
+  "applicationCategory": "BusinessApplication",
+  "url": "https://aicareer.me",
+  "description": "Assess AI job displacement risk scores for careers.",
+  "author": { "@type": "Person", "name": author.name }
+};
+
+const getBarColor = (score) => {
+  if (score <= 40) return '#00f0ff'; // Neon Cyan
+  if (score <= 70) return '#f59e0b';
+  return '#f43f5e';
+};
+---
+
+<BaseLayout
+  title="Free AI Career Risk Calculator | aicareer.me"
+  description="Check your AI job displacement risk score instantly. Personalized upskilling roadmaps."
+  canonical="https://aicareer.me/"
+  schema={[orgSchema]}
+>
+  <Nav />
+  
+  <main class="pt-24 pb-20">
+    <!-- ── Hero: Obsidian Terminal ── -->
+    <section class="max-w-4xl mx-auto px-6 py-16 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#00f0ff]/30 bg-[#00f0ff]/5 text-[10px] uppercase tracking-widest text-[#00f0ff] mb-8">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00f0ff] opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-[#00f0ff]"></span>
+        </span>
+        Obsidian Neural Model 4.2 Active
+      </div>
+      
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+        Is Your Career <br/>
+        <span class="text-gradient">Future-Proof?</span>
+      </h1>
+      
+      <p class="text-lg text-[#4b5280] mb-12 max-w-2xl mx-auto leading-relaxed">
+        Our intelligence engine calculates real-time AI displacement risks using global market data and predictive neural modeling.
+      </p>
+
+      <!-- Calculator Terminal -->
+      <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-2 max-w-xl mx-auto neon-glow">
+        <div class="flex items-center gap-4 px-4 py-3">
+          <div class="flex-grow">
+            <CareerSelector client:load careers={careers} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Market Insights ── -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-[#1e2340]">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-4">
+          <h2 class="text-3xl font-bold mb-4 tracking-tight text-gradient">Real-time Intelligence</h2>
+          <p class="text-[#4b5280] leading-relaxed">
+            The AI-driven transformation of the labor market is accelerating faster than most workers realize.
+          </p>
+        </div>
+        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {marketStats.map(stat => (
+            <div class="bg-[#0d1120]/50 border border-[#1e2340] rounded-2xl p-6 text-center">
+              <div class="text-4xl font-bold text-[#00f0ff] mb-2">{stat.figure}</div>
+              <div class="text-xs uppercase tracking-widest text-[#4b5280]">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Career Index ── -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+      <h2 class="text-3xl font-bold mb-12 text-center">Risk Analysis by Profession</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {careers.map(career => (
+          <a href={`/risk/${career.slug}/`} class="group block bg-[#0d1120] border border-[#1e2340] rounded-2xl p-8 transition-all hover:border-[#00f0ff] hover:scale-[1.02]">
+            <h3 class="text-xl font-bold mb-4 group-hover:text-[#00f0ff] transition-colors">{career.title}</h3>
+            <div class="flex items-end justify-between mb-4">
+              <span class="text-3xl font-bold">{career.baseRiskScore}%</span>
+              <span class="text-[10px] uppercase tracking-widest text-[#4b5280]">Risk Metric</span>
+            </div>
+            <div class="w-full h-1 bg-[#1e2340] rounded-full overflow-hidden">
+              <div class="h-full bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]" style={`width: ${career.baseRiskScore}%`}></div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── Methodology ── -->
+    <section class="max-w-5xl mx-auto px-6 py-24 bg-[#0d1120] border-y border-[#1e2340]">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4">{methodology.title}</h2>
+        <p class="text-[#4b5280]">{methodology.description}</p>
+      </div>
+      <div class="grid gap-6">
+        {methodology.dimensions.map(dim => (
+          <div class="flex items-start gap-6 p-6 rounded-2xl border border-[#1e2340] bg-[#06070f]">
+            <div class="px-3 py-1 rounded bg-[#00f0ff]/10 text-[#00f0ff] text-xs font-bold">{dim.weight}</div>
+            <div>
+              <h4 class="font-bold mb-2">{dim.name}</h4>
+              <p class="text-sm text-[#4b5280] leading-relaxed">{dim.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+```
