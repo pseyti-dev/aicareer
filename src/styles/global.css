@@ -1,19 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
+  :root {
+    --obsidian-bg: #06070f;
+    --obsidian-surface: #0d1120;
+    --obsidian-border: #1e2340;
+    --obsidian-cyan: #00f0ff;
+    --obsidian-purple: #7c3aed;
+    --obsidian-text: #e2e6f5;
+    --obsidian-text-muted: #4b5280;
+  }
+
   body {
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: #06070f;
-    color: #e2e6f5;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--obsidian-bg);
+    color: var(--obsidian-text);
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
   }
+
   code, pre {
     font-family: 'DM Mono', 'Courier New', monospace;
   }
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: #06070f; }
-  ::-webkit-scrollbar-thumb { background: #06B6D4; border-radius: 5px; }
-  ::-webkit-scrollbar-thumb:hover { background: #0891b2; }
+
+  /* Modern Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--obsidian-bg); }
+  ::-webkit-scrollbar-thumb { 
+    background: var(--obsidian-border); 
+    border-radius: 10px;
+    border: 2px solid var(--obsidian-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--obsidian-cyan); }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-opacity-20 backdrop-blur-lg border border-white/10 rounded-2xl;
+  }
+  
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00f0ff] to-[#7c3aed];
+  }
 }
