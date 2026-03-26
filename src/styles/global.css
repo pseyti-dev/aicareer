@@ -7,14 +7,14 @@
     --obsidian-bg: #06070f;
     --obsidian-surface: #0d1120;
     --obsidian-border: #1e2340;
-    --obsidian-cyan: #00f0ff;
+    --obsidian-cyan: #06B6D4;
     --obsidian-purple: #7c3aed;
     --obsidian-text: #e2e6f5;
     --obsidian-text-muted: #4b5280;
   }
 
   body {
-    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Grotesk', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: var(--obsidian-bg);
     color: var(--obsidian-text);
     overflow-x: clip;
@@ -28,8 +28,8 @@
   /* Modern Scrollbar */
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: var(--obsidian-bg); }
-  ::-webkit-scrollbar-thumb { 
-    background: var(--obsidian-border); 
+  ::-webkit-scrollbar-thumb {
+    background: var(--obsidian-border);
     border-radius: 10px;
     border: 2px solid var(--obsidian-bg);
   }
@@ -40,12 +40,13 @@
   .glass-panel {
     @apply bg-opacity-20 backdrop-blur-lg border border-white/10 rounded-2xl;
   }
-  
+
   .neon-glow {
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00f0ff] to-[#7c3aed];
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%);
   }
 }
