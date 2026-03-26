@@ -1,123 +1,260 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Nav from '../../components/Nav.astro';
-import Footer from '../../components/Footer.astro';
-import CareerSelector from '../../components/CareerSelector.jsx';
-import { careers, methodology, marketStats, author } from '../../data/careers.js';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CareerSelector from '../components/CareerSelector.jsx';
+import { careers, specialOptions, methodology, marketStats, riskRankings, author } from '../data/careers.js';
 
-// Schema and color logic (kept same for SEO continuity)
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "AI Career Risk Calculator",
   "applicationCategory": "BusinessApplication",
   "url": "https://aicareer.me",
-  "description": "Assess AI job displacement risk scores for careers.",
+  "description": "Free tool to assess AI job displacement risk scores for specific careers and generate personalized upskilling roadmaps.",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "author": { "@type": "Person", "name": author.name }
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Which jobs are most at risk of AI automation?", "acceptedAnswer": { "@type": "Answer", "text": "The jobs most at risk of AI automation in 2026 are: Data Entry Clerk (95%), Bookkeeper (90%), Customer Service Representative (82%), Paralegal (78%), Medical Coder (72%), Loan Officer (65%), and Sales Representative (58%). These roles have the highest concentration of tasks that AI can already perform reliably." } },
+    { "@type": "Question", "name": "How can I future-proof my career against AI?", "acceptedAnswer": { "@type": "Answer", "text": "To future-proof your career against AI, focus on three areas: develop AI literacy and learn to use AI tools relevant to your field; shift toward human-judgment tasks like strategic thinking and client relationships; and acquire cross-functional skills in data analysis, project management, and communication." } },
+    { "@type": "Question", "name": "How is the AI risk score calculated?", "acceptedAnswer": { "@type": "Answer", "text": "Our AI risk score is a composite index built on three dimensions: Task Routinization (40%), AI Tool Penetration (35%), and Human Judgment Dependency (25%). Based on research by Oxford University, McKinsey Global Institute, and the World Economic Forum." } },
+    { "@type": "Question", "name": "Can I reduce my AI displacement risk?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our interactive tool lets you check off skills as you acquire them, and your personal risk score decreases accordingly. Professionals who proactively learn AI-adjacent skills typically reduce their displacement risk by 30-50 percentage points." } }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://aicareer.me/"
+    }
+  ]
+};
+
 const getBarColor = (score) => {
-  if (score <= 40) return '#00f0ff'; // Neon Cyan
+  if (score <= 40) return '#10b981';
   if (score <= 70) return '#f59e0b';
   return '#f43f5e';
 };
 ---
 
 <BaseLayout
-  title="Free AI Career Risk Calculator | aicareer.me"
-  description="Check your AI job displacement risk score instantly. Personalized upskilling roadmaps."
+  title="Free AI Career Risk Calculator: Is Your Job Safe from AI? | aicareer.me"
+  description="Check your AI job displacement risk score instantly. Free calculator for 17 high-risk careers. Get a personalized upskilling roadmap to future-proof your career."
   canonical="https://aicareer.me/"
-  schema={[orgSchema]}
+  schema={[orgSchema, faqSchema, breadcrumbSchema]}
 >
   <Nav />
-  
-  <main class="pt-24 pb-20">
-    <!-- ── Hero: Obsidian Terminal ── -->
-    <section class="max-w-4xl mx-auto px-6 py-16 text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#00f0ff]/30 bg-[#00f0ff]/5 text-[10px] uppercase tracking-widest text-[#00f0ff] mb-8">
+
+  <main>
+
+    <!-- ── Hero ── -->
+    <section class="max-w-4xl mx-auto px-6 py-16 sm:py-24 text-center">
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#06B6D4]/30 bg-[#06B6D4]/5 text-[10px] uppercase tracking-widest text-[#06B6D4] mb-8">
         <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00f0ff] opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-[#00f0ff]"></span>
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#06B6D4] opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-[#06B6D4]"></span>
         </span>
-        Obsidian Neural Model 4.2 Active
+        Free AI Displacement Risk Calculator
       </div>
-      
-      <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-        Is Your Career <br/>
-        <span class="text-gradient">Future-Proof?</span>
+
+      <nav aria-label="Breadcrumb" class="mb-6 flex justify-center">
+        <ol class="flex items-center space-x-2 text-sm text-[#4b5280]">
+          <li><span class="text-[#e2e6f5] font-medium" aria-current="page">Home</span></li>
+        </ol>
+      </nav>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-[#e2e6f5] mb-6 leading-tight tracking-tight">
+        Is Your Job<br/>
+        <span class="bg-clip-text text-transparent" style="background-image: linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%)">
+          Safe from AI?
+        </span>
       </h1>
-      
-      <p class="text-lg text-[#4b5280] mb-12 max-w-2xl mx-auto leading-relaxed">
-        Our intelligence engine calculates real-time AI displacement risks using global market data and predictive neural modeling.
+
+      <p class="text-lg sm:text-xl text-[#4b5280] mb-3 max-w-2xl mx-auto">
+        Free AI displacement risk calculator for 17 high-risk careers.
+      </p>
+      <p class="text-base text-[#4b5280] mb-10 max-w-2xl mx-auto">
+        Get your personal risk score and a step-by-step upskilling roadmap — based on research from Oxford, McKinsey, and the World Economic Forum.
       </p>
 
-      <!-- Calculator Terminal -->
-      <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-2 max-w-xl mx-auto neon-glow">
-        <div class="flex items-center gap-4 px-4 py-3">
-          <div class="flex-grow">
-            <CareerSelector client:load careers={careers} />
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <span class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]">🎯 17 High-Risk Careers</span>
+        <span class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]">📊 Instant Risk Score</span>
+        <span class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]">🚀 Free Upskilling Path</span>
+        <span class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]">🔒 No Sign-Up Required</span>
+      </div>
+
+      <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-4 max-w-xl mx-auto" style="box-shadow: 0 0 20px rgba(6,182,212,0.08)">
+        <CareerSelector client:load careers={careers} specialOptions={specialOptions} />
+      </div>
+    </section>
+
+    <!-- ── Market Stats ── -->
+    <section class="border-t border-[#1e2340] bg-[#0a0c18] py-14">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-4">
+            <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-4 tracking-tight">
+              The Impact of AI on the Job Market in 2026
+            </h2>
+            <p class="text-[#4b5280] leading-relaxed">
+              The AI-driven transformation of the labor market is accelerating faster than most workers realize.
+            </p>
+          </div>
+          <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+            {marketStats.map(stat => (
+              <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-5 text-center">
+                <div class="text-3xl font-bold text-[#06B6D4] mb-1">{stat.figure}</div>
+                <div class="text-sm text-[#e2e6f5] mb-2 leading-snug">{stat.label}</div>
+                <div class="text-xs text-[#4b5280]">— {stat.source}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── Market Insights ── -->
-    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-[#1e2340]">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        <div class="lg:col-span-4">
-          <h2 class="text-3xl font-bold mb-4 tracking-tight text-gradient">Real-time Intelligence</h2>
-          <p class="text-[#4b5280] leading-relaxed">
-            The AI-driven transformation of the labor market is accelerating faster than most workers realize.
-          </p>
-        </div>
-        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {marketStats.map(stat => (
-            <div class="bg-[#0d1120]/50 border border-[#1e2340] rounded-2xl p-6 text-center">
-              <div class="text-4xl font-bold text-[#00f0ff] mb-2">{stat.figure}</div>
-              <div class="text-xs uppercase tracking-widest text-[#4b5280]">{stat.label}</div>
+    <!-- ── Career Cards ── -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-3 text-center tracking-tight">
+        Top Jobs Most at Risk of AI Automation in 2026
+      </h2>
+      <p class="text-[#4b5280] text-center mb-10 max-w-2xl mx-auto">
+        Each career has a dedicated risk assessment with specific skills to reduce your personal risk score.
+      </p>
+
+      <!-- AIO crawlable summary -->
+      <div class="sr-only">
+        {riskRankings.map(r => (
+          <p>#{r.rank}: The AI replacement risk for a {r.title} is {r.risk}% due to {r.reason}.</p>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {careers.map(career => {
+          const color = getBarColor(career.baseRiskScore);
+          return (
+            <a href={`/risk/${career.slug}/`}
+              aria-label={`${career.title} AI risk assessment — ${career.baseRiskScore}% risk`}
+              class="block bg-[#0d1120] border border-[#1e2340] rounded-2xl p-6 text-left transition-all duration-200 hover:border-[#06B6D4] hover:scale-[1.02] group">
+              <h3 class="text-lg font-bold text-[#e2e6f5] mb-2 group-hover:text-[#06B6D4] transition-colors">{career.title}</h3>
+              <p class="text-xs text-[#4b5280] mb-4 line-clamp-2">{career.aioSummary}</p>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-2xl font-bold text-[#e2e6f5]">{career.baseRiskScore}%</span>
+                <span class="px-2 py-1 rounded text-xs font-bold uppercase"
+                  style={`background-color:${color}20;color:${color}`}>{career.riskLabel}</span>
+              </div>
+              <div class="w-full h-1 bg-[#1e2340] rounded-full overflow-hidden">
+                <div class="h-full rounded-full" style={`width:${career.baseRiskScore}%;background-color:${color};box-shadow:0 0 6px ${color}80`}></div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- ── Future-Proof Framework ── -->
+    <section class="border-t border-[#1e2340] bg-[#0a0c18] py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-3 text-center tracking-tight">
+          How to Future-Proof Your Career Against AI
+        </h2>
+        <p class="text-[#4b5280] text-center mb-10 max-w-2xl mx-auto">
+          The professionals who thrive in the AI era aren't those who avoid AI — they're the ones who learn to work alongside it.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { step: "01", title: "Know Your Risk", desc: "Start by honestly assessing how much of your current work is routine and predictable. Our calculator gives you a baseline score based on your profession.", color: "#f43f5e" },
+            { step: "02", title: "Learn AI Tools", desc: "Master the AI tools entering your industry. Becoming the person who runs the AI — rather than being replaced by it — requires deliberate skill-building.", color: "#f59e0b" },
+            { step: "03", title: "Shift to Human Work", desc: "Move your career toward tasks requiring judgment, creativity, trust, and emotional intelligence. These are the domains where AI still falls short.", color: "#10b981" }
+          ].map(item => (
+            <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-6">
+              <div class="text-4xl font-bold mb-3" style={`color:${item.color}`}>{item.step}</div>
+              <h3 class="text-lg font-bold text-[#e2e6f5] mb-2">{item.title}</h3>
+              <p class="text-sm text-[#4b5280] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- ── Career Index ── -->
-    <section class="max-w-7xl mx-auto px-6 py-20">
-      <h2 class="text-3xl font-bold mb-12 text-center">Risk Analysis by Profession</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {careers.map(career => (
-          <a href={`/risk/${career.slug}/`} class="group block bg-[#0d1120] border border-[#1e2340] rounded-2xl p-8 transition-all hover:border-[#00f0ff] hover:scale-[1.02]">
-            <h3 class="text-xl font-bold mb-4 group-hover:text-[#00f0ff] transition-colors">{career.title}</h3>
-            <div class="flex items-end justify-between mb-4">
-              <span class="text-3xl font-bold">{career.baseRiskScore}%</span>
-              <span class="text-[10px] uppercase tracking-widest text-[#4b5280]">Risk Metric</span>
-            </div>
-            <div class="w-full h-1 bg-[#1e2340] rounded-full overflow-hidden">
-              <div class="h-full bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]" style={`width: ${career.baseRiskScore}%`}></div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
-
     <!-- ── Methodology ── -->
-    <section class="max-w-5xl mx-auto px-6 py-24 bg-[#0d1120] border-y border-[#1e2340]">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold mb-4">{methodology.title}</h2>
-        <p class="text-[#4b5280]">{methodology.description}</p>
-      </div>
-      <div class="grid gap-6">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16" id="methodology">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-3 text-center tracking-tight">
+        {methodology.title}
+      </h2>
+      <p class="text-[#4b5280] text-center mb-10 max-w-2xl mx-auto">{methodology.description}</p>
+      <div class="space-y-4 mb-6">
         {methodology.dimensions.map(dim => (
-          <div class="flex items-start gap-6 p-6 rounded-2xl border border-[#1e2340] bg-[#06070f]">
-            <div class="px-3 py-1 rounded bg-[#00f0ff]/10 text-[#00f0ff] text-xs font-bold">{dim.weight}</div>
+          <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-6 flex gap-4">
+            <div class="flex-shrink-0">
+              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-[#06B6D4]/10 text-[#06B6D4] border border-[#06B6D4]/30">
+                {dim.weight}
+              </span>
+            </div>
             <div>
-              <h4 class="font-bold mb-2">{dim.name}</h4>
+              <h3 class="font-bold text-[#e2e6f5] mb-1">{dim.name}</h3>
               <p class="text-sm text-[#4b5280] leading-relaxed">{dim.description}</p>
             </div>
           </div>
         ))}
       </div>
+      <div class="bg-[#0d1120] border border-[#1e2340] border-l-4 border-l-[#06B6D4] rounded-2xl p-5">
+        <p class="text-sm text-[#4b5280] leading-relaxed">
+          <span class="text-[#e2e6f5] font-medium">Note: </span>{methodology.note}
+        </p>
+      </div>
     </section>
+
+    <!-- ── About / E-E-A-T ── -->
+    <section class="border-t border-[#1e2340] bg-[#0a0c18] py-16" id="about">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-6 tracking-tight">Who Built This</h2>
+        <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-8">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white mx-auto mb-4"
+            style="background: linear-gradient(135deg, #06B6D4, #7C3AED)">
+            {author.name.charAt(0)}
+          </div>
+          <h3 class="text-xl font-bold text-[#e2e6f5] mb-1">{author.name}</h3>
+          <p class="text-sm text-[#06B6D4] mb-4">{author.role}</p>
+          <p class="text-[#4b5280] leading-relaxed mb-6">{author.bio}</p>
+          <div class="flex flex-wrap justify-center gap-2 mb-6">
+            {author.expertise.map(skill => (
+              <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#1e2340] text-[#e2e6f5]">{skill}</span>
+            ))}
+          </div>
+          <p class="text-xs text-[#4b5280]">
+            This tool covers career topics (YMYL). Scores are based on published labor economics research for informational purposes only.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-10 text-center tracking-tight">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-6">
+            <h3 class="font-bold text-[#e2e6f5] mb-3">{item.name}</h3>
+            <p class="text-sm text-[#4b5280] leading-relaxed">{item.acceptedAnswer.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
   </main>
 
   <Footer />
