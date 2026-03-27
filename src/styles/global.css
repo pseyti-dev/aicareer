@@ -14,7 +14,7 @@
   }
 
   body {
-    font-family: 'Space Grotesk', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: var(--obsidian-bg);
     color: var(--obsidian-text);
     overflow-x: clip;
