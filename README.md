@@ -3,6 +3,7 @@
 Free AI Career Risk Calculator. Built with Astro for guaranteed static HTML output on every page.
 
 ## Stack
+
 - **Astro 4** — static site generation, zero-JS by default
 - **React** — interactive islands only (career selector, skill checklist, risk gauge)
 - **Tailwind CSS** — styling
@@ -47,7 +48,8 @@ grep -c "AI replacement risk" dist/risk/bookkeeper/index.html
 ## GitHub Actions Auto-Deploy
 
 On every push to `main`, GitHub Actions:
-1. Installs dependencies 
+
+1. Installs dependencies
 2. Runs `npm run build`
 3. Deploys `dist/` to Hostinger via FTP
 
@@ -55,11 +57,11 @@ On every push to `main`, GitHub Actions:
 
 In your GitHub repo → Settings → Secrets → New secret:
 
-| Secret | Value |
-|---|---|
-| `FTP_SERVER` | Your Hostinger FTP host (e.g. `ftp.aicareer.me`) |
-| `FTP_USERNAME` | Your Hostinger FTP username |
-| `FTP_PASSWORD` | Your Hostinger FTP password |
+| Secret         | Value                                            |
+| -------------- | ------------------------------------------------ |
+| `FTP_SERVER`   | Your Hostinger FTP host (e.g. `ftp.aicareer.me`) |
+| `FTP_USERNAME` | Your Hostinger FTP username                      |
+| `FTP_PASSWORD` | Your Hostinger FTP password                      |
 
 Find these in: Hostinger → Hosting → FTP Accounts.
 
