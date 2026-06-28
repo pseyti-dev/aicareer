@@ -55,10 +55,16 @@ Each phase = one PR. Never merge a phase that hasn't passed its acceptance crite
 
 > Confirm searchable and winnable demand BEFORE scaling pages.
 
-- [ ] Pull GSC data + keyword research for the 17 career themes
-  - Is there real search volume? Are AI Overviews already cannibalizing these queries?
-  - Which have tool intent (favor the calculator) vs pure informational intent (cannibalizable)?
-- [ ] Produce report and WAIT for explicit user OK before starting Phase 5
+- [x] Keyword research for the 17 career themes against 2026 AI Overview landscape
+  - ✅ Demand confirmed: "will AI replace [career]" = high-volume, growing
+  - ⚠️ AIO cannibalization: 83% coverage for career/education; mitigated by AEO stack (cited in AIO = 120% more clicks)
+  - ✅ Tool intent queries (calculator, risk score) are AIO-resistant
+  - ✅ Research/data queries (study page, Dataset schema) are AIO-citation-friendly
+  - ❌ Generic lists ("AI proof jobs") — high AIO, no differentiation: skip
+- [x] Produce report → see `PHASE4-DEMAND-REPORT.md`
+- [ ] **WAIT for explicit user OK before starting Phase 5**
+
+**Recommendation in report: Proceed. Scope = expand existing career pages + 2 index pages. No thin pages.**
 
 **DO NOT start Phase 5 without explicit user approval based on this report.**
 
