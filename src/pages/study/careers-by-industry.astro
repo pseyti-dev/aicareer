@@ -1,0 +1,420 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { careers, author } from '../../data/careers.js';
+
+const industries = [
+  {
+    id: 'finance',
+    name: 'Finance & Accounting',
+    description:
+      'Finance and accounting roles are among the most AI-exposed of any sector. Task routinization is extreme — reconciliation, data entry, tax calculation, and standard reporting are all rule-based processes that AI executes with high accuracy and zero fatigue.',
+    stanfordNote:
+      'Stanford AI Index 2026: AI penetration in finance operations is among the highest across all sectors. Productivity gains of 26%+ documented in structured financial workflows.',
+    slugs: [
+      'bookkeeper',
+      'tax-preparer',
+      'accountant',
+      'financial-analyst',
+      'investment-banker',
+      'loan-officer',
+    ],
+  },
+  {
+    id: 'legal-insurance',
+    name: 'Legal & Insurance',
+    description:
+      'Legal and insurance roles face high automation pressure in document-heavy, rules-based workflows. Contract review, risk scoring, and standard policy processing are already handled by AI. Human professionals retain value in complex cases, client relationships, and strategic judgment.',
+    stanfordNote:
+      'Stanford AI Index 2026: Legal services is in the top-five AI-exposed categories. Insurance underwriting algorithms now outperform human accuracy on standard risk assessments.',
+    slugs: ['paralegal', 'insurance-underwriter'],
+  },
+  {
+    id: 'technology',
+    name: 'Technology & Data',
+    description:
+      'Technology roles show a nuanced picture: senior engineers and security specialists are relatively protected, but entry-level and data-entry-adjacent positions face severe pressure. The "jagged frontier" is especially visible here — AI excels at code generation and log analysis while struggling with complex systems thinking.',
+    stanfordNote:
+      'Stanford AI Index 2026: Entry-level software developer employment (ages 22–25) fell ~20% since 2024. AI agents achieved 93% cybersecurity problem-solving success (vs. 15% in 2024). AI skills demand in the information sector grew from 7.8% to 13.2%.',
+    slugs: [
+      'data-entry-clerk',
+      'it-support-specialist',
+      'data-analyst',
+      'software-developer',
+      'cybersecurity-analyst',
+    ],
+  },
+  {
+    id: 'healthcare',
+    name: 'Healthcare',
+    description:
+      'Healthcare shows the starkest split between clinical judgment (highly protected) and administrative processing (highly automated). Medical coding and clinical documentation are being transformed by AI trained on clinical notes — but diagnostic and treatment decisions remain firmly human.',
+    stanfordNote:
+      'Stanford AI Index 2026: Physicians using AI note-generation tools report 83% less time spent writing clinical notes. ICD-10 code assignment is being automated by NLP with 90%+ accuracy on standard cases.',
+    slugs: ['medical-coder'],
+  },
+  {
+    id: 'sales-customer',
+    name: 'Sales & Customer Service',
+    description:
+      'Customer-facing roles face significant automation at the tier-1 interaction level — chatbots, AI dialers, and CRM automation handle routine inquiries and outreach. High-value sales relationships, complex negotiations, and escalated support remain human-dependent.',
+    stanfordNote:
+      'Stanford AI Index 2026: Customer support AI tools deliver 14–15% productivity gains and handle Tier-1 tickets without human intervention. Employment declines for entry-level customer service roles mirror those in software development.',
+    slugs: ['customer-service-rep', 'sales-representative'],
+  },
+  {
+    id: 'product-strategy',
+    name: 'Product & Strategy',
+    description:
+      'Product management is among the most AI-resilient roles measured. It requires cross-functional leadership, stakeholder alignment, and strategic judgment — capabilities that remain beyond current AI. AI tools assist with research synthesis and roadmap generation, but the core judgment work is human.',
+    stanfordNote:
+      'Stanford AI Index 2026: Expert consensus is that roles requiring "judgment, trust, and complex reasoning" are most resistant to automation. Product managers score high on all three dimensions.',
+    slugs: ['product-manager'],
+  },
+];
+
+const publishDate = '2026-06-01';
+const modifyDate = '2026-06-28';
+
+const getCareer = (slug) => careers.find((c) => c.slug === slug);
+const getLabelColor = (score) => {
+  if (score <= 40)
+    return { text: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/30' };
+  if (score <= 70)
+    return { text: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/30' };
+  return { text: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/30' };
+};
+
+const industryAvgRisk = (slugs) => {
+  const cs = slugs.map(getCareer).filter(Boolean);
+  return Math.round(cs.reduce((sum, c) => sum + c.baseRiskScore, 0) / cs.length);
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'AI Displacement Risk by Industry: Which Sectors Are Most Exposed in 2026?',
+  description:
+    '17 careers grouped into 6 industry sectors, each with average AI displacement risk score and Stanford AI Index 2026 context. Finance & Accounting leads at 70% average risk; Product & Strategy is lowest at 32%.',
+  url: 'https://aicareer.me/study/careers-by-industry/',
+  datePublished: publishDate,
+  dateModified: modifyDate,
+  author: { '@type': 'Person', name: author.name },
+  publisher: { '@type': 'Organization', name: 'AI Career Risk', url: 'https://aicareer.me' },
+  citation: {
+    '@type': 'CreativeWork',
+    name: '2026 AI Index Report',
+    author: { '@type': 'Organization', name: 'Stanford Human-Centered AI Institute' },
+    url: 'https://hai.stanford.edu/ai-index/2026-ai-index-report',
+  },
+};
+
+const datasetSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: 'AI Career Displacement Risk by Industry Sector — 2026',
+  description:
+    'Average AI displacement risk scores for 6 industry sectors (Finance & Accounting, Legal & Insurance, Technology & Data, Healthcare, Sales & Customer Service, Product & Strategy), aggregated from 17 individual career risk assessments.',
+  url: 'https://aicareer.me/study/careers-by-industry/',
+  datePublished: publishDate,
+  dateModified: modifyDate,
+  creator: { '@type': 'Person', name: author.name },
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  variableMeasured: [
+    { '@type': 'PropertyValue', name: 'Industry Sector', valueReference: 'string' },
+    {
+      '@type': 'PropertyValue',
+      name: 'Average AI Displacement Risk',
+      minValue: 0,
+      maxValue: 100,
+      unitText: 'percent',
+    },
+    { '@type': 'PropertyValue', name: 'Career Count', unitText: 'count' },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Which industry has the highest AI displacement risk in 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Finance & Accounting has the highest average AI displacement risk in 2026, with an average risk score of approximately 70% across bookkeeping, tax preparation, accounting, financial analysis, investment banking, and loan processing. The Stanford AI Index 2026 confirms AI penetration in finance operations is among the highest across all sectors.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which industry is safest from AI in 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Product management and strategic roles show the lowest AI displacement risk (28–32%), driven by their dependence on cross-functional leadership, stakeholder alignment, and novel problem-solving. Healthcare clinical roles are also highly protected, though administrative healthcare roles (medical coding) face high automation pressure.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are technology jobs safe from AI?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Technology jobs show a wide range of AI risk. Senior software developers (38% risk) and cybersecurity analysts (28%) are relatively safe, but entry-level tech roles face acute pressure. The Stanford AI Index 2026 reports that employment among software developers aged 22–25 fell nearly 20% since 2024, even as senior headcount grew. Data entry and IT support roles within the tech sector face high automation (65–95% risk).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does AI affect finance and accounting jobs?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Finance and accounting jobs are among the most heavily impacted by AI. Bookkeepers (90% risk), tax preparers (88%), and accountants (80%) face critical-level displacement risk as AI tools like QuickBooks AI, TurboTax AI, and automated reconciliation systems handle their core tasks with high accuracy. Financial analysts (55%) and investment bankers (42%) retain more protection due to judgment-heavy, client-relationship components of their work.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Will AI replace legal and insurance professionals?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Legal and insurance professionals face significant but uneven AI displacement risk. Paralegals (78% risk) and insurance underwriters (74%) see high exposure in document review, risk scoring, and standard case processing. However, lawyers, senior underwriters, and claims adjusters handling complex or contentious cases retain strong human value. The Stanford AI Index 2026 places legal services in the top-five most AI-exposed categories.',
+      },
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://aicareer.me/' },
+    { '@type': 'ListItem', position: 2, name: 'Research', item: 'https://aicareer.me/study/' },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'AI Risk by Industry',
+      item: 'https://aicareer.me/study/careers-by-industry/',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="AI Displacement Risk by Industry: Which Sectors Are Most Exposed in 2026?"
+  description="17 careers grouped across 6 industries with average AI risk scores and Stanford AI Index 2026 context. Finance & Accounting leads at ~70% average risk. See where your sector stands."
+  canonical="https://aicareer.me/study/careers-by-industry/"
+  ogType="article"
+  schema={[articleSchema, datasetSchema, faqSchema, breadcrumbSchema]}
+>
+  <Nav />
+
+  <div class="min-h-screen bg-[#06070f]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Breadcrumb -->
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center space-x-2 text-sm text-[#4b5280]">
+          <li><a href="/" class="hover:text-[#06B6D4] transition-colors">Home</a></li>
+          <li><span class="mx-2 text-[#1e2340]">/</span></li>
+          <li><span class="text-[#4b5280]">Research</span></li>
+          <li><span class="mx-2 text-[#1e2340]">/</span></li>
+          <li>
+            <span class="text-[#e2e6f5] font-medium" aria-current="page">AI Risk by Industry</span>
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <div class="mb-10">
+        <div class="flex items-center gap-2 mb-4">
+          <span
+            class="px-3 py-1 rounded-full text-xs font-semibold bg-[#06B6D4]/10 text-[#06B6D4] border border-[#06B6D4]/20"
+          >
+            Research
+          </span>
+          <span class="text-xs text-[#4b5280]">17 careers · 6 sectors · Stanford AI Index 2026</span
+          >
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-[#e2e6f5] mb-4 leading-tight">
+          AI Displacement Risk by Industry
+        </h1>
+        <p class="text-lg text-[#4b5280] leading-relaxed max-w-3xl">
+          We grouped all 17 careers in our dataset into 6 industry sectors and calculated the
+          average AI displacement risk per sector. Finance & Accounting leads with ~70% average
+          risk. Product & Strategy is the most resilient at 32%. Each section includes Stanford AI
+          Index 2026 context for that industry.
+        </p>
+      </div>
+
+      <!-- Sector overview cards -->
+      <section class="mb-10" aria-labelledby="sector-overview-heading">
+        <h2 id="sector-overview-heading" class="text-xl font-bold text-[#e2e6f5] mb-4">
+          Sector Risk Overview
+        </h2>
+
+        <!-- sr-only machine-readable data for AEO -->
+        <table class="sr-only" aria-label="AI displacement risk by industry sector 2026">
+          <caption>Average AI displacement risk for 6 industry sectors, 17 careers total</caption>
+          <thead>
+            <tr
+              ><th>Sector</th><th>Careers</th><th>Average Risk (%)</th><th
+                >Stanford AI Index 2026 Note</th
+              ></tr
+            >
+          </thead>
+          <tbody>
+            {
+              industries.map((ind) => (
+                <tr>
+                  <td>{ind.name}</td>
+                  <td>
+                    {ind.slugs
+                      .map(getCareer)
+                      .filter(Boolean)
+                      .map((c) => c.title)
+                      .join(', ')}
+                  </td>
+                  <td>{industryAvgRisk(ind.slugs)}</td>
+                  <td>{ind.stanfordNote}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          {
+            industries.map((ind) => {
+              const avg = industryAvgRisk(ind.slugs);
+              const colors = getLabelColor(avg);
+              return (
+                <a
+                  href={`#${ind.id}`}
+                  class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-4 hover:border-[#2a3060] transition-colors"
+                >
+                  <div class={`text-2xl font-bold mb-1 ${colors.text}`}>{avg}%</div>
+                  <div class="text-sm font-medium text-[#e2e6f5]">{ind.name}</div>
+                  <div class="text-xs text-[#4b5280] mt-1">
+                    {ind.slugs.length} career{ind.slugs.length > 1 ? 's' : ''}
+                  </div>
+                </a>
+              );
+            })
+          }
+        </div>
+      </section>
+
+      <!-- Industry sections -->
+      {
+        industries.map((ind) => {
+          const avg = industryAvgRisk(ind.slugs);
+          const colors = getLabelColor(avg);
+          return (
+            <section id={ind.id} class="mb-10" aria-labelledby={`heading-${ind.id}`}>
+              <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl overflow-hidden">
+                <div
+                  class={`p-6 border-b border-[#1e2340] flex items-center justify-between gap-4`}
+                >
+                  <div>
+                    <h2 id={`heading-${ind.id}`} class="text-xl font-bold text-[#e2e6f5]">
+                      {ind.name}
+                    </h2>
+                    <p class="text-sm text-[#4b5280] mt-1 leading-relaxed">{ind.description}</p>
+                  </div>
+                  <div class="flex-shrink-0 text-right">
+                    <div class={`text-3xl font-bold ${colors.text}`}>{avg}%</div>
+                    <div class="text-xs text-[#4b5280]">avg risk</div>
+                  </div>
+                </div>
+
+                <div class="divide-y divide-[#1e2340]">
+                  {ind.slugs.map((slug) => {
+                    const career = getCareer(slug);
+                    if (!career) return null;
+                    const c = getLabelColor(career.baseRiskScore);
+                    return (
+                      <a
+                        href={`/risk/${career.slug}/`}
+                        class="flex items-center justify-between gap-4 px-6 py-4 hover:bg-[#0a0f1e] transition-colors"
+                      >
+                        <div>
+                          <span class="font-medium text-[#e2e6f5] text-sm">{career.title}</span>
+                          <span
+                            class={`ml-2 px-2 py-0.5 rounded-full text-xs border ${c.bg} ${c.text} ${c.border}`}
+                          >
+                            {career.riskLabel}
+                          </span>
+                        </div>
+                        <div class="flex-shrink-0 flex items-center gap-3">
+                          <div class="w-24 h-1.5 bg-[#1e2340] rounded-full overflow-hidden hidden sm:block">
+                            <div
+                              class="h-full rounded-full"
+                              style={`width: ${career.baseRiskScore}%; background: ${career.baseRiskScore <= 40 ? '#10b981' : career.baseRiskScore <= 70 ? '#f59e0b' : '#f43f5e'}`}
+                            />
+                          </div>
+                          <span class={`text-lg font-bold ${c.text} w-12 text-right`}>
+                            {career.baseRiskScore}%
+                          </span>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+
+                <div class="px-6 py-4 bg-[#06070f] border-t border-[#1e2340]">
+                  <p class="text-xs text-[#4b5280]">
+                    <span class="text-[#06B6D4] font-medium">Stanford AI Index 2026:</span>{' '}
+                    {ind.stanfordNote.replace('Stanford AI Index 2026: ', '')}
+                  </p>
+                </div>
+              </div>
+            </section>
+          );
+        })
+      }
+
+      <!-- FAQ -->
+      <section class="mb-10" aria-labelledby="faq-industry-heading">
+        <h2 id="faq-industry-heading" class="text-2xl font-bold text-[#e2e6f5] mb-5">
+          Frequently Asked Questions
+        </h2>
+        <div class="space-y-4">
+          {
+            faqSchema.mainEntity.map((item) => (
+              <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-6">
+                <h3 class="font-semibold text-[#e2e6f5] mb-3">{item.name}</h3>
+                <p class="text-sm text-[#4b5280] leading-relaxed">{item.acceptedAnswer.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <div
+        class="bg-gradient-to-br from-[#0d1120] to-[#06070f] border border-[#1e2340] rounded-xl p-8 text-center"
+      >
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-3">Check Your Personal Risk Score</h2>
+        <p class="text-[#4b5280] mb-6 max-w-lg mx-auto">
+          Industry averages hide wide variance within sectors. A software developer and a data entry
+          clerk are both in "Technology" but their risk scores differ by 57 percentage points. Get
+          your career-specific score.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            href="/"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all"
+            style="background: linear-gradient(135deg, #06B6D4, #7C3AED)"
+          >
+            Calculate My Risk Score →
+          </a>
+          <a
+            href="/study/ai-job-impact-2026/"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-[#e2e6f5] border border-[#1e2340] hover:border-[#06B6D4] transition-all"
+          >
+            View Stanford 2026 Data →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

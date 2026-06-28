@@ -16,6 +16,20 @@ const { career } = Astro.props;
 
 const relatedCareers = careers.filter((c) => c.slug !== career.slug).slice(0, 3);
 
+const replaceBottomLine =
+  career.baseRiskScore > 70
+    ? `At ${career.baseRiskScore}% risk, most routine ${career.title} tasks will be automated within 3–5 years. The role will not disappear overnight, but headcount will contract significantly — especially at the entry level, where the Stanford AI Index 2026 confirms the steepest job losses are already occurring. Human ${career.title}s will remain employed in advisory, exception-handling, and client-facing capacities that require trust and judgment.`
+    : career.baseRiskScore > 40
+      ? `At ${career.baseRiskScore}% risk, AI will automate a significant portion of this role's task load, but human ${career.title}s will remain essential for complex, relationship-dependent, and judgment-heavy work. The Stanford AI Index 2026 shows productivity gains in this category — meaning fewer people will do more work, not that the role disappears.`
+      : `At ${career.baseRiskScore}% risk, this role is among the more AI-resilient in today's market. AI tools will augment rather than replace ${career.title}s in most scenarios. However, the Stanford AI Index 2026 cautions that entry-level positions in even "low risk" careers are vulnerable — junior developer employment fell ~20% in 2025–2026 despite software development being rated low-risk overall.`;
+
+const replaceBoxColor =
+  career.baseRiskScore > 70
+    ? 'border-rose-500/30 bg-rose-500/5'
+    : career.baseRiskScore > 40
+      ? 'border-amber-500/30 bg-amber-500/5'
+      : 'border-emerald-500/30 bg-emerald-500/5';
+
 const getBarColor = (score) => {
   if (score <= 40) return '#10b981';
   if (score <= 70) return '#f59e0b';
@@ -69,7 +83,7 @@ const faqSchema = {
       name: `Will AI completely replace ${career.title}s?`,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: `While AI will automate many tasks in the ${career.title} role, complete replacement is unlikely in the near term. Professionals who proactively develop AI-adjacent skills and focus on human-judgment work can significantly reduce their displacement risk.`,
+        text: `${career.aioSummary} Complete replacement is most likely for entry-level and routine-task positions within the role. Professionals who develop AI-adjacent skills and pivot toward judgment-heavy, relationship-driven work can reduce their personal displacement risk well below the ${career.baseRiskScore}% baseline. The Stanford AI Index 2026 confirms that entry-level workers in AI-exposed roles see the steepest employment declines, while senior professionals in the same fields hold steady or grow.`,
       },
     },
   ],
@@ -193,6 +207,28 @@ const breadcrumbSchema = {
           strategic, creative, and relationship-driven dimensions of the role.
         </p>
       </article>
+
+      <!-- Will AI Replace? — AIO-targeted section -->
+      <section
+        class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8"
+        aria-labelledby={`replace-heading-${career.slug}`}
+      >
+        <h2 id={`replace-heading-${career.slug}`} class="text-2xl font-bold text-[#e2e6f5] mb-4">
+          Will AI Replace {career.title}s?
+        </h2>
+        <p class="text-[#4b5280] leading-relaxed mb-4">{career.aioSummary}</p>
+        <div class={`rounded-lg p-4 mb-4 border ${replaceBoxColor}`}>
+          <p class="text-sm leading-relaxed text-[#e2e6f5]">
+            <strong>Bottom line:</strong>
+            {' '}{replaceBottomLine}
+          </p>
+        </div>
+        <p class="text-xs text-[#4b5280]">
+          Source: <a href="/study/ai-job-impact-2026/" class="text-[#06B6D4] hover:underline"
+            >Stanford AI Index 2026 analysis</a
+          > · <a href="/about/" class="text-[#06B6D4] hover:underline">Risk score methodology</a>
+        </p>
+      </section>
 
       <!-- FAQ — visible section -->
       <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">

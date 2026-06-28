@@ -62,21 +62,26 @@ Each phase = one PR. Never merge a phase that hasn't passed its acceptance crite
   - ✅ Research/data queries (study page, Dataset schema) are AIO-citation-friendly
   - ❌ Generic lists ("AI proof jobs") — high AIO, no differentiation: skip
 - [x] Produce report → see `PHASE4-DEMAND-REPORT.md`
-- [ ] **WAIT for explicit user OK before starting Phase 5**
+- [x] **Explicit user approval received (2026-06-28) → Phase 5 unlocked**
 
 **Recommendation in report: Proceed. Scope = expand existing career pages + 2 index pages. No thin pages.**
 
-**DO NOT start Phase 5 without explicit user approval based on this report.**
-
 ---
 
-## Phase 5 — Programmatic SEO _(locked until Phase 4 gate)_
+## Phase 5 — Programmatic SEO *(current)*
 
-- [ ] Pipeline generating career pages from dataset — each with unique data/calculation + cited source
-- [ ] Every new page PR must pass the CLAUDE.md §5 quality gate (5 checks)
-- [ ] Zero thin pages — no find-replace templates
+- [x] Add "Will AI Replace [Career]?" visible section to all 17 career pages
+  - Unique per career (uses career.aioSummary + risk-band-specific bottom line)
+  - AIO-targeted H2 matching exact search query
+  - Stanford AI Index 2026 cited; links back to study page
+- [x] Updated FAQ 5th entry on all career pages to use career.aioSummary (richer, citable)
+- [x] New page `/study/careers-by-industry/` — 6 industry sectors, avg risk, Dataset schema
+  - Article + Dataset + FAQPage + BreadcrumbList schemas, all server-rendered
+  - sr-only machine-readable sector table for AI crawlers
+- [x] `llms.txt` updated with careers-by-industry entry
+- [x] Footer updated with careers-by-industry link
 
-**Acceptance:** generated pages pass quality gate; no thin content.
+**Acceptance:** 23 pages pass full audit; "Will AI Replace?" H2 in all 17 career page HTML; Dataset schema on industry page.
 
 ---
 
