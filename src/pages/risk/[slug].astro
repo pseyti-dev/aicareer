@@ -47,7 +47,7 @@ const articleSchema = {
   author: { '@type': 'Person', name: author.name },
   publisher: { '@type': 'Organization', name: 'AI Career Risk', url: 'https://aicareer.me' },
   datePublished: '2026-01-01',
-  dateModified: '2026-03-01',
+  dateModified: new Date().toISOString().slice(0, 10),
 };
 
 const faqSchema = {
@@ -112,8 +112,8 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout
-  title={`${career.title} AI Risk Score: ${career.baseRiskScore}% | Future-Proof Your Career | aicareer.me`}
-  description={`${career.title} AI automation risk is ${career.baseRiskScore}% (${career.riskLabel}). See which tasks AI already performs, learn the skills to reduce your risk, and get a free upskilling roadmap.`}
+  title={`${career.title} AI Risk Score: ${career.baseRiskScore}% | aicareer.me`}
+  description={`${career.title} AI risk is ${career.baseRiskScore}% (${career.riskLabel}). See which tasks AI already automates, the key skills to cut your risk, and a free upskilling roadmap.`}
   canonical={`https://aicareer.me/risk/${career.slug}/`}
   ogType="article"
   schema={[articleSchema, faqSchema, breadcrumbSchema]}
