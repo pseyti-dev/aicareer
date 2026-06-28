@@ -23,6 +23,8 @@ const replaceBottomLine =
       ? `At ${career.baseRiskScore}% risk, AI will automate a significant portion of this role's task load, but human ${career.title}s will remain essential for complex, relationship-dependent, and judgment-heavy work. The Stanford AI Index 2026 shows productivity gains in this category — meaning fewer people will do more work, not that the role disappears.`
       : `At ${career.baseRiskScore}% risk, this role is among the more AI-resilient in today's market. AI tools will augment rather than replace ${career.title}s in most scenarios. However, the Stanford AI Index 2026 cautions that entry-level positions in even "low risk" careers are vulnerable — junior developer employment fell ~20% in 2025–2026 despite software development being rated low-risk overall.`;
 
+const replaceIcon = career.baseRiskScore > 70 ? '⚠' : career.baseRiskScore > 40 ? '⚡' : '✓';
+
 const replaceBoxColor =
   career.baseRiskScore > 70
     ? 'border-rose-500/30 bg-rose-500/5'
@@ -149,7 +151,10 @@ const breadcrumbSchema = {
       </div>
 
       <!-- AIO Summary — static, citable, in the HTML -->
-      <div class="bg-[#0d1120] border-l-4 border-[#06B6D4] rounded-xl p-6 mb-8">
+      <div
+        class="border-l-4 border-[#06B6D4] rounded-xl p-6 mb-8"
+        style="background:rgba(6,182,212,0.06)"
+      >
         <p class="text-sm text-[#e2e6f5] leading-relaxed font-medium">{career.aioSummary}</p>
       </div>
 
@@ -214,7 +219,7 @@ const breadcrumbSchema = {
         aria-labelledby={`replace-heading-${career.slug}`}
       >
         <h2 id={`replace-heading-${career.slug}`} class="text-2xl font-bold text-[#e2e6f5] mb-4">
-          Will AI Replace {career.title}s?
+          <span aria-hidden="true">{replaceIcon} </span>Will AI Replace {career.title}s?
         </h2>
         <p class="text-[#4b5280] leading-relaxed mb-4">{career.aioSummary}</p>
         <div class={`rounded-lg p-4 mb-4 border ${replaceBoxColor}`}>
@@ -230,16 +235,21 @@ const breadcrumbSchema = {
         </p>
       </section>
 
-      <!-- FAQ — visible section -->
+      <!-- FAQ — accordion (CSS-only, zero JS) -->
       <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
         <h2 class="text-2xl font-bold text-[#e2e6f5] mb-6">Frequently Asked Questions</h2>
-        <div class="space-y-5">
+        <div class="space-y-1">
           {
             faqSchema.mainEntity.map((faq) => (
-              <div class="border-b border-[#1e2340] pb-5 last:border-0 last:pb-0">
-                <h3 class="text-base font-bold text-[#e2e6f5] mb-2">{faq.name}</h3>
-                <p class="text-sm text-[#4b5280] leading-relaxed">{faq.acceptedAnswer.text}</p>
-              </div>
+              <details class="group border-b border-[#1e2340] last:border-0">
+                <summary class="flex items-center justify-between gap-4 py-4 cursor-pointer list-none text-base font-bold text-[#e2e6f5] hover:text-[#06B6D4] transition-colors">
+                  {faq.name}
+                  <span class="flex-shrink-0 text-[#4b5280] group-open:rotate-45 transition-transform duration-200 text-xl leading-none">
+                    +
+                  </span>
+                </summary>
+                <p class="text-sm text-[#4b5280] leading-relaxed pb-4">{faq.acceptedAnswer.text}</p>
+              </details>
             ))
           }
         </div>

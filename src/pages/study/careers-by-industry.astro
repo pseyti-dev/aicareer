@@ -118,6 +118,12 @@ const industryAvgRisk = (slugs) => {
   return Math.round(cs.reduce((sum, c) => sum + c.baseRiskScore, 0) / cs.length);
 };
 
+const getBarColor = (score) => {
+  if (score <= 40) return '#10b981';
+  if (score <= 70) return '#f59e0b';
+  return '#f43f5e';
+};
+
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -311,14 +317,21 @@ const breadcrumbSchema = {
             industries.map((ind) => {
               const avg = industryAvgRisk(ind.slugs);
               const colors = getLabelColor(avg);
+              const barColor = getBarColor(avg);
               return (
                 <a
                   href={`#${ind.id}`}
                   class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-4 hover:border-[#2a3060] transition-colors"
                 >
                   <div class={`text-2xl font-bold mb-1 ${colors.text}`}>{avg}%</div>
-                  <div class="text-sm font-medium text-[#e2e6f5]">{ind.name}</div>
-                  <div class="text-xs text-[#4b5280] mt-1">
+                  <div class="text-sm font-medium text-[#e2e6f5] mb-2">{ind.name}</div>
+                  <div class="w-full h-1.5 bg-[#1e2340] rounded-full overflow-hidden mb-2">
+                    <div
+                      class="h-full rounded-full"
+                      style={`width:${avg}%;background-color:${barColor}`}
+                    />
+                  </div>
+                  <div class="text-xs text-[#4b5280]">
                     {ind.slugs.length} career{ind.slugs.length > 1 ? 's' : ''}
                   </div>
                 </a>
