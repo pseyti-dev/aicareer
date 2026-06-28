@@ -1,0 +1,179 @@
+# CLAUDE.md — aicareer.me
+
+This file is loaded on every invocation. Keep responses anchored to it.
+
+---
+
+## 1. Project Overview & Current Stage
+
+**aicareer.me** is a free AI career displacement risk calculator. Users select a career, get a research-backed risk score (0–100%), and receive a personalized upskilling roadmap with affiliate-linked courses.
+
+**Current stage: pre-traffic.** Organic traffic is near zero. The site is indexed but has not yet accumulated authority or ranking signals. This changes priorities: SEO infrastructure and content quality matter more than velocity; do not optimize lagging metrics (rankings, revenue) on noise.
+
+**Monetization:** affiliate links to Coursera and free resources on every skill card in `[slug].astro`. No ads, no paywall.
+
+---
+
+## 2. Strategic Priorities
+
+Read before proposing any change.
+
+**The moat is original, citable data — not page volume.**
+The calculator + its research-backed methodology (Oxford/McKinsey/WEF, documented in `careers.js` and `about.astro`) is the asset. A single well-sourced page beats ten thin ones.
+
+**Programmatic SEO from the careers dataset is permitted, but only after demand validation.** Every new career page must carry:
+- A unique computed risk score (not copied from another page)
+- At least one cited primary source for that profession's automation outlook
+- A skills list specific to that career
+
+Never ship a page that is a find-replace of another. Avoid "scaled content abuse" per Google's spam policies.
+
+**Optimize for AEO/GEO (AI Engine Optimization / Generative Engine Optimization):**
+- Keep definitions clear, Q&A structured, data tabular, sources named
+- `llms.txt` must stay current (see `public/llms.txt`)
+- The `sr-only` risk rankings block in `index.astro` exists for AI crawler consumption — do not remove it
+
+---
+
+## 3. Architecture & Stack
+
+### Stack
+| Layer | Technology |
+|---|---|
+| Framework | Astro v5 (`astro: ^5.18.0`) |
+| Output | `static` (no SSR adapter) |
+| Build format | `directory` → `/risk/bookkeeper/index.html` |
+| React islands | `@astrojs/react` — `client:load` for `CareerSelector` and `SkillChecklist` |
+| Styles | Tailwind CSS via `@astrojs/tailwind` + `src/styles/global.css` |
+| Deploy | GitHub Actions → FTP to Hostinger (`dangerous-clean-slate: true`) |
+| Analytics | GA4 `G-5725XSLSGP` hardcoded in `BaseLayout.astro` |
+
+### Commands
+```bash
+npm run dev       # astro dev (local, port 4321 default)
+npm run build     # astro build  → dist/
+npm run preview   # astro preview
+```
+No lint, format, or test scripts exist yet. Run `npm run build` locally and verify `dist/` before opening any PR.
+
+### Source tree
+```
+src/
+  data/
+    careers.js          # SINGLE SOURCE OF TRUTH for all content
+                        # exports: careers, specialOptions, specialContent,
+                        #          methodology, marketStats, riskRankings, author
+  layouts/
+    BaseLayout.astro    # All <head> tags: meta, canonical, OG, GA4, JSON-LD array
+  pages/
+    index.astro         # Homepage — SoftwareApplication + FAQPage + BreadcrumbList
+    about.astro         # About — Person + AboutPage
+    risk/[slug].astro   # Career detail — Article + FAQPage + BreadcrumbList
+    special/[type].astro # ai-ready, ai-entrepreneur — FAQPage + BreadcrumbList
+  components/
+    Nav.astro           # Static nav
+    Footer.astro        # Static footer with career links
+    CareerSelector.jsx  # React island: career dropdown → navigates to /risk/:slug/
+    SkillChecklist.jsx  # React island: skill progress tracker (localStorage)
+    RiskGauge.jsx       # React component: SVG gauge (used inside SkillChecklist)
+  styles/
+    global.css
+public/
+  robots.txt            # Allow: * + sitemap pointer
+  sitemap.xml           # MANUAL — must be updated when new pages are added
+  llms.txt              # LLM/AI crawler index (keep current with new pages)
+  og-image.png
+  favicon.svg
+  .htaccess             # Apache URL rewrite fallback for direct URL access
+```
+
+### Schema conventions
+All JSON-LD schemas are defined as plain JS objects in the Astro frontmatter and passed to `BaseLayout` via the `schema` prop (accepts single object or array). `BaseLayout` serializes them with `JSON.stringify`. **Do not inject schemas via `<script>` tags elsewhere.**
+
+Per-page schema types in use:
+- `index.astro` → `SoftwareApplication`, `FAQPage`, `BreadcrumbList`
+- `risk/[slug].astro` → `Article`, `FAQPage`, `BreadcrumbList`
+- `about.astro` → `Person`, `AboutPage`
+- `special/[type].astro` → `FAQPage`, `BreadcrumbList`
+
+### Data model (careers.js)
+Each career object requires: `slug`, `title`, `baseRiskScore`, `riskLabel`, `aioSummary`, `whyAtRisk`, `howToFutureProof`, `automatedTasks[]`, `skills[]`.
+Each skill requires: `id`, `name`, `description`, `riskReduction`, `difficulty`, `freeResource { label, url }`, `paidResource { label, platform, affiliateUrl }`.
+
+---
+
+## 4. SEO Invariants (NON-NEGOTIABLE)
+
+- **Never change a slug/URL without a 301 redirect.** Add redirects to `.htaccess` (Apache) before the old URL disappears. Verify with `curl -I`.
+- **Every new content page needs valid schema** following the conventions in §3. Use the existing page types as templates; do not invent new schema types without checking schema.org first.
+- **Preserve internal linking architecture.** `index.astro` → career cards → `/risk/[slug]/` → related careers → back to index. Footer links all careers. Do not break this graph.
+- **Performance budget: LCP < 2.5 s.** Do not add above-the-fold JS that blocks paint. React islands are fine with `client:load` but avoid adding new ones on the critical path.
+- **Canonical, sitemap, robots must stay consistent after every change.** When adding a page: (1) add its URL to `sitemap.xml`, (2) add an entry to `llms.txt`, (3) confirm `BaseLayout` receives the correct `canonical` prop.
+- **Calculator output must be indexable.** The base risk score is rendered server-side in `[slug].astro`. The interactive skill reduction is a React island — that's fine, the static content remains in HTML. Never move the base score into a client-only component.
+- **Keep `llms.txt` in `public/` and maintain it.** It is the primary signal for AI search engines (Perplexity, ChatGPT Search, Gemini) to understand the site's structure.
+
+---
+
+## 5. Content Quality Gate
+
+Every PR that creates or modifies a page must pass all five checks before opening:
+
+- [ ] **Unique data/calculation.** Does this page have a risk score or data point not copied from another page?
+- [ ] **Source cited.** Is there at least one named primary source (Oxford, McKinsey, WEF, BLS, etc.) for the core claim?
+- [ ] **Valid schema.** Does the page pass Google's Rich Results Test (or equivalent local validation)?
+- [ ] **Search intent covered.** Does the page title + H1 match the likely query? Is it a single, specific intent?
+- [ ] **No cannibalization.** Does a search for this topic already lead to an existing page? If so, expand that page instead of creating a new one.
+
+If any item is unchecked, do not open the PR.
+
+---
+
+## 6. Measurement Policy
+
+**Pre-traffic phase (current):** Optimize leading indicators only:
+- Google Search Console: indexing coverage, crawl errors, valid rich results
+- Core Web Vitals: LCP, CLS, INP (run `astro build && astro preview` + Lighthouse)
+- Schema validation: Rich Results Test after every schema change
+- Internal link graph: verify no orphaned pages after adding content
+
+**Do not optimize lagging indicators** (rankings, clicks, affiliate revenue) while organic signal is near zero. Avoid A/B conclusions from <100 impressions.
+
+**Primary SEO signal: Search Console** (not GA4). GA4 (`G-5725XSLSGP`, hardcoded in `BaseLayout.astro`) is active but use it for engagement/affiliate conversion only, after traffic is established.
+
+---
+
+## 7. Recursive Review Loop
+
+The long-term goal is a scheduled GitHub Action that audits the repo against this file and opens PRs for regressions (broken schema, missing canonical, sitemap drift, content gate failures). Design all changes to be compatible:
+- Small, atomic PRs (one concern per PR)
+- Changes justified against a specific rule in this file (reference the section number in the PR description)
+- No direct pushes to `main` — every change via PR, even solo work
+
+---
+
+## 8. Security & Guardrails
+
+- **Always work via PR. Never push directly to `main`.** A push to `main` triggers the deploy workflow and immediately overwrites the live site on Hostinger (`dangerous-clean-slate: true` means the entire server dir is replaced).
+- **FTP credentials (`FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`) are OFF-LIMITS.** Do not read, log, move, or reference them. Do not suggest workflows that expose secrets in build logs.
+- **Google Search Console and GA4 access, when granted, is read-only.** Respect API quota limits. Do not write or delete GSC data.
+- The `.htaccess` file controls URL rewriting on the live server. Changes to it are high-blast-radius — test locally with `astro preview` and document the redirect chain before touching it.
+
+---
+
+## 9. Dev Workflow
+
+Mandatory sequence before opening any PR:
+
+```bash
+npm run build     # must complete with zero errors
+npm run preview   # smoke-test the affected pages in browser
+```
+
+Then verify manually:
+1. Affected page(s) render correctly at `localhost:4321`
+2. `<title>`, `<meta name="description">`, and `<link rel="canonical">` are correct in page source
+3. JSON-LD schemas are present and valid (paste into Google's Rich Results Test)
+4. `sitemap.xml` and `llms.txt` updated if new pages were added
+5. No new above-the-fold render-blocking resources introduced
+
+No lint or test scripts exist. If you add them, update this section.

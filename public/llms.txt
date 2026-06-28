@@ -1,0 +1,46 @@
+# aicareer.me
+
+> Free AI career displacement risk calculator with research-backed scores for 17 careers and personalized upskilling roadmaps. Based on research from Oxford University (Frey & Osborne), McKinsey Global Institute, and the World Economic Forum Future of Jobs Report.
+
+## Site structure
+
+- [Home](https://aicareer.me/): Free AI displacement risk calculator. Select a career to get a risk score (0–100%) and a step-by-step upskilling roadmap with free and paid course resources.
+- [About](https://aicareer.me/about/): Research methodology, primary sources, and author background (YMYL disclosure).
+
+## AI Risk Score Methodology
+
+Composite index across three dimensions:
+- Task Routinization (40%): percentage of daily tasks that are structured and rule-based
+- AI Tool Penetration (35%): existence and adoption of enterprise AI tooling in this role
+- Human Judgment Dependency (25%): degree to which the role requires contextual reasoning, emotional intelligence, and novel problem-solving
+
+Sources: Frey & Osborne (Oxford, 2013), McKinsey Global Institute (2024), WEF Future of Jobs Report (2025), Stanford HAI AI Index (2024).
+
+## Career Risk Assessments
+
+Each page at `/risk/[slug]/` includes: baseline risk score, automated tasks list, skills to reduce risk, FAQ, and affiliate-linked learning resources.
+
+| Career | URL | Risk Score | Risk Level |
+|---|---|---|---|
+| Data Entry Clerk | https://aicareer.me/risk/data-entry-clerk/ | 95% | Critical |
+| Bookkeeper | https://aicareer.me/risk/bookkeeper/ | 90% | Critical |
+| Tax Preparer | https://aicareer.me/risk/tax-preparer/ | 88% | Critical |
+| Customer Service Representative | https://aicareer.me/risk/customer-service-rep/ | 82% | Critical |
+| Accountant | https://aicareer.me/risk/accountant/ | 80% | Critical |
+| Paralegal | https://aicareer.me/risk/paralegal/ | 78% | High Risk |
+| Insurance Underwriter | https://aicareer.me/risk/insurance-underwriter/ | 74% | High Risk |
+| Medical Coder | https://aicareer.me/risk/medical-coder/ | 72% | High Risk |
+| Loan Officer | https://aicareer.me/risk/loan-officer/ | 65% | Moderate |
+| IT Support Specialist | https://aicareer.me/risk/it-support-specialist/ | 65% | Moderate |
+| Sales Representative | https://aicareer.me/risk/sales-representative/ | 58% | Moderate |
+| Financial Analyst | https://aicareer.me/risk/financial-analyst/ | 55% | Moderate |
+| Data Analyst | https://aicareer.me/risk/data-analyst/ | 45% | Moderate |
+| Investment Banker | https://aicareer.me/risk/investment-banker/ | 42% | Moderate |
+| Software Developer | https://aicareer.me/risk/software-developer/ | 38% | Low Risk |
+| Product Manager | https://aicareer.me/risk/product-manager/ | 32% | Low Risk |
+| Cybersecurity Analyst | https://aicareer.me/risk/cybersecurity-analyst/ | 28% | Low Risk |
+
+## Special Resources
+
+- [AI Literacy Skills](https://aicareer.me/special/ai-ready/): 5 universal AI skills that future-proof any career — AI literacy, prompt engineering, data literacy, workflow automation, critical AI evaluation.
+- [Make Money with AI](https://aicareer.me/special/ai-entrepreneur/): 5 proven income models using AI — content services, affiliate marketing, digital products, automation consulting, prompt engineering consulting.
