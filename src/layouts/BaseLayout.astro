@@ -19,10 +19,9 @@ const {
   schema,
 } = Astro.props;
 
-const schemaArray = schema
-  ? Array.isArray(schema) ? schema : [schema]
-  : [];
+const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 ---
+
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
@@ -30,7 +29,9 @@ const schemaArray = schema
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5725XSLSGP"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
       gtag('config', 'G-5725XSLSGP');
     </script>
@@ -45,7 +46,10 @@ const schemaArray = schema
     <!-- Fonts: Space Grotesk + DM Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- SEO -->
     <title>{title}</title>
@@ -68,9 +72,7 @@ const schemaArray = schema
     <meta name="twitter:image" content={ogImage} />
 
     <!-- JSON-LD Schemas -->
-    {schemaArray.map(s => (
-      <script type="application/ld+json" set:html={JSON.stringify(s)} />
-    ))}
+    {schemaArray.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body class="bg-[#06070f] text-[#e2e6f5] selection:bg-[#06B6D4]/30 selection:text-[#06B6D4]">
     <slot />

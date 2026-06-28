@@ -8,32 +8,49 @@ import { careers, specialOptions, author } from '../data/careers.js';
       <div>
         <h3 class="text-base font-bold text-[#e2e6f5] mb-4">Career Risk Assessments</h3>
         <ul class="space-y-2">
-          {careers.map(career => (
-            <li>
-              <a href={`/risk/${career.slug}/`} class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm">
-                {career.title} AI Risk — {career.baseRiskScore}%
-              </a>
-            </li>
-          ))}
+          {
+            careers.map((career) => (
+              <li>
+                <a
+                  href={`/risk/${career.slug}/`}
+                  class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm"
+                >
+                  {career.title} AI Risk — {career.baseRiskScore}%
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div>
         <h3 class="text-base font-bold text-[#e2e6f5] mb-4">Special Resources</h3>
         <ul class="space-y-2">
-          {specialOptions.map(option => (
-            <li>
-              <a href={`/special/${option.value}/`} class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm">
-                {option.label}
-              </a>
-            </li>
-          ))}
+          {
+            specialOptions.map((option) => (
+              <li>
+                <a
+                  href={`/special/${option.value}/`}
+                  class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm"
+                >
+                  {option.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div>
         <h3 class="text-base font-bold text-[#e2e6f5] mb-4">About</h3>
         <ul class="space-y-2">
-          <li><a href="/about/" class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm">About This Tool</a></li>
-          <li><a href="/#methodology" class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm">Methodology</a></li>
+          <li>
+            <a href="/about/" class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm"
+              >About This Tool</a>
+          </li>
+          <li>
+            <a
+              href="/#methodology"
+              class="text-[#4b5280] hover:text-[#06B6D4] transition-colors text-sm">Methodology</a>
+          </li>
         </ul>
       </div>
     </div>
