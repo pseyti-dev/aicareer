@@ -43,6 +43,7 @@ Each page at `/risk/[slug]/` includes: baseline risk score, automated tasks list
 ## Research & Studies
 
 - [AI Job Impact 2026](https://aicareer.me/study/ai-job-impact-2026/): Stanford AI Index 2026 findings crossed with all 17 career risk scores. Key data: junior developer employment fell ~20%, 1-in-3 organizations plan cuts, productivity gains range from 14–50% by field. Explains the "jagged frontier" and why entry-level roles in even "low risk" careers face displacement pressure.
+- [AI Risk by Industry](https://aicareer.me/study/careers-by-industry/): 17 careers grouped into 6 industry sectors with average AI risk per sector. Finance & Accounting leads at ~70% average risk (bookkeeper 90%, tax preparer 88%, accountant 80%). Technology & Data shows the widest variance (data entry clerk 95% vs cybersecurity analyst 28%). Includes Stanford AI Index 2026 context per sector.
 
 ## Special Resources
 
