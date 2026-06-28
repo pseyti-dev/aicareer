@@ -155,7 +155,28 @@ If any item is unchecked, do not open the PR.
 
 ## 7. Recursive Review Loop
 
-The long-term goal is a scheduled GitHub Action that audits the repo against this file and opens PRs for regressions (broken schema, missing canonical, sitemap drift, content gate failures). Design all changes to be compatible:
+**Audit workflow:** `.github/workflows/audit.yml` runs every Monday at 08:00 UTC (and on `workflow_dispatch`).
+It builds the site and runs `scripts/audit.py`, which checks:
+
+1. JSON-LD schema present on every page
+2. Canonical tag present and correct on every page
+3. Every page covered in `dist/sitemap-0.xml`
+4. `public/llms.txt` has entries for study + special pages
+5. `<title>` and `<meta name="description">` present on every page
+6. `public/robots.txt` points to `sitemap-index.xml`
+7. GSC indexation smoke test (optional — requires `GSC_SERVICE_ACCOUNT_JSON` secret)
+
+If issues are found, it opens (or updates) a GitHub Issue labelled `audit`. If all clear, any open audit issue is auto-closed. Human-in-the-loop always — the workflow never auto-commits or auto-deploys.
+
+**GSC read-only setup** (one-time, requires GCP access):
+
+1. Create a GCP service account with no roles
+2. In Google Search Console → Settings → Users and permissions → Add user → Restricted (read-only)
+3. Download the service account JSON key
+4. Add as repo secret: `GSC_SERVICE_ACCOUNT_JSON` (paste the full JSON string)
+5. Optionally override `GSC_SITE_URL` secret (default: `sc-domain:aicareer.me`)
+
+Design all PRs to be compatible with the audit loop:
 
 - Small, atomic PRs (one concern per PR)
 - Changes justified against a specific rule in this file (reference the section number in the PR description)
