@@ -49,19 +49,46 @@ const industries = [
     id: 'healthcare',
     name: 'Healthcare',
     description:
-      'Healthcare shows the starkest split between clinical judgment (highly protected) and administrative processing (highly automated). Medical coding and clinical documentation are being transformed by AI trained on clinical notes — but diagnostic and treatment decisions remain firmly human.',
+      'Healthcare shows the starkest split between clinical judgment (highly protected) and administrative processing (highly automated). Medical coding and clinical documentation are being transformed by AI trained on clinical notes — but nursing, diagnosis, and treatment decisions remain firmly human. Registered nurses score 22% risk, among the lowest of any profession.',
     stanfordNote:
-      'Stanford AI Index 2026: Physicians using AI note-generation tools report 83% less time spent writing clinical notes. ICD-10 code assignment is being automated by NLP with 90%+ accuracy on standard cases.',
-    slugs: ['medical-coder'],
+      'Stanford AI Index 2026: Physicians using AI note-generation tools report 83% less time spent writing clinical notes. ICD-10 code assignment is being automated by NLP with 90%+ accuracy on standard cases. Nursing shortage is structural and worsening — demand outpaces AI substitution.',
+    slugs: ['medical-coder', 'registered-nurse'],
   },
   {
     id: 'sales-customer',
     name: 'Sales & Customer Service',
     description:
-      'Customer-facing roles face significant automation at the tier-1 interaction level — chatbots, AI dialers, and CRM automation handle routine inquiries and outreach. High-value sales relationships, complex negotiations, and escalated support remain human-dependent.',
+      'Customer-facing roles face significant automation at the tier-1 interaction level — chatbots, AI dialers, and CRM automation handle routine inquiries and outreach. Real estate agents face mounting pressure from automated valuation and listing tools. High-value sales relationships, complex negotiations, and investment advisory remain human-dependent.',
     stanfordNote:
-      'Stanford AI Index 2026: Customer support AI tools deliver 14–15% productivity gains and handle Tier-1 tickets without human intervention. Employment declines for entry-level customer service roles mirror those in software development.',
-    slugs: ['customer-service-rep', 'sales-representative'],
+      'Stanford AI Index 2026: Customer support AI tools deliver 14–15% productivity gains and handle Tier-1 tickets without human intervention. Real estate platforms report AI-generated listings and valuations now handling 60%+ of initial property discovery.',
+    slugs: ['customer-service-rep', 'sales-representative', 'real-estate-agent'],
+  },
+  {
+    id: 'creative-media',
+    name: 'Creative & Media',
+    description:
+      'Generative AI has directly disrupted creative production — content writing, graphic design, and visual media face the steepest automation pressure of any creative profession. The split is between commodity production (high risk) and strategic creative direction (protected). Designers and writers whose value is in execution speed are at highest risk; those providing brand strategy, investigative journalism, or art direction retain strong value.',
+    stanfordNote:
+      'Stanford AI Index 2026: Generative AI image and text models saw the fastest adoption curve of any AI category in 2025. Creative agency headcount for production roles declined ~25% industry-wide while demand for creative directors and brand strategists held steady.',
+    slugs: ['content-writer', 'graphic-designer'],
+  },
+  {
+    id: 'education-hr',
+    name: 'Education & HR',
+    description:
+      'Education and HR share a common protection: both are fundamentally relational professions. Teachers mentor students through social and emotional development; HR managers navigate the human complexity of organizations. AI automates the administrative layers of both roles — grading, scheduling, screening — while the judgment-intensive core remains protected.',
+    stanfordNote:
+      'Stanford AI Index 2026: AI education tools (adaptive tutoring, automated grading) are the fastest-growing EdTech category. HR AI platforms automated ~40% of transactional HR tasks in early adopter companies. Both sectors retain strong demand for experienced professionals who direct AI tools rather than compete with them.',
+    slugs: ['teacher', 'hr-manager'],
+  },
+  {
+    id: 'admin-ops',
+    name: 'Administration & Operations',
+    description:
+      'Administrative roles face significant pressure from AI tools that automate scheduling, communication, and document management. The administrative assistant role — one of the largest white-collar job categories globally — is being transformed by tools like Microsoft Copilot and Google Workspace AI. Survival requires pivoting from task execution to project ownership and AI tool management.',
+    stanfordNote:
+      'Stanford AI Index 2026: Administrative and secretarial roles are in the top categories for AI-driven productivity substitution. Microsoft reports Copilot reduces administrative task time by 29% on average in enterprise deployments.',
+    slugs: ['administrative-assistant'],
   },
   {
     id: 'product-strategy',
