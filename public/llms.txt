@@ -14,7 +14,7 @@ Composite index across three dimensions:
 - AI Tool Penetration (35%): existence and adoption of enterprise AI tooling in this role
 - Human Judgment Dependency (25%): degree to which the role requires contextual reasoning, emotional intelligence, and novel problem-solving
 
-Sources: Frey & Osborne (Oxford, 2013), McKinsey Global Institute (2024), WEF Future of Jobs Report (2025), Stanford HAI AI Index (2024).
+Sources: Frey & Osborne (Oxford, 2013), McKinsey Global Institute (2024), WEF Future of Jobs Report (2025), Stanford HAI AI Index (2026).
 
 ## Career Risk Assessments
 
@@ -39,6 +39,10 @@ Each page at `/risk/[slug]/` includes: baseline risk score, automated tasks list
 | Software Developer | https://aicareer.me/risk/software-developer/ | 38% | Low Risk |
 | Product Manager | https://aicareer.me/risk/product-manager/ | 32% | Low Risk |
 | Cybersecurity Analyst | https://aicareer.me/risk/cybersecurity-analyst/ | 28% | Low Risk |
+
+## Research & Studies
+
+- [AI Job Impact 2026](https://aicareer.me/study/ai-job-impact-2026/): Stanford AI Index 2026 findings crossed with all 17 career risk scores. Key data: junior developer employment fell ~20%, 1-in-3 organizations plan cuts, productivity gains range from 14–50% by field. Explains the "jagged frontier" and why entry-level roles in even "low risk" careers face displacement pressure.
 
 ## Special Resources
 

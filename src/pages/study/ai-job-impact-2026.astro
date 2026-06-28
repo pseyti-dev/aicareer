@@ -1,0 +1,460 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { careers, author } from '../../data/careers.js';
+
+const sortedCareers = [...careers].sort((a, b) => b.baseRiskScore - a.baseRiskScore);
+
+const getLabelColor = (score) => {
+  if (score <= 40) return { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/30' };
+  if (score <= 70) return { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/30' };
+  return { bg: 'bg-rose-500/10', text: 'text-rose-400', border: 'border-rose-500/30' };
+};
+
+const stanfordContext = {
+  'software-developer': 'Entry-level developer employment (ages 22–25) fell ~20% since 2024 per Stanford AI Index 2026, even as senior headcount grew. AI delivers +26% productivity in dev tasks.',
+  'customer-service-rep': 'Stanford AI Index 2026 documents entry-level employment decline mirroring software development. AI tools deliver 14–15% productivity gains; routine ticket resolution is heavily automated.',
+  'data-entry-clerk': 'Highest automation exposure. WEF projects 85M jobs displaced by 2025; data entry is consistently in the top category. AI achieves 99%+ accuracy on structured data extraction.',
+  'bookkeeper': 'QuickBooks AI and similar tools automate up to 80% of reconciliation and categorization tasks. The remaining value is judgment around exceptions and client advisory.',
+  'tax-preparer': 'AI now handles form population, deduction identification, and compliance checks for standard returns. Complexity and judgment-heavy filings remain human work.',
+  'accountant': 'Automation covers auditing, reconciliation, and reporting. Stanford AI Index 2026 notes AI penetration in finance operations is among the highest across sectors.',
+  'paralegal': 'LawGeex and contract-review AI have automated document review, due diligence, and research tasks. Stanford AI Index 2026 data shows legal services in top-five AI-exposed categories.',
+  'insurance-underwriter': 'Algorithmic underwriting now handles standard risk assessment with higher accuracy than manual review. Human underwriters increasingly focus on complex commercial lines.',
+  'medical-coder': 'AI diagnostic coding tools process clinical notes with 90%+ accuracy. Physicians using AI note-generation tools report 83% less time on documentation (Stanford AI Index 2026).',
+  'it-support-specialist': 'AI helpdesk systems resolve Tier-1 and many Tier-2 tickets without human intervention. However, complex infrastructure and security incidents still require human expertise.',
+  'loan-officer': 'Algorithmic credit decisioning has largely automated consumer loan origination. Commercial lending and relationship banking remain resistant to full automation.',
+  'sales-representative': 'CRM AI automates lead scoring, outreach sequencing, and pipeline forecasting. Top performers differentiate through relationship depth and complex deal navigation.',
+  'financial-analyst': 'Bloomberg AI and similar tools automate data gathering, model construction, and report generation. Interpretation, client communication, and novel situations remain human work.',
+  'data-analyst': 'AI co-pilots now write SQL, generate visualizations, and surface anomalies automatically. Stanford AI Index 2026 notes AI skills demand in the information sector grew from 7.8% to 13.2% in 2025.',
+  'investment-banker': 'AI handles M&A due diligence, comparable analysis, and pitch deck drafting. Senior bankers\' value lies in relationships and deal structuring judgment, which are highly resistant to automation.',
+  'product-manager': 'AI accelerates user research synthesis, roadmap generation, and A/B analysis. Core PM value — stakeholder alignment, strategic judgment, and cross-functional leadership — remains human-dependent.',
+  'cybersecurity-analyst': 'A dual-edged data point: AI security agents achieved 93% problem-solving success vs. 15% in 2024 (Stanford AI Index 2026). AI augments analysts rather than replacing them, as threat complexity grows in parallel.',
+};
+
+const publishDate = '2026-06-01';
+const modifyDate = '2026-06-28';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'AI\'s Real Impact on Jobs in 2026: Stanford AI Index Data Crossed with 17 Career Risk Scores',
+  description:
+    'A data-driven study crossing Stanford HAI\'s AI Index 2026 findings with risk scores for 17 professions. Covers entry-level job displacement, productivity gains by field, and what the jagged frontier means for your career.',
+  url: 'https://aicareer.me/study/ai-job-impact-2026/',
+  datePublished: publishDate,
+  dateModified: modifyDate,
+  author: { '@type': 'Person', name: author.name },
+  publisher: { '@type': 'Organization', name: 'AI Career Risk', url: 'https://aicareer.me' },
+  about: {
+    '@type': 'Thing',
+    name: 'AI impact on employment',
+  },
+  citation: [
+    {
+      '@type': 'CreativeWork',
+      name: '2026 AI Index Report',
+      author: { '@type': 'Organization', name: 'Stanford Human-Centered AI Institute' },
+      url: 'https://hai.stanford.edu/ai-index/2026-ai-index-report',
+    },
+    {
+      '@type': 'CreativeWork',
+      name: 'Future of Jobs Report 2025',
+      author: { '@type': 'Organization', name: 'World Economic Forum' },
+    },
+    {
+      '@type': 'CreativeWork',
+      name: 'The Future of Employment',
+      author: { '@type': 'Person', name: 'Frey & Osborne, Oxford University' },
+    },
+  ],
+};
+
+const datasetSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: 'AI Career Displacement Risk Scores — 17 Professions, 2026',
+  description:
+    'Composite AI displacement risk scores for 17 professions, calculated from task routinization (40%), AI tool penetration (35%), and human judgment dependency (25%). Scores reflect baseline risk without AI augmentation skills.',
+  url: 'https://aicareer.me/study/ai-job-impact-2026/',
+  datePublished: publishDate,
+  dateModified: modifyDate,
+  creator: { '@type': 'Person', name: author.name },
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  variableMeasured: [
+    { '@type': 'PropertyValue', name: 'Career Title', valueReference: 'string' },
+    { '@type': 'PropertyValue', name: 'AI Displacement Risk Score', minValue: 0, maxValue: 100, unitText: 'percent' },
+    { '@type': 'PropertyValue', name: 'Risk Label', valueReference: 'Critical | High Risk | Moderate | Low Risk' },
+  ],
+  distribution: {
+    '@type': 'DataDownload',
+    encodingFormat: 'text/html',
+    contentUrl: 'https://aicareer.me/study/ai-job-impact-2026/',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What does the Stanford AI Index 2026 say about job displacement?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The 2026 Stanford AI Index is the first edition to document concrete AI-driven workforce displacement rather than merely forecast it. Employment among US software developers aged 22–25 fell nearly 20% since 2024, even as senior developer headcount grew. One-third of organizations expect AI to reduce their workforce in the coming year, with highest anticipated cuts in service operations, supply chain, and software engineering.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the jagged frontier of AI?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The "jagged frontier" describes how AI models can excel at extraordinarily complex tasks while failing at surprisingly simple ones. For example, Gemini Deep Think earned a gold medal at the International Mathematical Olympiad, yet top AI models read analog clocks correctly only 50.1% of the time. This means the risk profile of AI for any given job is uneven — some tasks are fully automated while others remain human-dependent in non-obvious ways.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which jobs have the highest AI displacement risk in 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Based on our composite risk model (task routinization 40%, AI tool penetration 35%, human judgment dependency 25%), the five highest-risk professions are: Data Entry Clerk (95%), Bookkeeper (90%), Tax Preparer (88%), Customer Service Representative (82%), and Accountant (80%). These align with Stanford AI Index 2026 data showing the largest productivity gains and employment shifts in exactly these high-task-routinization roles.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much productivity does AI add to different jobs?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'According to the Stanford AI Index 2026, productivity gains from AI vary significantly by field: customer support sees 14–15% gains, software development sees 26% gains, and marketing output improves up to 50% on targeted tasks. However, for tasks requiring judgment, reasoning, or novel problem-solving, the gains are smaller or inconsistent. Physicians using AI note-generation tools report up to 83% less time writing clinical notes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is a software developer safe from AI displacement?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Mid-career and senior software developers remain relatively safe (our model scores the role at 38% risk), but the Stanford AI Index 2026 reveals a critical caveat: entry-level developer employment for workers aged 22–25 has fallen nearly 20% since 2024. AI delivers 26% productivity gains in software development, meaning organizations can accomplish more with fewer junior developers. The risk is concentrated at career entry, not at the senior level.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What does AI mean for cybersecurity jobs?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Cybersecurity is a dual-edged case. Stanford AI Index 2026 reports that AI security agents achieved 93% problem-solving success on cybersecurity benchmarks, up from 15% in 2024. This dramatically increases analyst productivity but does not eliminate the role — as AI capabilities grow, so does the sophistication of AI-powered attacks, requiring human oversight. Our risk model scores cybersecurity analysts at 28% (Low Risk).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How was the AI career risk score calculated?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Each score is a composite of three dimensions: Task Routinization (40% weight) — how predictable and rule-based the daily tasks are; AI Tool Penetration (35%) — whether enterprise AI tools already exist and are being adopted for the role; and Human Judgment Dependency (25%) — how much the role relies on contextual reasoning, emotional intelligence, or novel problem-solving. Sources include Oxford/Frey & Osborne (2013), McKinsey Global Institute (2024), WEF Future of Jobs Report (2025), and Stanford HAI AI Index (2026).',
+      },
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://aicareer.me/' },
+    { '@type': 'ListItem', position: 2, name: 'Research', item: 'https://aicareer.me/study/' },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'AI Job Impact 2026',
+      item: 'https://aicareer.me/study/ai-job-impact-2026/',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="AI's Real Impact on Jobs in 2026 | Stanford AI Index Data + Career Risk Scores"
+  description="Stanford AI Index 2026 crossed with 17 career risk scores. Junior dev employment fell 20%, 1-in-3 companies plan cuts. See which roles are most exposed and what the data actually says."
+  canonical="https://aicareer.me/study/ai-job-impact-2026/"
+  ogType="article"
+  schema={[articleSchema, datasetSchema, faqSchema, breadcrumbSchema]}
+>
+  <Nav />
+
+  <div class="min-h-screen bg-[#06070f]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <!-- Breadcrumb -->
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center space-x-2 text-sm text-[#4b5280]">
+          <li><a href="/" class="hover:text-[#06B6D4] transition-colors">Home</a></li>
+          <li><span class="mx-2 text-[#1e2340]">/</span></li>
+          <li><span class="text-[#4b5280]">Research</span></li>
+          <li><span class="mx-2 text-[#1e2340]">/</span></li>
+          <li><span class="text-[#e2e6f5] font-medium" aria-current="page">AI Job Impact 2026</span></li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <div class="mb-10">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#06B6D4]/10 text-[#06B6D4] border border-[#06B6D4]/20">
+            Research
+          </span>
+          <span class="text-xs text-[#4b5280]">Published June 2026 · Source: Stanford HAI AI Index 2026</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-[#e2e6f5] mb-4 leading-tight">
+          AI's Real Impact on Jobs in 2026:<br class="hidden sm:inline" /> What the Data Actually Shows
+        </h1>
+        <p class="text-lg text-[#4b5280] leading-relaxed max-w-3xl">
+          The Stanford AI Index 2026 is the first report to document AI-driven workforce displacement
+          rather than merely forecast it. We crossed those findings with risk scores for 17 professions
+          to show where the pressure is real, where it is overstated, and what "the jagged frontier"
+          means for your career.
+        </p>
+      </div>
+
+      <!-- Key stats from Stanford AI Index 2026 -->
+      <section class="mb-10" aria-labelledby="key-findings-heading">
+        <h2 id="key-findings-heading" class="text-2xl font-bold text-[#e2e6f5] mb-5">
+          Key Findings: Stanford AI Index 2026
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            {
+              figure: '~20%',
+              label: 'Drop in junior developer employment (ages 22–25) since 2024',
+              detail: 'While senior headcount grew',
+              color: 'rose',
+            },
+            {
+              figure: '1 in 3',
+              label: 'Organizations expect AI to reduce their workforce this year',
+              detail: 'Highest in service ops, supply chain, software engineering',
+              color: 'amber',
+            },
+            {
+              figure: '+26%',
+              label: 'Productivity gain in software development tasks',
+              detail: '+14–15% in customer support, up to +50% in marketing',
+              color: 'cyan',
+            },
+            {
+              figure: '83%',
+              label: 'Less time physicians spend writing clinical notes with AI',
+              detail: 'AI note-generation tools, per Stanford HAI 2026',
+              color: 'cyan',
+            },
+            {
+              figure: '93%',
+              label: 'Cybersecurity problem-solving success by AI agents',
+              detail: 'Up from 15% in 2024 — doubling risk and capability',
+              color: 'amber',
+            },
+            {
+              figure: '88%',
+              label: 'Organizational AI adoption rate',
+              detail: '70% using AI in at least one business function',
+              color: 'cyan',
+            },
+          ].map((stat) => (
+            <div
+              class={`bg-[#0d1120] border border-[#1e2340] rounded-xl p-5 ${stat.color === 'rose' ? 'border-l-2 border-l-rose-500/50' : stat.color === 'amber' ? 'border-l-2 border-l-amber-500/50' : 'border-l-2 border-l-[#06B6D4]/50'}`}
+            >
+              <div
+                class={`text-3xl font-bold mb-1 ${stat.color === 'rose' ? 'text-rose-400' : stat.color === 'amber' ? 'text-amber-400' : 'text-[#06B6D4]'}`}
+              >
+                {stat.figure}
+              </div>
+              <div class="text-sm font-medium text-[#e2e6f5] mb-1">{stat.label}</div>
+              <div class="text-xs text-[#4b5280]">{stat.detail}</div>
+            </div>
+          ))}
+        </div>
+        <p class="mt-3 text-xs text-[#4b5280]">
+          Source: <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" class="text-[#06B6D4] hover:underline" target="_blank" rel="noopener noreferrer">Stanford HAI AI Index 2026</a>
+        </p>
+      </section>
+
+      <!-- Jagged Frontier explanation -->
+      <section class="mb-10 bg-[#0d1120] border border-[#1e2340] rounded-xl p-6" aria-labelledby="jagged-frontier-heading">
+        <h2 id="jagged-frontier-heading" class="text-xl font-bold text-[#e2e6f5] mb-3">
+          The Jagged Frontier: Why Risk Is Non-Linear
+        </h2>
+        <p class="text-[#4b5280] leading-relaxed mb-4">
+          The Stanford AI Index 2026 uses the term <strong class="text-[#e2e6f5]">"jagged frontier"</strong> to
+          describe how AI models can solve extraordinarily complex problems while failing at surprisingly
+          simple ones. Gemini Deep Think earned a gold medal at the International Mathematical Olympiad —
+          yet the top AI model reads analog clocks correctly only 50.1% of the time.
+        </p>
+        <p class="text-[#4b5280] leading-relaxed mb-4">
+          For careers, this means risk is not simply "high-skill = safe, low-skill = at risk." A
+          software developer (rated Low Risk at 38%) saw the sharpest entry-level employment decline of
+          any profession measured. A medical coder (High Risk at 72%) is in the same sector as
+          physicians, who are experiencing dramatic productivity gains from AI — but the
+          <em>type</em> of work differs enormously. You must analyze the task, not just the job title.
+        </p>
+        <div class="bg-[#06070f] rounded-lg p-4 border border-[#1e2340] text-sm text-[#4b5280]">
+          <strong class="text-[#e2e6f5]">What this means practically:</strong> Even in a "low risk" career,
+          your entry-level tasks are more exposed than your senior-level tasks. Professionals who shift
+          toward judgment-heavy, relationship-dependent work within their field are far more protected
+          than those who remain in the routinized portion of their role — regardless of the career's
+          headline risk score.
+        </div>
+      </section>
+
+      <!-- Career risk table -->
+      <section class="mb-10" aria-labelledby="career-table-heading">
+        <h2 id="career-table-heading" class="text-2xl font-bold text-[#e2e6f5] mb-2">
+          17 Careers: Risk Score + Stanford 2026 Context
+        </h2>
+        <p class="text-sm text-[#4b5280] mb-5">
+          Sorted by displacement risk (highest first). Risk scores are composite indices from task
+          routinization, AI tool penetration, and human judgment dependency. Stanford context reflects
+          the 2026 AI Index report and related primary sources.
+        </p>
+
+        <!-- sr-only machine-readable data for AEO crawlers -->
+        <table class="sr-only" aria-label="AI career displacement risk scores 2026">
+          <caption>AI displacement risk scores for 17 professions, 2026, with Stanford AI Index context</caption>
+          <thead>
+            <tr>
+              <th>Career</th>
+              <th>Risk Score (%)</th>
+              <th>Risk Level</th>
+              <th>Stanford AI Index 2026 Context</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedCareers.map((career) => (
+              <tr>
+                <td>{career.title}</td>
+                <td>{career.baseRiskScore}</td>
+                <td>{career.riskLabel}</td>
+                <td>{stanfordContext[career.slug] ?? 'See full career analysis for details.'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div class="space-y-3">
+          {sortedCareers.map((career) => {
+            const colors = getLabelColor(career.baseRiskScore);
+            const ctx = stanfordContext[career.slug];
+            return (
+              <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-5 hover:border-[#2a3060] transition-colors">
+                <div class="flex items-start justify-between gap-4">
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-3 mb-2 flex-wrap">
+                      <a
+                        href={`/risk/${career.slug}/`}
+                        class="font-semibold text-[#e2e6f5] hover:text-[#06B6D4] transition-colors"
+                      >
+                        {career.title}
+                      </a>
+                      <span
+                        class={`px-2 py-0.5 rounded-full text-xs font-medium border ${colors.bg} ${colors.text} ${colors.border}`}
+                      >
+                        {career.riskLabel}
+                      </span>
+                    </div>
+                    {ctx && <p class="text-sm text-[#4b5280] leading-relaxed">{ctx}</p>}
+                  </div>
+                  <div class="flex-shrink-0 text-right">
+                    <div class={`text-2xl font-bold ${colors.text}`}>{career.baseRiskScore}%</div>
+                    <div class="text-xs text-[#4b5280]">risk score</div>
+                  </div>
+                </div>
+                <!-- Risk bar -->
+                <div class="mt-3 h-1.5 bg-[#1e2340] rounded-full overflow-hidden">
+                  <div
+                    class="h-full rounded-full transition-all"
+                    style={`width: ${career.baseRiskScore}%; background: ${career.baseRiskScore <= 40 ? '#10b981' : career.baseRiskScore <= 70 ? '#f59e0b' : '#f43f5e'}`}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <p class="mt-4 text-xs text-[#4b5280]">
+          Methodology: scores are composite of task routinization (40%), AI tool penetration (35%), and human judgment dependency (25%).
+          Based on Oxford/Frey &amp; Osborne, McKinsey Global Institute, WEF Future of Jobs 2025, and Stanford HAI AI Index 2026.
+          Scores represent baseline risk without AI augmentation skills.
+          <a href="/about/" class="text-[#06B6D4] hover:underline ml-1">Full methodology →</a>
+        </p>
+      </section>
+
+      <!-- FAQ for AEO -->
+      <section class="mb-10" aria-labelledby="faq-heading">
+        <h2 id="faq-heading" class="text-2xl font-bold text-[#e2e6f5] mb-5">
+          Frequently Asked Questions
+        </h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map((item) => (
+            <div class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-6">
+              <h3 class="font-semibold text-[#e2e6f5] mb-3">{item.name}</h3>
+              <p class="text-sm text-[#4b5280] leading-relaxed">{item.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Sources -->
+      <section class="mb-10 bg-[#0d1120] border border-[#1e2340] rounded-xl p-6" aria-labelledby="sources-heading">
+        <h2 id="sources-heading" class="text-lg font-bold text-[#e2e6f5] mb-4">Primary Sources</h2>
+        <ul class="space-y-2 text-sm text-[#4b5280]">
+          <li>
+            <a
+              href="https://hai.stanford.edu/ai-index/2026-ai-index-report"
+              class="text-[#06B6D4] hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Stanford HAI · 2026 AI Index Report</a>
+            — employment displacement, productivity gains, organizational AI adoption
+          </li>
+          <li>
+            <a
+              href="https://hai.stanford.edu/ai-index/2026-ai-index-report/economy"
+              class="text-[#06B6D4] hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Stanford HAI · AI Index 2026, Chapter 4: Economy</a>
+            — labor market data, junior developer employment figures
+          </li>
+          <li>
+            <span class="text-[#e2e6f5]">Oxford University · Frey &amp; Osborne (2013)</span>
+            — "The Future of Employment: How Susceptible Are Jobs to Computerisation?" — foundational task-level automation analysis
+          </li>
+          <li>
+            <span class="text-[#e2e6f5]">McKinsey Global Institute (2024)</span>
+            — "Generative AI and the Future of Work" — automation potential by job category
+          </li>
+          <li>
+            <span class="text-[#e2e6f5]">World Economic Forum (2025)</span>
+            — "Future of Jobs Report 2025" — 85M displaced / 97M created projection
+          </li>
+        </ul>
+      </section>
+
+      <!-- CTA -->
+      <div class="bg-gradient-to-br from-[#0d1120] to-[#06070f] border border-[#1e2340] rounded-xl p-8 text-center">
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-3">Check Your Personal Risk Score</h2>
+        <p class="text-[#4b5280] mb-6 max-w-lg mx-auto">
+          The table above shows baseline risk. Your personal risk depends on which tasks within your
+          role you focus on and which AI-adjacent skills you've built. Use the calculator to get your
+          adjusted score.
+        </p>
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all"
+          style="background: linear-gradient(135deg, #06B6D4, #7C3AED)"
+        >
+          Calculate My Risk Score →
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>
