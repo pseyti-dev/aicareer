@@ -1,6 +1,6 @@
 # aicareer.me
 
-> Free AI career displacement risk calculator with research-backed scores for 17 careers and personalized upskilling roadmaps. Based on research from Oxford University (Frey & Osborne), McKinsey Global Institute, and the World Economic Forum Future of Jobs Report.
+> Free AI career displacement risk calculator with research-backed scores for 24 careers and personalized upskilling roadmaps. Based on research from Oxford University (Frey & Osborne), McKinsey Global Institute, and the World Economic Forum Future of Jobs Report.
 
 ## Site structure
 
@@ -25,25 +25,32 @@ Each page at `/risk/[slug]/` includes: baseline risk score, automated tasks list
 | Data Entry Clerk | https://aicareer.me/risk/data-entry-clerk/ | 95% | Critical |
 | Bookkeeper | https://aicareer.me/risk/bookkeeper/ | 90% | Critical |
 | Tax Preparer | https://aicareer.me/risk/tax-preparer/ | 88% | Critical |
-| Customer Service Representative | https://aicareer.me/risk/customer-service-rep/ | 82% | Critical |
-| Accountant | https://aicareer.me/risk/accountant/ | 80% | Critical |
+| Customer Service Representative | https://aicareer.me/risk/customer-service-rep/ | 82% | High Risk |
+| Administrative Assistant | https://aicareer.me/risk/administrative-assistant/ | 82% | High Risk |
+| Accountant | https://aicareer.me/risk/accountant/ | 80% | High Risk |
 | Paralegal | https://aicareer.me/risk/paralegal/ | 78% | High Risk |
+| Content Writer | https://aicareer.me/risk/content-writer/ | 76% | High Risk |
 | Insurance Underwriter | https://aicareer.me/risk/insurance-underwriter/ | 74% | High Risk |
+| Graphic Designer | https://aicareer.me/risk/graphic-designer/ | 72% | High Risk |
 | Medical Coder | https://aicareer.me/risk/medical-coder/ | 72% | High Risk |
-| Loan Officer | https://aicareer.me/risk/loan-officer/ | 65% | Moderate |
-| IT Support Specialist | https://aicareer.me/risk/it-support-specialist/ | 65% | Moderate |
+| Loan Officer | https://aicareer.me/risk/loan-officer/ | 65% | High Risk |
+| Real Estate Agent | https://aicareer.me/risk/real-estate-agent/ | 65% | High Risk |
+| IT Support Specialist | https://aicareer.me/risk/it-support-specialist/ | 65% | High Risk |
 | Sales Representative | https://aicareer.me/risk/sales-representative/ | 58% | Moderate |
+| HR Manager | https://aicareer.me/risk/hr-manager/ | 58% | Moderate |
 | Financial Analyst | https://aicareer.me/risk/financial-analyst/ | 55% | Moderate |
 | Data Analyst | https://aicareer.me/risk/data-analyst/ | 45% | Moderate |
 | Investment Banker | https://aicareer.me/risk/investment-banker/ | 42% | Moderate |
 | Software Developer | https://aicareer.me/risk/software-developer/ | 38% | Low Risk |
+| Teacher | https://aicareer.me/risk/teacher/ | 35% | Low Risk |
 | Product Manager | https://aicareer.me/risk/product-manager/ | 32% | Low Risk |
 | Cybersecurity Analyst | https://aicareer.me/risk/cybersecurity-analyst/ | 28% | Low Risk |
+| Registered Nurse | https://aicareer.me/risk/registered-nurse/ | 22% | Low Risk |
 
 ## Research & Studies
 
-- [AI Job Impact 2026](https://aicareer.me/study/ai-job-impact-2026/): Stanford AI Index 2026 findings crossed with all 17 career risk scores. Key data: junior developer employment fell ~20%, 1-in-3 organizations plan cuts, productivity gains range from 14–50% by field. Explains the "jagged frontier" and why entry-level roles in even "low risk" careers face displacement pressure.
-- [AI Risk by Industry](https://aicareer.me/study/careers-by-industry/): 17 careers grouped into 6 industry sectors with average AI risk per sector. Finance & Accounting leads at ~70% average risk (bookkeeper 90%, tax preparer 88%, accountant 80%). Technology & Data shows the widest variance (data entry clerk 95% vs cybersecurity analyst 28%). Includes Stanford AI Index 2026 context per sector.
+- [AI Job Impact 2026](https://aicareer.me/study/ai-job-impact-2026/): Stanford AI Index 2026 findings crossed with all 24 career risk scores. Key data: junior developer employment fell ~20%, 1-in-3 organizations plan cuts, productivity gains range from 14–50% by field. Explains the "jagged frontier" and why entry-level roles in even "low risk" careers face displacement pressure.
+- [AI Risk by Industry](https://aicareer.me/study/careers-by-industry/): 24 careers grouped into 9 industry sectors with average AI risk per sector. Finance & Accounting leads at ~70% average risk. Creative & Media is newly added — content writers (76%) and graphic designers (72%) face severe generative AI pressure. Education & HR and Administration show the mixed-risk split between admin automation and judgment-intensive core work. Includes Stanford AI Index 2026 context per sector.
 
 ## Special Resources
 
