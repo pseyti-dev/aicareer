@@ -68,7 +68,7 @@ Each phase = one PR. Never merge a phase that hasn't passed its acceptance crite
 
 ---
 
-## Phase 5 — Programmatic SEO *(current)*
+## Phase 5 — Programmatic SEO _(current)_
 
 - [x] Add "Will AI Replace [Career]?" visible section to all 17 career pages
   - Unique per career (uses career.aioSummary + risk-band-specific bottom line)
@@ -85,14 +85,17 @@ Each phase = one PR. Never merge a phase that hasn't passed its acceptance crite
 
 ---
 
-## Phase 6 — Integrated Monetization
+## Phase 6 — Integrated Monetization _(current)_
 
-- [ ] Contextual course recommendations inside calculator funnel:
-      risk result → mitigation skills → affiliate course link
-- [ ] No generic banners; no Core Web Vitals regression
+- [x] Contextual recommendation panel in `SkillChecklist.jsx`:
+  - `TopRecommendation` component: highest-impact unchecked skill surfaced as "next action" with urgency label (Urgent/Recommended/Next step) tied to current risk score
+  - Direct affiliate CTA + free option link — no generic banners
+  - Reacts live as user checks/unchecks skills
+- [x] `CompletionPanel`: shown when all skills checked — redirects to `/special/ai-ready/` for cross-sell
+- [x] No new above-fold JS — addition is inside existing `client:load` React island; CWV unaffected
 
-**Acceptance:** contextual links in funnel, CWV preserved.
+**Acceptance:** contextual link appears in funnel immediately below gauge; changes with user progress; no CWV regression.
 
 ---
 
-_Last updated: Phase 1 in-progress_
+_Last updated: Phase 6 complete — all 6 phases shipped_

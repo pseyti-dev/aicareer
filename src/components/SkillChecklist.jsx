@@ -82,6 +82,84 @@ function SkillCard({ skill, checked, onChange }) {
   );
 }
 
+function TopRecommendation({ skill, currentScore }) {
+  if (!skill) return null;
+
+  const urgency =
+    currentScore > 70
+      ? { label: 'Urgent', color: '#f43f5e', bg: '#f43f5e12', border: '#f43f5e30' }
+      : currentScore > 40
+        ? { label: 'Recommended', color: '#f59e0b', bg: '#f59e0b12', border: '#f59e0b30' }
+        : { label: 'Next step', color: '#06B6D4', bg: '#06B6D412', border: '#06B6D430' };
+
+  return (
+    <div
+      className="rounded-xl p-5 mb-8 border"
+      style={{ background: urgency.bg, borderColor: urgency.border }}
+    >
+      <div className="flex items-start gap-3">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <span
+              className="px-2 py-0.5 rounded-full text-xs font-bold uppercase"
+              style={{ backgroundColor: `${urgency.color}20`, color: urgency.color }}
+            >
+              {urgency.label}
+            </span>
+            <span className="text-xs text-[#4b5280]">
+              Top action — saves {skill.riskReduction} risk points
+            </span>
+          </div>
+          <p className="font-semibold text-[#e2e6f5] mb-1">{skill.name}</p>
+          <p className="text-xs text-[#4b5280] mb-3">{skill.description}</p>
+          <div className="flex flex-wrap gap-2">
+            <a
+              href={skill.paidResource.affiliateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold text-white"
+              style={{
+                background: 'linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%)',
+                boxShadow: '0 4px 12px rgba(6,182,212,0.25)',
+              }}
+            >
+              Start Learning → {skill.paidResource.label}
+            </a>
+            <a
+              href={skill.freeResource.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-[#e2e6f5] border border-[#1e2340] hover:border-[#4b5280] transition-all"
+            >
+              Free option available
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CompletionPanel() {
+  return (
+    <div className="rounded-xl p-6 mb-8 border border-emerald-500/30 bg-emerald-500/5 text-center">
+      <p className="text-2xl mb-2">🎉</p>
+      <p className="font-bold text-[#e2e6f5] mb-1">You've completed all skills!</p>
+      <p className="text-sm text-[#4b5280] mb-4">
+        You've learned every recommended skill for this career. Your risk score reflects your full
+        upskilling potential.
+      </p>
+      <a
+        href="/special/ai-ready/"
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold text-white"
+        style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%)' }}
+      >
+        Discover Universal AI Skills →
+      </a>
+    </div>
+  );
+}
+
 export default function SkillChecklist({ skills, slug, baseRiskScore }) {
   const [checkedSkills, setCheckedSkills] = useState([]);
   const [toasts, setToasts] = useState([]);
@@ -108,7 +186,7 @@ export default function SkillChecklist({ skills, slug, baseRiskScore }) {
   const handleToggle = (skillId, checked) => {
     if (checked) {
       setCheckedSkills((prev) => [...prev, skillId]);
-      showToast('Skill added! Risk score updated. 🎉');
+      showToast('Skill added! Risk score updated.');
     } else {
       setCheckedSkills((prev) => prev.filter((id) => id !== skillId));
       showToast('Skill removed.');
@@ -128,6 +206,14 @@ export default function SkillChecklist({ skills, slug, baseRiskScore }) {
   const currentReduction = baseRiskScore - currentScore;
   const progressPercentage = (currentReduction / totalPossibleReduction) * 100;
 
+  // Highest-impact unchecked skill for contextual recommendation
+  const uncheckedSkills = skills.filter((s) => !checkedSkills.includes(s.id));
+  const topRecommendation = uncheckedSkills.reduce(
+    (best, s) => (!best || s.riskReduction > best.riskReduction ? s : best),
+    null
+  );
+  const allComplete = uncheckedSkills.length === 0;
+
   return (
     <div>
       {/* Live gauge */}
@@ -139,7 +225,7 @@ export default function SkillChecklist({ skills, slug, baseRiskScore }) {
             <p className="text-2xl font-bold text-[#e2e6f5]">{Math.round(currentScore)}% Risk</p>
             {currentReduction > 0 && (
               <p className="text-sm text-[#10b981] mt-1">
-                You've reduced your risk by {currentReduction} points 🎉
+                Risk reduced by {currentReduction} points
               </p>
             )}
           </div>
@@ -157,6 +243,13 @@ export default function SkillChecklist({ skills, slug, baseRiskScore }) {
           </div>
         </div>
       </div>
+
+      {/* Contextual recommendation — risk result → course link */}
+      {allComplete ? (
+        <CompletionPanel />
+      ) : (
+        <TopRecommendation skill={topRecommendation} currentScore={currentScore} />
+      )}
 
       {/* Skills */}
       <div className="space-y-4 mb-8">
