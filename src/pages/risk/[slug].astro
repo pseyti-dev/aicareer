@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import SkillChecklist from '../../components/SkillChecklist.jsx';
+import EmailCapture from '../../components/EmailCapture.astro';
 import { careers, author, datasetMeta } from '../../data/careers.js';
 
 export function getStaticPaths() {
@@ -173,6 +174,9 @@ const breadcrumbSchema = {
         slug={career.slug}
         baseRiskScore={career.baseRiskScore}
       />
+
+      <!-- Lead magnet: PDF report -->
+      <EmailCapture career={career} />
 
       <!-- What AI Already Does — static HTML -->
       <div class="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-8 mb-8">
