@@ -1,0 +1,71 @@
+---
+import { emailCapture } from '../data/config.js';
+
+const { career } = Astro.props;
+const formActive = Boolean(emailCapture.action);
+const pdfUrl = `/reports/${career.slug}.pdf`;
+---
+
+<section
+  class="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-8 mb-8 neon-glow"
+  aria-labelledby={`report-heading-${career.slug}`}
+>
+  <div class="flex flex-wrap items-center gap-2 mb-3">
+    <span
+      class="px-3 py-1 rounded-full text-xs font-semibold bg-[#4338ca]/8 text-[#4338ca] border border-[#4338ca]/25"
+      >Free PDF report</span
+    >
+  </div>
+  <h2 id={`report-heading-${career.slug}`} class="text-2xl font-bold text-[#1c1917] mb-2">
+    Get your {career.title} risk report
+  </h2>
+  <p class="text-sm text-[#6b6459] leading-relaxed mb-5">
+    The full assessment as a PDF: your {career.baseRiskScore}% score explained, the tasks AI already
+    automates, and a 90-day upskilling plan ordered by impact — with free and paid resources for
+    every skill.
+  </p>
+
+  {
+    formActive ? (
+      <form
+        action={emailCapture.action}
+        method="post"
+        target="_blank"
+        class="flex flex-col sm:flex-row gap-3"
+      >
+        <label class="sr-only" for={`email-${career.slug}`}>
+          Email address
+        </label>
+        <input
+          id={`email-${career.slug}`}
+          type="email"
+          name={emailCapture.emailField}
+          required
+          placeholder="you@example.com"
+          class="flex-1 px-4 py-3 rounded-lg bg-[#faf9f6] border border-[#e5e1d8] text-[#1c1917] placeholder-[#6b6459] focus:outline-none focus:border-[#4338ca] transition-colors"
+        />
+        <input type="hidden" name={emailCapture.careerField} value={career.slug} />
+        <button
+          type="submit"
+          class="px-6 py-3 rounded-lg font-bold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-colors"
+        >
+          Email me the report
+        </button>
+      </form>
+    ) : (
+      <a
+        href={pdfUrl}
+        download
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-colors"
+      >
+        ↓ Download the PDF report
+      </a>
+    )
+  }
+  <p class="text-xs text-[#6b6459] mt-3">
+    No spam. The report links back to the open
+    <a href="/data/ai-career-risk-index/" class="text-[#4338ca] hover:underline"
+      >AI Career Risk Index</a
+    > so you can verify every number.
+  </p>
+</section>
