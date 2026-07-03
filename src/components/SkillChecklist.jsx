@@ -4,21 +4,21 @@ function SkillCard({ skill, checked, onChange }) {
   const getDifficultyColor = () => {
     switch (skill.difficulty) {
       case 'easy':
-        return '#10b981';
+        return '#047857';
       case 'medium':
-        return '#f59e0b';
+        return '#b45309';
       case 'hard':
-        return '#f43f5e';
+        return '#dc2626';
       default:
-        return '#4b5280';
+        return '#6b6459';
     }
   };
   const color = getDifficultyColor();
 
   return (
     <div
-      className="bg-[#0d1120] border border-[#1e2340] rounded-lg p-4 transition-all duration-300 hover:border-[#06B6D4]"
-      style={{ borderLeftWidth: '4px', borderLeftColor: checked ? '#10b981' : 'transparent' }}
+      className="bg-[#ffffff] border border-[#e5e1d8] rounded-lg p-4 transition-all duration-300 hover:border-[#4338ca]"
+      style={{ borderLeftWidth: '4px', borderLeftColor: checked ? '#047857' : 'transparent' }}
     >
       <div className="flex items-start gap-4">
         <button
@@ -26,16 +26,16 @@ function SkillCard({ skill, checked, onChange }) {
           aria-label={checked ? `Unmark ${skill.name}` : `Mark ${skill.name} as learned`}
           className="flex-shrink-0 w-6 h-6 rounded border-2 flex items-center justify-center mt-1 transition-all"
           style={{
-            borderColor: checked ? '#10b981' : '#4b5280',
-            backgroundColor: checked ? '#10b98120' : 'transparent',
+            borderColor: checked ? '#047857' : '#6b6459',
+            backgroundColor: checked ? '#04785720' : 'transparent',
           }}
         >
-          {checked && <span className="text-[#10b981] text-sm font-bold">✓</span>}
+          {checked && <span className="text-[#047857] text-sm font-bold">✓</span>}
         </button>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-2">
             <h3
-              className="font-bold text-[#e2e6f5]"
+              className="font-bold text-[#1c1917]"
               style={{
                 textDecoration: checked ? 'line-through' : 'none',
                 opacity: checked ? 0.6 : 1,
@@ -49,19 +49,19 @@ function SkillCard({ skill, checked, onChange }) {
             >
               {skill.difficulty}
             </span>
-            <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-[#06B6D4] bg-opacity-20 text-[#06B6D4]">
+            <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-[#4338ca] bg-opacity-20 text-[#4338ca]">
               -{skill.riskReduction}pts
             </span>
           </div>
-          <p className="text-sm text-[#4b5280] mb-3">{skill.description}</p>
+          <p className="text-sm text-[#6b6459] mb-3">{skill.description}</p>
           <div className="flex flex-wrap gap-2">
             <a
               href={skill.freeResource.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-lg border border-[#1e2340] text-sm font-medium text-[#e2e6f5] hover:border-[#06B6D4] transition-all"
+              className="px-4 py-2 rounded-lg border border-[#e5e1d8] text-sm font-medium text-[#1c1917] hover:border-[#4338ca] transition-all"
             >
-              ▶ Free Resource
+              Free resource
             </a>
             <a
               href={skill.paidResource.affiliateUrl}
@@ -69,11 +69,11 @@ function SkillCard({ skill, checked, onChange }) {
               rel="noopener noreferrer"
               className="px-4 py-2 rounded-lg text-sm font-bold text-white transition-all"
               style={{
-                background: 'linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%)',
-                boxShadow: '0 4px 12px rgba(6,182,212,0.3)',
+                background: 'linear-gradient(135deg, #4338ca 0%, #3730a3 100%)',
+                boxShadow: '0 4px 12px rgba(67,56,202,0.3)',
               }}
             >
-              🚀 {skill.paidResource.label}
+              {skill.paidResource.label} →
             </a>
           </div>
         </div>
@@ -87,10 +87,10 @@ function TopRecommendation({ skill, currentScore }) {
 
   const urgency =
     currentScore > 70
-      ? { label: 'Urgent', color: '#f43f5e', bg: '#f43f5e12', border: '#f43f5e30' }
+      ? { label: 'Urgent', color: '#dc2626', bg: '#dc262612', border: '#dc262630' }
       : currentScore > 40
-        ? { label: 'Recommended', color: '#f59e0b', bg: '#f59e0b12', border: '#f59e0b30' }
-        : { label: 'Next step', color: '#06B6D4', bg: '#06B6D412', border: '#06B6D430' };
+        ? { label: 'Recommended', color: '#b45309', bg: '#b4530912', border: '#b4530930' }
+        : { label: 'Next step', color: '#4338ca', bg: '#4338ca12', border: '#4338ca30' };
 
   return (
     <div
@@ -106,12 +106,12 @@ function TopRecommendation({ skill, currentScore }) {
             >
               {urgency.label}
             </span>
-            <span className="text-xs text-[#4b5280]">
+            <span className="text-xs text-[#6b6459]">
               Top action — saves {skill.riskReduction} risk points
             </span>
           </div>
-          <p className="font-semibold text-[#e2e6f5] mb-1">{skill.name}</p>
-          <p className="text-xs text-[#4b5280] mb-3">{skill.description}</p>
+          <p className="font-semibold text-[#1c1917] mb-1">{skill.name}</p>
+          <p className="text-xs text-[#6b6459] mb-3">{skill.description}</p>
           <div className="flex flex-wrap gap-2">
             <a
               href={skill.paidResource.affiliateUrl}
@@ -119,8 +119,8 @@ function TopRecommendation({ skill, currentScore }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold text-white"
               style={{
-                background: 'linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%)',
-                boxShadow: '0 4px 12px rgba(6,182,212,0.25)',
+                background: 'linear-gradient(135deg, #4338ca 0%, #3730a3 100%)',
+                boxShadow: '0 4px 12px rgba(67,56,202,0.25)',
               }}
             >
               Start Learning → {skill.paidResource.label}
@@ -129,7 +129,7 @@ function TopRecommendation({ skill, currentScore }) {
               href={skill.freeResource.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-[#e2e6f5] border border-[#1e2340] hover:border-[#4b5280] transition-all"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-[#1c1917] border border-[#e5e1d8] hover:border-[#6b6459] transition-all"
             >
               Free option available
             </a>
@@ -144,15 +144,15 @@ function CompletionPanel() {
   return (
     <div className="rounded-xl p-6 mb-8 border border-emerald-500/30 bg-emerald-500/5 text-center">
       <p className="text-2xl mb-2">🎉</p>
-      <p className="font-bold text-[#e2e6f5] mb-1">You've completed all skills!</p>
-      <p className="text-sm text-[#4b5280] mb-4">
+      <p className="font-bold text-[#1c1917] mb-1">You've completed all skills!</p>
+      <p className="text-sm text-[#6b6459] mb-4">
         You've learned every recommended skill for this career. Your risk score reflects your full
         upskilling potential.
       </p>
       <a
         href="/special/ai-ready/"
         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold text-white"
-        style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #4338ca 0%, #3730a3 100%)' }}
       >
         Discover Universal AI Skills →
       </a>
@@ -217,27 +217,27 @@ export default function SkillChecklist({ skills, slug, baseRiskScore }) {
   return (
     <div>
       {/* Live gauge */}
-      <div className="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+      <div className="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-8 mb-8">
         <div className="flex flex-col items-center">
           <RiskGaugeInline score={currentScore} size={200} />
           <div className="mt-4 text-center">
-            <p className="text-sm text-[#4b5280] mb-1">Your Current AI Risk Score</p>
-            <p className="text-2xl font-bold text-[#e2e6f5]">{Math.round(currentScore)}% Risk</p>
+            <p className="text-sm text-[#6b6459] mb-1">Your Current AI Risk Score</p>
+            <p className="text-2xl font-bold text-[#1c1917]">{Math.round(currentScore)}% Risk</p>
             {currentReduction > 0 && (
-              <p className="text-sm text-[#10b981] mt-1">
+              <p className="text-sm text-[#047857] mt-1">
                 Risk reduced by {currentReduction} points
               </p>
             )}
           </div>
         </div>
         <div className="mt-6">
-          <div className="flex justify-between text-sm text-[#4b5280] mb-2">
+          <div className="flex justify-between text-sm text-[#6b6459] mb-2">
             <span>Upskilling Progress</span>
             <span>{Math.round(progressPercentage)}% Complete</span>
           </div>
-          <div className="w-full h-3 bg-[#1e2340] rounded-full overflow-hidden">
+          <div className="w-full h-3 bg-[#e5e1d8] rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-[#06B6D4] to-[#10b981] rounded-full transition-all duration-500"
+              className="h-full bg-gradient-to-r from-[#4338ca] to-[#047857] rounded-full transition-all duration-500"
               style={{ width: `${progressPercentage}%` }}
             />
           </div>
@@ -268,11 +268,11 @@ export default function SkillChecklist({ skills, slug, baseRiskScore }) {
         {toasts.map(({ id, msg }) => (
           <div
             key={id}
-            className="bg-[#0d1120] border border-[#06B6D4] rounded-lg px-4 py-3 shadow-lg max-w-sm"
+            className="bg-[#ffffff] border border-[#4338ca] rounded-lg px-4 py-3 shadow-lg max-w-sm"
             style={{ animation: 'slideUp 0.3s ease-out' }}
           >
-            <div className="flex items-center gap-2 text-[#e2e6f5]">
-              <span className="text-[#06B6D4]">✓</span>
+            <div className="flex items-center gap-2 text-[#1c1917]">
+              <span className="text-[#4338ca]">✓</span>
               <span className="text-sm">{msg}</span>
             </div>
           </div>
@@ -293,13 +293,13 @@ function RiskGaugeInline({ score, size = 200 }) {
   const radius = (size - 20) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (animatedScore / 100) * circumference;
-  const color = score <= 40 ? '#10b981' : score <= 70 ? '#f59e0b' : '#f43f5e';
+  const color = score <= 40 ? '#047857' : score <= 70 ? '#b45309' : '#dc2626';
   const badge =
     score <= 40
-      ? { text: 'SAFE', color: '#10b981' }
+      ? { text: 'SAFE', color: '#047857' }
       : score <= 70
-        ? { text: 'CAUTION', color: '#f59e0b' }
-        : { text: 'CRITICAL', color: '#f43f5e' };
+        ? { text: 'CAUTION', color: '#b45309' }
+        : { text: 'CRITICAL', color: '#dc2626' };
   return (
     <div className="flex flex-col items-center gap-4">
       <svg width={size} height={size} className="transform -rotate-90">
@@ -308,7 +308,7 @@ function RiskGaugeInline({ score, size = 200 }) {
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="#1e2340"
+          stroke="#e5e1d8"
           strokeWidth="12"
         />
         <circle
@@ -331,7 +331,7 @@ function RiskGaugeInline({ score, size = 200 }) {
           style={{
             fontSize: size * 0.25,
             fontWeight: 'bold',
-            fill: '#e2e6f5',
+            fill: '#1c1917',
             transform: 'rotate(90deg)',
             transformOrigin: 'center',
           }}

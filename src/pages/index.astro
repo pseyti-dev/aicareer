@@ -78,9 +78,9 @@ const breadcrumbSchema = {
 };
 
 const getBarColor = (score) => {
-  if (score <= 40) return '#10b981';
-  if (score <= 70) return '#f59e0b';
-  return '#f43f5e';
+  if (score <= 40) return '#047857';
+  if (score <= 70) return '#b45309';
+  return '#dc2626';
 };
 ---
 
@@ -95,72 +95,67 @@ const getBarColor = (score) => {
   <main>
     <!-- ── Hero ── -->
     <section class="max-w-4xl mx-auto px-6 py-16 sm:py-24 text-center">
-      <div
-        class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#06B6D4]/30 bg-[#06B6D4]/5 text-[10px] uppercase tracking-widest text-[#06B6D4] mb-8"
+      <a
+        href="/data/ai-career-risk-index/"
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#4338ca]/30 bg-[#4338ca]/5 text-[11px] uppercase tracking-widest text-[#4338ca] mb-8 hover:bg-[#4338ca]/10 transition-colors"
       >
-        <span class="relative flex h-2 w-2">
-          <span
-            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#06B6D4] opacity-75"
-          ></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-[#06B6D4]"></span>
-        </span>
-        Free AI Displacement Risk Calculator
-      </div>
+        AI Career Risk Index · v2026.2 · Open Data
+      </a>
 
       <nav aria-label="Breadcrumb" class="mb-6 flex justify-center">
-        <ol class="flex items-center space-x-2 text-sm text-[#4b5280]">
-          <li><span class="text-[#e2e6f5] font-medium" aria-current="page">Home</span></li>
+        <ol class="flex items-center space-x-2 text-sm text-[#6b6459]">
+          <li><span class="text-[#1c1917] font-medium" aria-current="page">Home</span></li>
         </ol>
       </nav>
 
       <h1
-        class="text-4xl sm:text-5xl lg:text-7xl font-bold text-[#e2e6f5] mb-6 leading-tight tracking-tight"
+        class="text-4xl sm:text-5xl lg:text-7xl font-bold text-[#1c1917] mb-6 leading-tight tracking-tight"
       >
         Is Your Job<br />
         <span class="text-gradient">Safe from AI?</span>
       </h1>
 
-      <p class="text-lg sm:text-xl text-[#4b5280] mb-3 max-w-2xl mx-auto">
+      <p class="text-lg sm:text-xl text-[#6b6459] mb-3 max-w-2xl mx-auto">
         Find out in 30 seconds if your job is safe from AI — and what to do about it.
       </p>
-      <p class="text-base text-[#4b5280] mb-10 max-w-2xl mx-auto">
+      <p class="text-base text-[#6b6459] mb-10 max-w-2xl mx-auto">
         Free risk score for 24 careers, plus a step-by-step upskilling roadmap — based on research
         from Oxford, McKinsey, and the World Economic Forum.
       </p>
 
       <div class="flex flex-wrap justify-center gap-3 mb-10">
         <span
-          class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]"
-          >🎯 24 Careers Analyzed</span
+          class="px-4 py-2 rounded-full bg-[#ffffff] border border-[#e5e1d8] text-sm text-[#1c1917]"
+          >24 careers analyzed</span
         >
         <span
-          class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]"
-          >📊 Instant Risk Score</span
+          class="px-4 py-2 rounded-full bg-[#ffffff] border border-[#e5e1d8] text-sm text-[#1c1917]"
+          >Instant risk score</span
         >
         <span
-          class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]"
-          >📉 Reduce risk by 30–50 pts</span
+          class="px-4 py-2 rounded-full bg-[#ffffff] border border-[#e5e1d8] text-sm text-[#1c1917]"
+          >Reduce risk by 30–50 pts</span
         >
         <span
-          class="px-4 py-2 rounded-full bg-[#0d1120] border border-[#1e2340] text-sm text-[#e2e6f5]"
-          >🔒 No Sign-Up Required</span
+          class="px-4 py-2 rounded-full bg-[#ffffff] border border-[#e5e1d8] text-sm text-[#1c1917]"
+          >No sign-up required</span
         >
       </div>
 
-      <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-4 max-w-xl mx-auto neon-glow">
+      <div class="bg-[#ffffff] border border-[#e5e1d8] rounded-2xl p-4 max-w-xl mx-auto neon-glow">
         <CareerSelector client:load careers={careers} specialOptions={specialOptions} />
       </div>
     </section>
 
     <!-- ── Market Stats ── -->
-    <section class="border-t border-[#1e2340] bg-[#0a0c18] py-14">
+    <section class="border-t border-[#e5e1d8] bg-[#f4f1ea] py-14">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div class="lg:col-span-4">
             <h2 class="text-2xl sm:text-3xl font-bold mb-4 tracking-tight text-gradient">
               The Impact of AI on the Job Market in 2026
             </h2>
-            <p class="text-[#4b5280] leading-relaxed">
+            <p class="text-[#6b6459] leading-relaxed">
               The AI-driven transformation of the labor market is accelerating faster than most
               workers realize.
             </p>
@@ -168,10 +163,10 @@ const getBarColor = (score) => {
           <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-4">
             {
               marketStats.map((stat) => (
-                <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-5 text-center">
-                  <div class="text-3xl font-bold text-[#06B6D4] mb-1">{stat.figure}</div>
-                  <div class="text-sm text-[#e2e6f5] mb-2 leading-snug">{stat.label}</div>
-                  <div class="text-xs text-[#4b5280]">— {stat.source}</div>
+                <div class="bg-[#ffffff] border border-[#e5e1d8] rounded-2xl p-5 text-center">
+                  <div class="text-3xl font-bold text-[#4338ca] mb-1">{stat.figure}</div>
+                  <div class="text-sm text-[#1c1917] mb-2 leading-snug">{stat.label}</div>
+                  <div class="text-xs text-[#6b6459]">— {stat.source}</div>
                 </div>
               ))
             }
@@ -182,10 +177,10 @@ const getBarColor = (score) => {
 
     <!-- ── Career Cards ── -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-3 text-center tracking-tight">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#1c1917] mb-3 text-center tracking-tight">
         AI Risk Score by Career — 2026
       </h2>
-      <p class="text-[#4b5280] text-center mb-10 max-w-2xl mx-auto">
+      <p class="text-[#6b6459] text-center mb-10 max-w-2xl mx-auto">
         24 careers analyzed — from critical risk to well-protected. Each has a dedicated assessment
         with specific skills to reduce your personal score.
       </p>
@@ -209,14 +204,14 @@ const getBarColor = (score) => {
               <a
                 href={`/risk/${career.slug}/`}
                 aria-label={`${career.title} AI risk assessment — ${career.baseRiskScore}% risk`}
-                class="block bg-[#0d1120] border border-[#1e2340] rounded-2xl p-6 text-left transition-all duration-200 hover:border-[#06B6D4] hover:scale-[1.02] hover:shadow-[0_0_24px_rgba(6,182,212,0.10)] group"
+                class="block bg-[#ffffff] border border-[#e5e1d8] rounded-2xl p-6 text-left transition-all duration-200 hover:border-[#4338ca] hover:scale-[1.02] hover:shadow-[0_0_24px_rgba(67,56,202,0.10)] group"
               >
-                <h3 class="text-lg font-bold text-[#e2e6f5] mb-2 group-hover:text-[#06B6D4] transition-colors">
+                <h3 class="text-lg font-bold text-[#1c1917] mb-2 group-hover:text-[#4338ca] transition-colors">
                   {career.title}
                 </h3>
-                <p class="text-xs text-[#4b5280] mb-4 line-clamp-2">{career.aioSummary}</p>
+                <p class="text-xs text-[#6b6459] mb-4 line-clamp-2">{career.aioSummary}</p>
                 <div class="flex items-center gap-3 mb-3">
-                  <span class="text-2xl font-bold text-[#e2e6f5]">{career.baseRiskScore}%</span>
+                  <span class="text-2xl font-bold text-[#1c1917]">{career.baseRiskScore}%</span>
                   <span
                     class="px-2 py-1 rounded text-xs font-bold uppercase"
                     style={`background-color:${color}20;color:${color}`}
@@ -224,7 +219,7 @@ const getBarColor = (score) => {
                     {career.riskLabel}
                   </span>
                 </div>
-                <div class="w-full h-1 bg-[#1e2340] rounded-full overflow-hidden">
+                <div class="w-full h-1 bg-[#e5e1d8] rounded-full overflow-hidden">
                   <div
                     class="h-full rounded-full"
                     style={`width:${career.baseRiskScore}%;background-color:${color};box-shadow:0 0 6px ${color}80`}
@@ -238,12 +233,12 @@ const getBarColor = (score) => {
     </section>
 
     <!-- ── Future-Proof Framework ── -->
-    <section class="border-t border-[#1e2340] bg-[#0a0c18] py-16">
+    <section class="border-t border-[#e5e1d8] bg-[#f4f1ea] py-16">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-3 text-center tracking-tight">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#1c1917] mb-3 text-center tracking-tight">
           How to Future-Proof Your Career Against AI
         </h2>
-        <p class="text-[#4b5280] text-center mb-10 max-w-2xl mx-auto">
+        <p class="text-[#6b6459] text-center mb-10 max-w-2xl mx-auto">
           The professionals who thrive in the AI era aren't those who avoid AI — they're the ones
           who learn to work alongside it.
         </p>
@@ -254,27 +249,27 @@ const getBarColor = (score) => {
                 step: '01',
                 title: 'Know Your Risk',
                 desc: 'Start by honestly assessing how much of your current work is routine and predictable. Our calculator gives you a baseline score based on your profession.',
-                color: '#f43f5e',
+                color: '#dc2626',
               },
               {
                 step: '02',
                 title: 'Learn AI Tools',
                 desc: 'Master the AI tools entering your industry. Becoming the person who runs the AI — rather than being replaced by it — requires deliberate skill-building.',
-                color: '#f59e0b',
+                color: '#b45309',
               },
               {
                 step: '03',
                 title: 'Shift to Human Work',
                 desc: 'Move your career toward tasks requiring judgment, creativity, trust, and emotional intelligence. These are the domains where AI still falls short.',
-                color: '#10b981',
+                color: '#047857',
               },
             ].map((item) => (
-              <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-6">
+              <div class="bg-[#ffffff] border border-[#e5e1d8] rounded-2xl p-6">
                 <div class="text-4xl font-bold mb-3" style={`color:${item.color}`}>
                   {item.step}
                 </div>
-                <h3 class="text-lg font-bold text-[#e2e6f5] mb-2">{item.title}</h3>
-                <p class="text-sm text-[#4b5280] leading-relaxed">{item.desc}</p>
+                <h3 class="text-lg font-bold text-[#1c1917] mb-2">{item.title}</h3>
+                <p class="text-sm text-[#6b6459] leading-relaxed">{item.desc}</p>
               </div>
             ))
           }
@@ -285,63 +280,63 @@ const getBarColor = (score) => {
     <!-- ── Methodology ── -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16" id="methodology">
       <div class="text-center mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-4 tracking-tight">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#1c1917] mb-4 tracking-tight">
           {methodology.title}
         </h2>
-        <p class="text-[#4b5280] max-w-2xl mx-auto">{methodology.description}</p>
+        <p class="text-[#6b6459] max-w-2xl mx-auto">{methodology.description}</p>
       </div>
       <div class="grid gap-6 mb-6">
         {
           methodology.dimensions.map((dim) => (
-            <div class="flex items-start gap-6 p-6 rounded-2xl border border-[#1e2340] bg-[#06070f]">
+            <div class="flex items-start gap-6 p-6 rounded-2xl border border-[#e5e1d8] bg-[#faf9f6]">
               <div class="flex-shrink-0">
-                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-[#06B6D4]/10 text-[#06B6D4] border border-[#06B6D4]/30">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-[#4338ca]/10 text-[#4338ca] border border-[#4338ca]/30">
                   {dim.weight}
                 </span>
               </div>
               <div>
-                <h3 class="font-bold text-[#e2e6f5] mb-1">{dim.name}</h3>
-                <p class="text-sm text-[#4b5280] leading-relaxed">{dim.description}</p>
+                <h3 class="font-bold text-[#1c1917] mb-1">{dim.name}</h3>
+                <p class="text-sm text-[#6b6459] leading-relaxed">{dim.description}</p>
               </div>
             </div>
           ))
         }
       </div>
       <div
-        class="bg-[#0d1120] border border-[#1e2340] border-l-4 border-l-[#06B6D4] rounded-2xl p-5"
+        class="bg-[#ffffff] border border-[#e5e1d8] border-l-4 border-l-[#4338ca] rounded-2xl p-5"
       >
-        <p class="text-sm text-[#4b5280] leading-relaxed">
-          <span class="text-[#e2e6f5] font-medium">Note: </span>{methodology.note}
+        <p class="text-sm text-[#6b6459] leading-relaxed">
+          <span class="text-[#1c1917] font-medium">Note: </span>{methodology.note}
         </p>
       </div>
     </section>
 
     <!-- ── About / E-E-A-T ── -->
-    <section class="border-t border-[#1e2340] bg-[#0a0c18] py-16" id="about">
+    <section class="border-t border-[#e5e1d8] bg-[#f4f1ea] py-16" id="about">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-6 tracking-tight">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#1c1917] mb-6 tracking-tight">
           Who Built This
         </h2>
-        <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-8">
+        <div class="bg-[#ffffff] border border-[#e5e1d8] rounded-2xl p-8">
           <div
             class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white mx-auto mb-4"
-            style="background: linear-gradient(135deg, #06B6D4, #7C3AED)"
+            style="background: linear-gradient(135deg, #4338ca, #3730a3)"
           >
             {author.name.charAt(0)}
           </div>
-          <h3 class="text-xl font-bold text-[#e2e6f5] mb-1">{author.name}</h3>
-          <p class="text-sm text-[#06B6D4] mb-4">{author.role}</p>
-          <p class="text-[#4b5280] leading-relaxed mb-6">{author.bio}</p>
+          <h3 class="text-xl font-bold text-[#1c1917] mb-1">{author.name}</h3>
+          <p class="text-sm text-[#4338ca] mb-4">{author.role}</p>
+          <p class="text-[#6b6459] leading-relaxed mb-6">{author.bio}</p>
           <div class="flex flex-wrap justify-center gap-2 mb-6">
             {
               author.expertise.map((skill) => (
-                <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#1e2340] text-[#e2e6f5]">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#e5e1d8] text-[#1c1917]">
                   {skill}
                 </span>
               ))
             }
           </div>
-          <p class="text-xs text-[#4b5280]">
+          <p class="text-xs text-[#6b6459]">
             This tool covers career topics (YMYL). Scores are based on published labor economics
             research for informational purposes only.
           </p>
@@ -351,15 +346,15 @@ const getBarColor = (score) => {
 
     <!-- ── FAQ ── -->
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-2xl sm:text-3xl font-bold text-[#e2e6f5] mb-10 text-center tracking-tight">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#1c1917] mb-10 text-center tracking-tight">
         Frequently Asked Questions
       </h2>
       <div class="space-y-4">
         {
           faqSchema.mainEntity.map((item) => (
-            <div class="bg-[#0d1120] border border-[#1e2340] rounded-2xl p-6">
-              <h3 class="font-bold text-[#e2e6f5] mb-3">{item.name}</h3>
-              <p class="text-sm text-[#4b5280] leading-relaxed">{item.acceptedAnswer.text}</p>
+            <div class="bg-[#ffffff] border border-[#e5e1d8] rounded-2xl p-6">
+              <h3 class="font-bold text-[#1c1917] mb-3">{item.name}</h3>
+              <p class="text-sm text-[#6b6459] leading-relaxed">{item.acceptedAnswer.text}</p>
             </div>
           ))
         }

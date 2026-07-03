@@ -2,25 +2,34 @@
 import { careers, specialOptions } from '../data/careers.js';
 ---
 
-<nav
-  class="border-b border-[#1e2340] bg-[#06070f] bg-opacity-90 backdrop-blur-sm sticky top-0 z-50"
->
+<nav class="border-b border-[#e5e1d8] bg-[#faf9f6]/90 backdrop-blur-sm sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold text-[#06B6D4]">AI Career Risk</a>
-    <div class="flex items-center gap-4">
+    <a
+      href="/"
+      class="text-xl font-bold text-[#1c1917] hover:text-[#4338ca] transition-colors"
+      style="font-family: 'Fraunces', Georgia, serif"
+    >
+      AI Career Risk<span class="text-[#4338ca]">.</span>
+    </a>
+    <div class="flex items-center gap-5">
       <a
         href="/data/ai-career-risk-index/"
-        class="text-sm text-[#4b5280] hover:text-[#06B6D4] transition-colors hidden sm:block"
+        class="text-sm font-medium text-[#6b6459] hover:text-[#4338ca] transition-colors hidden sm:block"
         >Data</a
       >
       <a
+        href="/study/ai-job-impact-2026/"
+        class="text-sm font-medium text-[#6b6459] hover:text-[#4338ca] transition-colors hidden md:block"
+        >Research</a
+      >
+      <a
         href="/about"
-        class="text-sm text-[#4b5280] hover:text-[#06B6D4] transition-colors hidden sm:block"
+        class="text-sm font-medium text-[#6b6459] hover:text-[#4338ca] transition-colors hidden sm:block"
         >About</a
       >
       <span
-        class="px-3 py-1 rounded-full text-xs font-bold bg-[#f59e0b] bg-opacity-20 text-[#f59e0b] border border-[#f59e0b]"
-        >FREE TOOL</span
+        class="px-3 py-1 rounded-full text-xs font-semibold bg-[#4338ca]/8 text-[#4338ca] border border-[#4338ca]/25"
+        >Free tool</span
       >
     </div>
   </div>

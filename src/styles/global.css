@@ -4,26 +4,37 @@
 
 @layer base {
   :root {
-    --obsidian-bg: #06070f;
-    --obsidian-surface: #0d1120;
-    --obsidian-border: #1e2340;
-    --obsidian-cyan: #06b6d4;
-    --obsidian-purple: #7c3aed;
-    --obsidian-text: #e2e6f5;
-    --obsidian-text-muted: #4b5280;
+    --paper-bg: #faf9f6;
+    --paper-alt: #f4f1ea;
+    --paper-surface: #ffffff;
+    --paper-border: #e5e1d8;
+    --ink: #1c1917;
+    --ink-muted: #6b6459;
+    --accent: #4338ca;
+    --risk-high: #dc2626;
+    --risk-mid: #b45309;
+    --risk-low: #047857;
   }
 
   body {
     font-family:
-      'Space Grotesk',
+      'Inter',
       -apple-system,
       BlinkMacSystemFont,
       'Segoe UI',
       sans-serif;
-    background-color: var(--obsidian-bg);
-    color: var(--obsidian-text);
+    background-color: var(--paper-bg);
+    color: var(--ink);
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.015em;
   }
 
   code,
@@ -36,29 +47,33 @@
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--obsidian-bg);
+    background: var(--paper-bg);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--obsidian-border);
+    background: var(--paper-border);
     border-radius: 10px;
-    border: 2px solid var(--obsidian-bg);
+    border: 2px solid var(--paper-bg);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--obsidian-cyan);
+    background: var(--accent);
   }
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-opacity-20 backdrop-blur-lg border border-white/10 rounded-2xl;
+    @apply bg-white/70 backdrop-blur-lg border border-[#e5e1d8] rounded-2xl;
   }
 
+  /* Editorial card lift (class name kept for compatibility) */
   .neon-glow {
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+    box-shadow:
+      0 1px 2px rgba(28, 25, 23, 0.05),
+      0 8px 24px rgba(28, 25, 23, 0.06);
   }
 
+  /* Editorial accent headline (class name kept for compatibility) */
   .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #06b6d4 0%, #7c3aed 100%);
+    color: var(--accent);
+    font-style: italic;
   }
 }

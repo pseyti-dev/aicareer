@@ -13,15 +13,15 @@ export default function RiskGauge({ score, size = 200, careerTitle = 'this caree
   const offset = circumference - (animatedScore / 100) * circumference;
 
   const getColor = () => {
-    if (score <= 40) return '#10b981';
-    if (score <= 70) return '#f59e0b';
-    return '#f43f5e';
+    if (score <= 40) return '#047857';
+    if (score <= 70) return '#b45309';
+    return '#dc2626';
   };
 
   const getBadge = () => {
-    if (score <= 40) return { text: 'SAFE', color: '#10b981' };
-    if (score <= 70) return { text: 'CAUTION', color: '#f59e0b' };
-    return { text: 'CRITICAL', color: '#f43f5e' };
+    if (score <= 40) return { text: 'SAFE', color: '#047857' };
+    if (score <= 70) return { text: 'CAUTION', color: '#b45309' };
+    return { text: 'CRITICAL', color: '#dc2626' };
   };
 
   const color = getColor();
@@ -41,7 +41,7 @@ export default function RiskGauge({ score, size = 200, careerTitle = 'this caree
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="#1e2340"
+          stroke="#e5e1d8"
           strokeWidth="12"
         />
         <circle
@@ -64,7 +64,7 @@ export default function RiskGauge({ score, size = 200, careerTitle = 'this caree
           style={{
             fontSize: size * 0.25,
             fontWeight: 'bold',
-            fill: '#e2e6f5',
+            fill: '#1c1917',
             transform: 'rotate(90deg)',
             transformOrigin: 'center',
           }}

@@ -75,9 +75,9 @@ const breadcrumbSchema = {
 };
 
 const getBarColor = (score) => {
-  if (score <= 40) return '#10b981';
-  if (score <= 70) return '#f59e0b';
-  return '#f43f5e';
+  if (score <= 40) return '#047857';
+  if (score <= 70) return '#b45309';
+  return '#dc2626';
 };
 ---
 
@@ -89,14 +89,14 @@ const getBarColor = (score) => {
 >
   <Nav />
 
-  <div class="min-h-screen bg-[#06070f]">
+  <div class="min-h-screen bg-[#faf9f6]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <nav aria-label="Breadcrumb" class="mb-6">
-        <ol class="flex items-center space-x-2 text-sm text-[#4b5280]">
-          <li><a href="/" class="hover:text-[#06B6D4] transition-colors">Home</a></li>
-          <li><span class="mx-2 text-[#1e2340]">/</span></li>
+        <ol class="flex items-center space-x-2 text-sm text-[#6b6459]">
+          <li><a href="/" class="hover:text-[#4338ca] transition-colors">Home</a></li>
+          <li><span class="mx-2 text-[#e5e1d8]">/</span></li>
           <li>
-            <span class="text-[#e2e6f5] font-medium" aria-current="page">{datasetMeta.name}</span>
+            <span class="text-[#1c1917] font-medium" aria-current="page">{datasetMeta.name}</span>
           </li>
         </ol>
       </nav>
@@ -104,23 +104,23 @@ const getBarColor = (score) => {
       <div class="mb-10">
         <div class="flex flex-wrap items-center gap-2 mb-4">
           <span
-            class="px-3 py-1 rounded-full text-xs font-bold bg-[#06B6D4]/10 text-[#06B6D4] border border-[#06B6D4]/30"
+            class="px-3 py-1 rounded-full text-xs font-bold bg-[#4338ca]/10 text-[#4338ca] border border-[#4338ca]/30"
             >Open Dataset</span
           >
-          <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#1e2340] text-[#e2e6f5]"
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#e5e1d8] text-[#1c1917]"
             >v{datasetMeta.version}</span
           >
-          <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#1e2340] text-[#e2e6f5]"
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#e5e1d8] text-[#1c1917]"
             >Updated {datasetMeta.lastUpdated}</span
           >
-          <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#1e2340] text-[#e2e6f5]"
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#e5e1d8] text-[#1c1917]"
             >{datasetMeta.licenseLabel}</span
           >
         </div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#e2e6f5] mb-4">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1c1917] mb-4">
           {datasetMeta.name}
         </h1>
-        <p class="text-lg text-[#4b5280] leading-relaxed mb-6">
+        <p class="text-lg text-[#6b6459] leading-relaxed mb-6">
           {datasetMeta.description}
         </p>
         <div class="flex flex-wrap gap-3">
@@ -128,14 +128,14 @@ const getBarColor = (score) => {
             href="/data/ai-career-risk-index.csv"
             download
             class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-white"
-            style="background: linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%)"
+            style="background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%)"
           >
             ↓ Download CSV
           </a>
           <a
             href="/data/ai-career-risk-index.json"
             download
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[#1e2340] font-bold text-[#e2e6f5] hover:border-[#06B6D4] transition-all"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[#e5e1d8] font-bold text-[#1c1917] hover:border-[#4338ca] transition-all"
           >
             ↓ Download JSON
           </a>
@@ -144,17 +144,17 @@ const getBarColor = (score) => {
 
       <!-- Full data table — visible, crawlable HTML -->
       <section class="mb-12" aria-labelledby="index-table-heading">
-        <h2 id="index-table-heading" class="text-2xl font-bold text-[#e2e6f5] mb-4">
+        <h2 id="index-table-heading" class="text-2xl font-bold text-[#1c1917] mb-4">
           AI Displacement Risk by Career — Full Index
         </h2>
-        <div class="overflow-x-auto rounded-xl border border-[#1e2340]">
+        <div class="overflow-x-auto rounded-xl border border-[#e5e1d8]">
           <table class="w-full text-sm">
             <caption class="sr-only">
               AI Career Risk Index: displacement risk scores for 24 careers, ranked highest to
               lowest.
             </caption>
             <thead>
-              <tr class="bg-[#0d1120] text-left text-[#4b5280]">
+              <tr class="bg-[#ffffff] text-left text-[#6b6459]">
                 <th scope="col" class="px-4 py-3 font-medium">#</th>
                 <th scope="col" class="px-4 py-3 font-medium">Career</th>
                 <th scope="col" class="px-4 py-3 font-medium">Risk Score</th>
@@ -167,13 +167,13 @@ const getBarColor = (score) => {
                 sorted.map((c, i) => {
                   const color = getBarColor(c.baseRiskScore);
                   return (
-                    <tr class="border-t border-[#1e2340]">
-                      <td class="px-4 py-3 text-[#4b5280]">{i + 1}</td>
-                      <td class="px-4 py-3 font-medium text-[#e2e6f5]">{c.title}</td>
+                    <tr class="border-t border-[#e5e1d8]">
+                      <td class="px-4 py-3 text-[#6b6459]">{i + 1}</td>
+                      <td class="px-4 py-3 font-medium text-[#1c1917]">{c.title}</td>
                       <td class="px-4 py-3">
                         <div class="flex items-center gap-3">
-                          <span class="font-bold text-[#e2e6f5] w-10">{c.baseRiskScore}%</span>
-                          <div class="w-24 h-1.5 bg-[#1e2340] rounded-full overflow-hidden hidden md:block">
+                          <span class="font-bold text-[#1c1917] w-10">{c.baseRiskScore}%</span>
+                          <div class="w-24 h-1.5 bg-[#e5e1d8] rounded-full overflow-hidden hidden md:block">
                             <div
                               class="h-full rounded-full"
                               style={`width:${c.baseRiskScore}%;background-color:${color}`}
@@ -192,7 +192,7 @@ const getBarColor = (score) => {
                       <td class="px-4 py-3 hidden sm:table-cell">
                         <a
                           href={`/risk/${c.slug}/`}
-                          class="text-[#06B6D4] hover:underline whitespace-nowrap"
+                          class="text-[#4338ca] hover:underline whitespace-nowrap"
                         >
                           View →
                         </a>
@@ -207,63 +207,63 @@ const getBarColor = (score) => {
       </section>
 
       <!-- Methodology summary -->
-      <section class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
-        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-4">How Scores Are Calculated</h2>
-        <p class="text-[#4b5280] leading-relaxed mb-6 text-sm">{methodology.description}</p>
+      <section class="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#1c1917] mb-4">How Scores Are Calculated</h2>
+        <p class="text-[#6b6459] leading-relaxed mb-6 text-sm">{methodology.description}</p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {
             methodology.dimensions.map((dim) => (
-              <div class="border border-[#1e2340] rounded-lg p-4">
-                <div class="text-2xl font-bold text-[#06B6D4] mb-1">{dim.weight}</div>
-                <div class="text-sm font-bold text-[#e2e6f5]">{dim.name}</div>
+              <div class="border border-[#e5e1d8] rounded-lg p-4">
+                <div class="text-2xl font-bold text-[#4338ca] mb-1">{dim.weight}</div>
+                <div class="text-sm font-bold text-[#1c1917]">{dim.name}</div>
               </div>
             ))
           }
         </div>
-        <p class="text-xs text-[#4b5280] mt-4">
-          Full methodology: <a href="/about/" class="text-[#06B6D4] hover:underline"
+        <p class="text-xs text-[#6b6459] mt-4">
+          Full methodology: <a href="/about/" class="text-[#4338ca] hover:underline"
             >About this tool</a
           >
         </p>
       </section>
 
       <!-- How to cite -->
-      <section class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
-        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-4">How to Cite This Data</h2>
-        <p class="text-[#4b5280] text-sm mb-4 leading-relaxed">
+      <section class="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#1c1917] mb-4">How to Cite This Data</h2>
+        <p class="text-[#6b6459] text-sm mb-4 leading-relaxed">
           The {datasetMeta.name} is free to reuse for journalism, research, and analysis under
           <a
             href={datasetMeta.license}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-[#06B6D4] hover:underline">{datasetMeta.licenseLabel}</a
+            class="text-[#4338ca] hover:underline">{datasetMeta.licenseLabel}</a
           > — attribution with a link to this page is required.
         </p>
         <div class="mb-4">
-          <p class="text-xs font-bold text-[#e2e6f5] uppercase tracking-wide mb-2">APA</p>
+          <p class="text-xs font-bold text-[#1c1917] uppercase tracking-wide mb-2">APA</p>
           <pre
-            class="bg-[#06070f] border border-[#1e2340] rounded-lg p-4 text-xs text-[#4b5280] whitespace-pre-wrap break-all">{citationApa}</pre>
+            class="bg-[#faf9f6] border border-[#e5e1d8] rounded-lg p-4 text-xs text-[#6b6459] whitespace-pre-wrap break-all">{citationApa}</pre>
         </div>
         <div>
-          <p class="text-xs font-bold text-[#e2e6f5] uppercase tracking-wide mb-2">BibTeX</p>
+          <p class="text-xs font-bold text-[#1c1917] uppercase tracking-wide mb-2">BibTeX</p>
           <pre
-            class="bg-[#06070f] border border-[#1e2340] rounded-lg p-4 text-xs text-[#4b5280] overflow-x-auto">{citationBibtex}</pre>
+            class="bg-[#faf9f6] border border-[#e5e1d8] rounded-lg p-4 text-xs text-[#6b6459] overflow-x-auto">{citationBibtex}</pre>
         </div>
       </section>
 
       <!-- Changelog -->
-      <section class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
-        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-4">Version History</h2>
+      <section class="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#1c1917] mb-4">Version History</h2>
         <ul class="space-y-4">
           {
             datasetMeta.changelog.map((entry) => (
               <li class="flex items-start gap-4 text-sm">
-                <span class="flex-shrink-0 px-2 py-0.5 rounded bg-[#1e2340] text-[#06B6D4] font-mono text-xs">
+                <span class="flex-shrink-0 px-2 py-0.5 rounded bg-[#e5e1d8] text-[#4338ca] font-mono text-xs">
                   v{entry.version}
                 </span>
                 <div>
-                  <p class="text-[#e2e6f5] leading-relaxed">{entry.note}</p>
-                  <p class="text-xs text-[#4b5280] mt-1">{entry.date}</p>
+                  <p class="text-[#1c1917] leading-relaxed">{entry.note}</p>
+                  <p class="text-xs text-[#6b6459] mt-1">{entry.date}</p>
                 </div>
               </li>
             ))
@@ -274,7 +274,7 @@ const getBarColor = (score) => {
       <div class="text-center">
         <a
           href="/"
-          class="inline-block px-8 py-4 rounded-lg border border-[#1e2340] font-bold text-[#e2e6f5] hover:border-[#06B6D4] hover:text-[#06B6D4] transition-all"
+          class="inline-block px-8 py-4 rounded-lg border border-[#e5e1d8] font-bold text-[#1c1917] hover:border-[#4338ca] hover:text-[#4338ca] transition-all"
         >
           ← Check Your Career's Risk Score
         </a>
