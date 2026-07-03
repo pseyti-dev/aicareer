@@ -11,7 +11,7 @@
 // While `action` is empty, career pages show a direct PDF download instead of
 // the form — the report ships value from day one either way.
 export const emailCapture = {
-  action: '',
+  action: 'https://assets.mailerlite.com/jsonp/2486960/forms/191930416809116786/subscribe',
   emailField: 'fields[email]',
   careerField: 'fields[career]',
 };
