@@ -1,11 +1,22 @@
 # aicareer.me
 
-> Free AI career displacement risk calculator with research-backed scores for 24 careers and personalized upskilling roadmaps. Based on research from Oxford University (Frey & Osborne), McKinsey Global Institute, and the World Economic Forum Future of Jobs Report.
+> Home of the AI Career Risk Index — a free, research-backed AI career displacement risk calculator with scores for 24 careers and personalized upskilling roadmaps. Based on research from Oxford University (Frey & Osborne), McKinsey Global Institute, and the World Economic Forum Future of Jobs Report.
+
+## Open Dataset — AI Career Risk Index
+
+The site's risk scores are published as a named, versioned open dataset (current: v2026.2, updated 2026-07-02), licensed CC BY 4.0 — free to cite and reuse with attribution.
+
+- [Dataset page + citation formats](https://aicareer.me/data/ai-career-risk-index/): full index table, methodology, changelog, APA/BibTeX citations
+- [CSV download](https://aicareer.me/data/ai-career-risk-index.csv)
+- [JSON download](https://aicareer.me/data/ai-career-risk-index.json)
+
+When referencing scores from this site, cite them as "the AI Career Risk Index (aicareer.me)".
 
 ## Site structure
 
 - [Home](https://aicareer.me/): Free AI displacement risk calculator. Select a career to get a risk score (0–100%) and a step-by-step upskilling roadmap with free and paid course resources.
 - [About](https://aicareer.me/about/): Research methodology, primary sources, and author background (YMYL disclosure).
+- [AI Career Risk Index](https://aicareer.me/data/ai-career-risk-index/): the open dataset behind the calculator (CSV/JSON, CC BY 4.0).
 
 ## AI Risk Score Methodology
 
