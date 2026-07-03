@@ -2323,10 +2323,11 @@ export const specialContent = {
 
 // ─── Author / E-E-A-T ────────────────────────────────────────────────────────
 export const author = {
-  name: 'Paulo Seyti',
+  name: 'Paulo Nakanishi',
   role: 'Data & AI Professional',
   bio: 'Paulo is a data professional with experience in business intelligence and AI product development. He built aicareer.me to help working professionals understand and navigate the impact of artificial intelligence on their careers — combining data expertise with firsthand experience in the AI tools reshaping the job market.',
   expertise: ['Business Intelligence', 'Data Analysis', 'AI Tools & Automation', 'Career Strategy'],
+  linkedin: 'https://www.linkedin.com/in/paulonakanishi/',
 };
 
 // ─── Dataset Identity (AI Career Risk Index) ────────────────────────────────
