@@ -98,4 +98,22 @@ Each phase = one PR. Never merge a phase that hasn't passed its acceptance crite
 
 ---
 
-_Last updated: Phase 6 complete — all 6 phases shipped_
+## Phase 7 — Citable Authority & Editorial Redesign _(current)_
+
+> Turn the site from "a tool that answers" into "a source that gets cited" by LLMs and journalists.
+
+- [ ] Brand the scores as the **AI Career Risk Index** (named, versioned dataset — v2026.2)
+- [ ] Canonical dataset page `/data/ai-career-risk-index/` with visible full table,
+      Dataset schema + distribution, CC BY 4.0 license, citation block (APA/BibTeX), changelog
+- [ ] Build-time CSV + JSON endpoints generated from `careers.js` (zero drift)
+- [ ] Visible dataset version + last-updated on all career pages, linking to citation page
+- [ ] `llms.txt` updated with dataset section and citation guidance
+- [ ] Editorial redesign: research-publication aesthetic (light paper background, serif display
+      typography, data-forward tables), CSS-only — no new JS, LCP budget preserved
+
+**Acceptance:** dataset page live with valid Dataset schema; CSV/JSON downloadable; all pages
+pass audit; Lighthouse LCP < 2.5 s after redesign.
+
+---
+
+_Last updated: Phase 7 in progress — citable dataset + redesign_

@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import SkillChecklist from '../../components/SkillChecklist.jsx';
-import { careers, author } from '../../data/careers.js';
+import { careers, author, datasetMeta } from '../../data/careers.js';
 
 export function getStaticPaths() {
   return careers.map((career) => ({
@@ -147,7 +147,15 @@ const breadcrumbSchema = {
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#e2e6f5] mb-4">
           {career.title}
         </h1>
-        <p class="text-lg text-[#4b5280]">AI Displacement Risk Assessment & Upskilling Roadmap</p>
+        <p class="text-lg text-[#4b5280] mb-3">
+          AI Displacement Risk Assessment & Upskilling Roadmap
+        </p>
+        <p class="text-xs text-[#4b5280]">
+          Score from the <a
+            href="/data/ai-career-risk-index/"
+            class="text-[#06B6D4] hover:underline">{datasetMeta.name} v{datasetMeta.version}</a
+          > · Updated {datasetMeta.lastUpdated}
+        </p>
       </div>
 
       <!-- AIO Summary — static, citable, in the HTML -->
@@ -231,7 +239,10 @@ const breadcrumbSchema = {
         <p class="text-xs text-[#4b5280]">
           Source: <a href="/study/ai-job-impact-2026/" class="text-[#06B6D4] hover:underline"
             >Stanford AI Index 2026 analysis</a
-          > · <a href="/about/" class="text-[#06B6D4] hover:underline">Risk score methodology</a>
+          > · <a href="/about/" class="text-[#06B6D4] hover:underline">Risk score methodology</a> ·
+          <a href="/data/ai-career-risk-index/" class="text-[#06B6D4] hover:underline"
+            >Cite this data (open dataset)</a
+          >
         </p>
       </section>
 

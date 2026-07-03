@@ -85,7 +85,8 @@ export const riskRankings = [
     rank: 5,
     title: 'Administrative Assistant',
     risk: 82,
-    reason: 'scheduling, email drafting, and document automation replaced by Microsoft Copilot and AI workflow tools',
+    reason:
+      'scheduling, email drafting, and document automation replaced by Microsoft Copilot and AI workflow tools',
   },
   {
     rank: 6,
@@ -116,7 +117,8 @@ export const riskRankings = [
     rank: 10,
     title: 'Graphic Designer',
     risk: 72,
-    reason: 'logo generation, social media graphics, and ad creative automated by Midjourney and Adobe Firefly',
+    reason:
+      'logo generation, social media graphics, and ad creative automated by Midjourney and Adobe Firefly',
   },
   {
     rank: 11,
@@ -134,7 +136,8 @@ export const riskRankings = [
     rank: 13,
     title: 'Real Estate Agent',
     risk: 65,
-    reason: 'property valuation, listing generation, and lead qualification automated by AI platforms',
+    reason:
+      'property valuation, listing generation, and lead qualification automated by AI platforms',
   },
   {
     rank: 14,
@@ -152,7 +155,8 @@ export const riskRankings = [
     rank: 16,
     title: 'HR Manager',
     risk: 58,
-    reason: 'resume screening, scheduling, and onboarding documentation automated by AI HR platforms',
+    reason:
+      'resume screening, scheduling, and onboarding documentation automated by AI HR platforms',
   },
   {
     rank: 17,
@@ -184,7 +188,8 @@ export const riskRankings = [
     rank: 21,
     title: 'Teacher',
     risk: 35,
-    reason: 'grading and lesson planning partly automated, but core human mentorship remains irreplaceable',
+    reason:
+      'grading and lesson planning partly automated, but core human mentorship remains irreplaceable',
   },
   {
     rank: 22,
@@ -202,7 +207,8 @@ export const riskRankings = [
     rank: 24,
     title: 'Registered Nurse',
     risk: 22,
-    reason: 'documentation and monitoring automated, but bedside clinical judgment and patient care remain deeply human',
+    reason:
+      'documentation and monitoring automated, but bedside clinical judgment and patient care remain deeply human',
   },
 ];
 
@@ -1698,7 +1704,10 @@ export const careers = [
           'Move up from writing to owning the content strategy — keyword architecture, content audits, conversion optimization, and editorial planning that require business judgment',
         riskReduction: 14,
         difficulty: 'medium',
-        freeResource: { label: 'Google SEO Fundamentals', url: 'https://developers.google.com/search/docs' },
+        freeResource: {
+          label: 'Google SEO Fundamentals',
+          url: 'https://developers.google.com/search/docs',
+        },
         paidResource: {
           label: 'SEO Specialization',
           platform: 'Coursera',
@@ -1740,8 +1749,7 @@ export const careers = [
         paidResource: {
           label: 'Google UX Design Professional',
           platform: 'Coursera',
-          affiliateUrl:
-            'https://www.coursera.org/professional-certificates/google-ux-design',
+          affiliateUrl: 'https://www.coursera.org/professional-certificates/google-ux-design',
         },
       },
       {
@@ -2319,6 +2327,37 @@ export const author = {
   role: 'Data & AI Professional',
   bio: 'Paulo is a data professional with experience in business intelligence and AI product development. He built aicareer.me to help working professionals understand and navigate the impact of artificial intelligence on their careers — combining data expertise with firsthand experience in the AI tools reshaping the job market.',
   expertise: ['Business Intelligence', 'Data Analysis', 'AI Tools & Automation', 'Career Strategy'],
+};
+
+// ─── Dataset Identity (AI Career Risk Index) ────────────────────────────────
+// Named, versioned identity for the scores dataset. This is what makes the
+// data citable by journalists, researchers, and AI answer engines.
+export const datasetMeta = {
+  name: 'AI Career Risk Index',
+  version: '2026.2',
+  lastUpdated: '2026-07-02',
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  licenseLabel: 'CC BY 4.0',
+  canonicalUrl: 'https://aicareer.me/data/ai-career-risk-index/',
+  description:
+    'A research-backed index of AI displacement risk scores (0–100%) for 24 professions, computed from three weighted dimensions: Task Routinization (40%), AI Tool Penetration (35%), and Human Judgment Dependency (25%). Derived from Frey & Osborne (Oxford), McKinsey Global Institute, WEF Future of Jobs Report, and the Stanford AI Index.',
+  changelog: [
+    {
+      version: '2026.2',
+      date: '2026-07-02',
+      note: 'Published as an open dataset (CSV + JSON) under CC BY 4.0. No score changes.',
+    },
+    {
+      version: '2026.1',
+      date: '2026-06-28',
+      note: 'Expanded from 17 to 24 careers: added Tax Preparer, Administrative Assistant, Content Writer, Insurance Underwriter, Graphic Designer, Investment Banker, and Registered Nurse.',
+    },
+    {
+      version: '2026.0',
+      date: '2026-01-01',
+      note: 'Initial release with 17 careers scored against the three-dimension methodology.',
+    },
+  ],
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────

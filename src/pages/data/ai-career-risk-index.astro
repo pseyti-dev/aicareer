@@ -1,0 +1,286 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { careers, methodology, datasetMeta, author } from '../../data/careers.js';
+
+const sorted = careers.slice().sort((a, b) => b.baseRiskScore - a.baseRiskScore);
+
+const year = datasetMeta.lastUpdated.slice(0, 4);
+const citationApa = `${author.name}. (${year}). ${datasetMeta.name} (v${datasetMeta.version}) [Data set]. aicareer.me. ${datasetMeta.canonicalUrl}`;
+const citationBibtex = `@misc{aicareer${year},
+  author = {${author.name}},
+  title  = {${datasetMeta.name} (v${datasetMeta.version})},
+  year   = {${year}},
+  publisher = {aicareer.me},
+  url    = {${datasetMeta.canonicalUrl}},
+  note   = {Licensed under CC BY 4.0}
+}`;
+
+const datasetSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: datasetMeta.name,
+  version: datasetMeta.version,
+  description: datasetMeta.description,
+  url: datasetMeta.canonicalUrl,
+  sameAs: 'https://aicareer.me/',
+  license: datasetMeta.license,
+  isAccessibleForFree: true,
+  dateModified: datasetMeta.lastUpdated,
+  temporalCoverage: '2026',
+  creator: { '@type': 'Person', name: author.name },
+  publisher: { '@type': 'Organization', name: 'aicareer.me', url: 'https://aicareer.me' },
+  keywords: [
+    'AI job displacement',
+    'AI career risk',
+    'automation risk by occupation',
+    'AI replacing jobs',
+    'labor market AI impact',
+  ],
+  variableMeasured: [
+    { '@type': 'PropertyValue', name: 'riskScore', description: 'AI displacement risk, 0–100%' },
+    {
+      '@type': 'PropertyValue',
+      name: 'riskLevel',
+      description: 'Risk band: Critical, High Risk, Moderate, Low Risk',
+    },
+  ],
+  distribution: [
+    {
+      '@type': 'DataDownload',
+      encodingFormat: 'text/csv',
+      contentUrl: 'https://aicareer.me/data/ai-career-risk-index.csv',
+    },
+    {
+      '@type': 'DataDownload',
+      encodingFormat: 'application/json',
+      contentUrl: 'https://aicareer.me/data/ai-career-risk-index.json',
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://aicareer.me/' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: datasetMeta.name,
+      item: datasetMeta.canonicalUrl,
+    },
+  ],
+};
+
+const getBarColor = (score) => {
+  if (score <= 40) return '#10b981';
+  if (score <= 70) return '#f59e0b';
+  return '#f43f5e';
+};
+---
+
+<BaseLayout
+  title={`AI Career Risk Index ${year}: Open Dataset, 24 Careers | aicareer.me`}
+  description={`Download the AI Career Risk Index v${datasetMeta.version}: AI displacement risk scores for 24 careers as open CSV/JSON data (CC BY 4.0). Methodology and citation included.`}
+  canonical={datasetMeta.canonicalUrl}
+  schema={[datasetSchema, breadcrumbSchema]}
+>
+  <Nav />
+
+  <div class="min-h-screen bg-[#06070f]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center space-x-2 text-sm text-[#4b5280]">
+          <li><a href="/" class="hover:text-[#06B6D4] transition-colors">Home</a></li>
+          <li><span class="mx-2 text-[#1e2340]">/</span></li>
+          <li>
+            <span class="text-[#e2e6f5] font-medium" aria-current="page">{datasetMeta.name}</span>
+          </li>
+        </ol>
+      </nav>
+
+      <div class="mb-10">
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <span
+            class="px-3 py-1 rounded-full text-xs font-bold bg-[#06B6D4]/10 text-[#06B6D4] border border-[#06B6D4]/30"
+            >Open Dataset</span
+          >
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#1e2340] text-[#e2e6f5]"
+            >v{datasetMeta.version}</span
+          >
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#1e2340] text-[#e2e6f5]"
+            >Updated {datasetMeta.lastUpdated}</span
+          >
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-[#1e2340] text-[#e2e6f5]"
+            >{datasetMeta.licenseLabel}</span
+          >
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#e2e6f5] mb-4">
+          {datasetMeta.name}
+        </h1>
+        <p class="text-lg text-[#4b5280] leading-relaxed mb-6">
+          {datasetMeta.description}
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/data/ai-career-risk-index.csv"
+            download
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-white"
+            style="background: linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%)"
+          >
+            ↓ Download CSV
+          </a>
+          <a
+            href="/data/ai-career-risk-index.json"
+            download
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[#1e2340] font-bold text-[#e2e6f5] hover:border-[#06B6D4] transition-all"
+          >
+            ↓ Download JSON
+          </a>
+        </div>
+      </div>
+
+      <!-- Full data table — visible, crawlable HTML -->
+      <section class="mb-12" aria-labelledby="index-table-heading">
+        <h2 id="index-table-heading" class="text-2xl font-bold text-[#e2e6f5] mb-4">
+          AI Displacement Risk by Career — Full Index
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-[#1e2340]">
+          <table class="w-full text-sm">
+            <caption class="sr-only">
+              AI Career Risk Index: displacement risk scores for 24 careers, ranked highest to
+              lowest.
+            </caption>
+            <thead>
+              <tr class="bg-[#0d1120] text-left text-[#4b5280]">
+                <th scope="col" class="px-4 py-3 font-medium">#</th>
+                <th scope="col" class="px-4 py-3 font-medium">Career</th>
+                <th scope="col" class="px-4 py-3 font-medium">Risk Score</th>
+                <th scope="col" class="px-4 py-3 font-medium">Level</th>
+                <th scope="col" class="px-4 py-3 font-medium hidden sm:table-cell">Assessment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                sorted.map((c, i) => {
+                  const color = getBarColor(c.baseRiskScore);
+                  return (
+                    <tr class="border-t border-[#1e2340]">
+                      <td class="px-4 py-3 text-[#4b5280]">{i + 1}</td>
+                      <td class="px-4 py-3 font-medium text-[#e2e6f5]">{c.title}</td>
+                      <td class="px-4 py-3">
+                        <div class="flex items-center gap-3">
+                          <span class="font-bold text-[#e2e6f5] w-10">{c.baseRiskScore}%</span>
+                          <div class="w-24 h-1.5 bg-[#1e2340] rounded-full overflow-hidden hidden md:block">
+                            <div
+                              class="h-full rounded-full"
+                              style={`width:${c.baseRiskScore}%;background-color:${color}`}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-4 py-3">
+                        <span
+                          class="px-2 py-0.5 rounded text-xs font-bold uppercase whitespace-nowrap"
+                          style={`background-color:${color}20;color:${color}`}
+                        >
+                          {c.riskLabel}
+                        </span>
+                      </td>
+                      <td class="px-4 py-3 hidden sm:table-cell">
+                        <a
+                          href={`/risk/${c.slug}/`}
+                          class="text-[#06B6D4] hover:underline whitespace-nowrap"
+                        >
+                          View →
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                })
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Methodology summary -->
+      <section class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-4">How Scores Are Calculated</h2>
+        <p class="text-[#4b5280] leading-relaxed mb-6 text-sm">{methodology.description}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {
+            methodology.dimensions.map((dim) => (
+              <div class="border border-[#1e2340] rounded-lg p-4">
+                <div class="text-2xl font-bold text-[#06B6D4] mb-1">{dim.weight}</div>
+                <div class="text-sm font-bold text-[#e2e6f5]">{dim.name}</div>
+              </div>
+            ))
+          }
+        </div>
+        <p class="text-xs text-[#4b5280] mt-4">
+          Full methodology: <a href="/about/" class="text-[#06B6D4] hover:underline"
+            >About this tool</a
+          >
+        </p>
+      </section>
+
+      <!-- How to cite -->
+      <section class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-4">How to Cite This Data</h2>
+        <p class="text-[#4b5280] text-sm mb-4 leading-relaxed">
+          The {datasetMeta.name} is free to reuse for journalism, research, and analysis under
+          <a
+            href={datasetMeta.license}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[#06B6D4] hover:underline">{datasetMeta.licenseLabel}</a
+          > — attribution with a link to this page is required.
+        </p>
+        <div class="mb-4">
+          <p class="text-xs font-bold text-[#e2e6f5] uppercase tracking-wide mb-2">APA</p>
+          <pre
+            class="bg-[#06070f] border border-[#1e2340] rounded-lg p-4 text-xs text-[#4b5280] whitespace-pre-wrap break-all">{citationApa}</pre>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-[#e2e6f5] uppercase tracking-wide mb-2">BibTeX</p>
+          <pre
+            class="bg-[#06070f] border border-[#1e2340] rounded-lg p-4 text-xs text-[#4b5280] overflow-x-auto">{citationBibtex}</pre>
+        </div>
+      </section>
+
+      <!-- Changelog -->
+      <section class="bg-[#0d1120] border border-[#1e2340] rounded-xl p-8 mb-8">
+        <h2 class="text-2xl font-bold text-[#e2e6f5] mb-4">Version History</h2>
+        <ul class="space-y-4">
+          {
+            datasetMeta.changelog.map((entry) => (
+              <li class="flex items-start gap-4 text-sm">
+                <span class="flex-shrink-0 px-2 py-0.5 rounded bg-[#1e2340] text-[#06B6D4] font-mono text-xs">
+                  v{entry.version}
+                </span>
+                <div>
+                  <p class="text-[#e2e6f5] leading-relaxed">{entry.note}</p>
+                  <p class="text-xs text-[#4b5280] mt-1">{entry.date}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <div class="text-center">
+        <a
+          href="/"
+          class="inline-block px-8 py-4 rounded-lg border border-[#1e2340] font-bold text-[#e2e6f5] hover:border-[#06B6D4] hover:text-[#06B6D4] transition-all"
+        >
+          ← Check Your Career's Risk Score
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>
