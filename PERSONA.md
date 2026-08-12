@@ -24,7 +24,7 @@ happening, plus compensation data for the roles involved.
 
 **I had the origin axis wrong in `STRATEGY.md` Phase E.**
 
-That document proposed transition routes by *profession* — `/hi-c/from-graphic-designer/`,
+That document proposed transition routes by _profession_ — `/hi-c/from-graphic-designer/`,
 `/hi-c/from-data-analyst/` — on the assumption that a HI-C is an IC who levelled up while
 escaping automation risk.
 
@@ -102,7 +102,7 @@ B forgives editorial restraint. A does not forgive marketing.
 Their reference set is known: **Stratechery, The Pragmatic Engineer, Lenny's Newsletter.**
 The most-read paid publications in this exact demographic.
 
-Note what they have in common — they are *newsletters*. Near-zero visual chrome. No stock
+Note what they have in common — they are _newsletters_. Near-zero visual chrome. No stock
 photography. No hero animation. Their premium signal is entirely: dense prose, charts that
 carry an argument, and a paywall as a confidence gesture.
 
@@ -110,14 +110,14 @@ carry an argument, and a paywall as a confidence gesture.
 
 Concretely, the signals that read as premium here:
 
-| Signal | Why it works on this persona |
-| --- | --- |
-| Typographic craft — measure, real hierarchy, optical sizing | Reads as editing, therefore as edited thinking |
-| Tabular figures, unrounded precision | Rounding away digits reads as hiding |
-| Version numbers, changelog, last-updated, DOI, methodology | This audience trusts what shows its work |
-| Speed | Linear and Vercel trained them: fast **is** the luxury signal |
-| One accent colour, used sparingly | Restraint signals confidence |
-| Dark mode | They live in dark IDEs; its absence reads as unserious |
+| Signal                                                      | Why it works on this persona                                  |
+| ----------------------------------------------------------- | ------------------------------------------------------------- |
+| Typographic craft — measure, real hierarchy, optical sizing | Reads as editing, therefore as edited thinking                |
+| Tabular figures, unrounded precision                        | Rounding away digits reads as hiding                          |
+| Version numbers, changelog, last-updated, DOI, methodology  | This audience trusts what shows its work                      |
+| Speed                                                       | Linear and Vercel trained them: fast **is** the luxury signal |
+| One accent colour, used sparingly                           | Restraint signals confidence                                  |
+| Dark mode                                                   | They live in dark IDEs; its absence reads as unserious        |
 
 And the signals that destroy it instantly — every one of these is a lead-gen tell:
 
@@ -134,7 +134,7 @@ the single biggest design opportunity here, and it costs nothing in performance.
 
 **Animate response, not arrival.**
 Motion should acknowledge what the user did — hover, click, navigate. Content that
-animates in *because the user scrolled to it* is the defining tell of a marketing site,
+animates in _because the user scrolled to it_ is the defining tell of a marketing site,
 and persona A reads it instantly. This corrects `STRATEGY.md` §7, which proposed
 `animation-timeline: view()` for scroll reveals: keep the technique, but restrict it to
 **data** (a gauge filling, a bar drawing as it enters view is informative) and never apply
@@ -166,7 +166,7 @@ audience that notices.
 The request was "more modern effects" plus "feels like a premium source". For this
 particular audience those two pull in opposite directions.
 
-The sites this persona pays for are visually *quieter* than aicareer.me is today, not
+The sites this persona pays for are visually _quieter_ than aicareer.me is today, not
 louder. What separates them is craft at small scale — typography, data presentation,
 responsiveness — not effects.
 

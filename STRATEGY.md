@@ -33,13 +33,13 @@ require it to be the homepage.
 
 HI-C (**High-Impact Individual Contributor**) is the exact inverse.
 
-| | AI risk | HI-C |
-| --- | --- | --- |
-| Competition | Every major publisher | Effectively nobody |
-| Authority required to rank | Very high | Nearly none |
-| Canonical source today | Dozens | **None** |
-| Emotion | Fear (paralyses) | Identity (mobilises) |
-| Audience | Threatened, low ticket | Senior, high ticket |
+|                            | AI risk                | HI-C                 |
+| -------------------------- | ---------------------- | -------------------- |
+| Competition                | Every major publisher  | Effectively nobody   |
+| Authority required to rank | Very high              | Nearly none          |
+| Canonical source today     | Dozens                 | **None**             |
+| Emotion                    | Fear (paralyses)       | Identity (mobilises) |
+| Audience                   | Threatened, low ticket | Senior, high ticket  |
 
 A new term is **the only situation where a site with no authority can win**, because
 there is nothing to outrank. We do not need to beat Forbes. We need to arrive first.
@@ -92,14 +92,14 @@ channel: being cited by LLMs.** Which is fortunate, because "named entity + vers
 verifiable artifact" is precisely the format that wins that game, and the delivery is
 100% automatable via CI:
 
-| Channel | Mechanism | Automatable |
-| --- | --- | --- |
-| Zenodo | GitHub release → automatic DOI | ✅ CI |
-| Hugging Face Datasets | CI push; among the most-crawled sources for LLM pipelines | ✅ CI |
-| Google Dataset Search | existing CSV/JSON + `Dataset` schema | ✅ already built |
-| CC BY 4.0 attribution | reuse legally requires a credit link | ✅ passive backlinks |
-| Public GitHub repo | already crawled | ✅ already true |
-| `llms.txt` + `DefinedTerm` schema | tells the model explicitly what to cite | ✅ build |
+| Channel                           | Mechanism                                                 | Automatable          |
+| --------------------------------- | --------------------------------------------------------- | -------------------- |
+| Zenodo                            | GitHub release → automatic DOI                            | ✅ CI                |
+| Hugging Face Datasets             | CI push; among the most-crawled sources for LLM pipelines | ✅ CI                |
+| Google Dataset Search             | existing CSV/JSON + `Dataset` schema                      | ✅ already built     |
+| CC BY 4.0 attribution             | reuse legally requires a credit link                      | ✅ passive backlinks |
+| Public GitHub repo                | already crawled                                           | ✅ already true      |
+| `llms.txt` + `DefinedTerm` schema | tells the model explicitly what to cite                   | ✅ build             |
 
 Configure once, runs forever. That is the engine.
 
@@ -151,13 +151,13 @@ roughly 6–12 months. Cheapest, highest-leverage piece in the plan.
 Second named, versioned dataset. Same engine as the risk calculator, inverted —
 measuring proximity to HI-C rather than exposure to automation:
 
-| Dimension | What it measures |
-| --- | --- |
-| End-to-end ownership | Can you take a problem from hypothesis to shipped outcome? |
+| Dimension                  | What it measures                                              |
+| -------------------------- | ------------------------------------------------------------- |
+| End-to-end ownership       | Can you take a problem from hypothesis to shipped outcome?    |
 | Adjacent-function coverage | How many neighbouring functions do you staff yourself via AI? |
-| Judgment / taste | Quality of decisions where there is no correct answer |
-| Own distribution | Can you reach an audience without your employer? |
-| Decision autonomy | How far can you go without approval? |
+| Judgment / taste           | Quality of decisions where there is no correct answer         |
+| Own distribution           | Can you reach an audience without your employer?              |
+| Decision autonomy          | How far can you go without approval?                          |
 
 Output: score + gap + 90-day plan. Becomes the second citable entity.
 Reuses `RiskGauge.jsx` and `SkillChecklist.jsx` mechanics; new data file
@@ -172,7 +172,7 @@ the user's radar entirely.
 
 > ⚠️ **Revised 2026-08-12 after persona research — see `PERSONA.md` §2.**
 
-The original scope here was wrong. It proposed routes by *profession*
+The original scope here was wrong. It proposed routes by _profession_
 (`/hi-c/from-graphic-designer/`), assuming a HI-C is an IC who levelled up while escaping
 automation risk.
 
@@ -200,12 +200,12 @@ The old ladder (email → course affiliates → paid report → B2B) was calibra
 wrong audience. **Seniors do not buy resume builders and do not buy Coursera. They buy
 leverage.**
 
-| Step | Was | Becomes |
-| --- | --- | --- |
-| 1 | Email capture | Same, segmented by origin role (MailerLite already live) |
-| 2 | Courses / resume builders | **Tool stack** — Cursor, n8n, Lovable, Gamma, Claude. Recurring, high ticket, genuine affinity |
-| 3 | PDF report | **HI-C Operating Kit** — workflow and prompt library, not a PDF |
-| 4 | B2B assessment | Same, but arrives sooner: companies restructuring around HI-C |
+| Step | Was                       | Becomes                                                                                        |
+| ---- | ------------------------- | ---------------------------------------------------------------------------------------------- |
+| 1    | Email capture             | Same, segmented by origin role (MailerLite already live)                                       |
+| 2    | Courses / resume builders | **Tool stack** — Cursor, n8n, Lovable, Gamma, Claude. Recurring, high ticket, genuine affinity |
+| 3    | PDF report                | **HI-C Operating Kit** — workflow and prompt library, not a PDF                                |
+| 4    | B2B assessment            | Same, but arrives sooner: companies restructuring around HI-C                                  |
 
 Step 2 alone is worth more than the entire old ladder, because SaaS affiliate revenue is
 recurring and this audience actually subscribes.
@@ -227,16 +227,16 @@ above-the-fold JS. Every technique below is CSS-only or GPU-composited.
 
 ### Techniques worth adding
 
-| Technique | Effect | Cost |
-| --- | --- | --- |
-| `@view-transition` (native CSS) | Smooth cross-page transitions | ~0 — CSS only, degrades silently |
-| `animation-timeline: view()` ⚠️ | Scroll-driven reveals, off main thread | ~0 — no JS, no observer |
-| `content-visibility: auto` | Skips off-screen rendering | **Negative** — improves render |
-| `text-wrap: balance/pretty` | Typographically correct headlines | 0 |
-| Gauge/number count-up on reveal | Score lands with weight | tiny, CSS-driven |
-| Grain / letterpress texture | Paper feel, print depth | 1 inline SVG, no request |
-| Layered elevation + micro-interaction | Cards react to intent | 0 — `transform`/`opacity` only |
-| Optional dark mode | Signals engineering-grade | CSS variables already in place |
+| Technique                             | Effect                                 | Cost                             |
+| ------------------------------------- | -------------------------------------- | -------------------------------- |
+| `@view-transition` (native CSS)       | Smooth cross-page transitions          | ~0 — CSS only, degrades silently |
+| `animation-timeline: view()` ⚠️       | Scroll-driven reveals, off main thread | ~0 — no JS, no observer          |
+| `content-visibility: auto`            | Skips off-screen rendering             | **Negative** — improves render   |
+| `text-wrap: balance/pretty`           | Typographically correct headlines      | 0                                |
+| Gauge/number count-up on reveal       | Score lands with weight                | tiny, CSS-driven                 |
+| Grain / letterpress texture           | Paper feel, print depth                | 1 inline SVG, no request         |
+| Layered elevation + micro-interaction | Cards react to intent                  | 0 — `transform`/`opacity` only   |
+| Optional dark mode                    | Signals engineering-grade              | CSS variables already in place   |
 
 ⚠️ **`animation-timeline: view()` is restricted by `PERSONA.md` §6** — apply it to **data
 only** (a gauge filling, a bar drawing as it enters view). Never to body text or headings:
