@@ -170,23 +170,29 @@ the user's radar entirely.
 
 ### Phase E — Transition routes + query hedge
 
-`/hi-c/from-{role}/` reusing existing career content.
+> ⚠️ **Revised 2026-08-12 after persona research — see `PERSONA.md` §2.**
 
-**Scope correction based on the actual data:** only ~9 of the 24 careers are credible
-HI-C origins. "Data entry clerk → HI-C" is not a sellable transition and would be a thin
-page. Build only for:
+The original scope here was wrong. It proposed routes by *profession*
+(`/hi-c/from-graphic-designer/`), assuming a HI-C is an IC who levelled up while escaping
+automation risk.
 
-`software-developer`, `product-manager`, `data-analyst`, `graphic-designer`,
-`content-writer`, `financial-analyst`, `cybersecurity-analyst`, `hr-manager`,
-`sales-representative`
+The evidence says the dominant origin is a **manager, director or VP going back to
+craft** — someone leaving the management track, not climbing it. The axis is **track**,
+not profession:
 
-Nine substantial pages, not 24 thin ones. Each cross-links with its risk page and back.
+`/hi-c/from-engineering-manager/`, `/hi-c/from-vp-product/`, `/hi-c/from-director/`,
+`/hi-c/from-senior-ic/`, `/hi-c/from-founder/`
 
-Plus the hedge pages targeting the existing-volume queries in §4.
+The 24 existing career pages stay as they are and feed in laterally, but they are not the
+route set.
+
+Plus the hedge pages targeting the existing-volume queries in §4 — which is also where the
+largest audience segment actually searches today.
 
 ### Phase F — Front-end redesign
 
-See §7.
+See §7 — and read `PERSONA.md` first, which defines who it is being designed for and
+corrects part of §7.
 
 ## 6. Monetisation ladder (corrected)
 
@@ -224,7 +230,7 @@ above-the-fold JS. Every technique below is CSS-only or GPU-composited.
 | Technique | Effect | Cost |
 | --- | --- | --- |
 | `@view-transition` (native CSS) | Smooth cross-page transitions | ~0 — CSS only, degrades silently |
-| `animation-timeline: view()` | Scroll-driven reveals, off main thread | ~0 — no JS, no observer |
+| `animation-timeline: view()` ⚠️ | Scroll-driven reveals, off main thread | ~0 — no JS, no observer |
 | `content-visibility: auto` | Skips off-screen rendering | **Negative** — improves render |
 | `text-wrap: balance/pretty` | Typographically correct headlines | 0 |
 | Gauge/number count-up on reveal | Score lands with weight | tiny, CSS-driven |
@@ -232,8 +238,14 @@ above-the-fold JS. Every technique below is CSS-only or GPU-composited.
 | Layered elevation + micro-interaction | Cards react to intent | 0 — `transform`/`opacity` only |
 | Optional dark mode | Signals engineering-grade | CSS variables already in place |
 
+⚠️ **`animation-timeline: view()` is restricted by `PERSONA.md` §6** — apply it to **data
+only** (a gauge filling, a bar drawing as it enters view). Never to body text or headings:
+scroll-revealed prose is the defining tell of a marketing site to this audience.
+
 ### Rules
 
+- **Animate response, not arrival** (`PERSONA.md` §6). Motion acknowledges what the user
+  did — hover, click, navigate. It never plays just because content appeared.
 - Only `transform` and `opacity` animate. Never `width`, `top`, `box-shadow`.
 - Everything gated behind `prefers-reduced-motion`.
 - Zero animation libraries. No Framer Motion, no GSAP, no AOS.
