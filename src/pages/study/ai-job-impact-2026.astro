@@ -210,17 +210,17 @@ const breadcrumbSchema = {
 >
   <Nav />
 
-  <div class="min-h-screen bg-[#faf9f6]">
+  <div class="min-h-screen bg-paper">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <!-- Breadcrumb -->
       <nav aria-label="Breadcrumb" class="mb-6">
-        <ol class="flex items-center space-x-2 text-sm text-[#6b6459]">
-          <li><a href="/" class="hover:text-[#4338ca] transition-colors">Home</a></li>
-          <li><span class="mx-2 text-[#e5e1d8]">/</span></li>
-          <li><span class="text-[#6b6459]">Research</span></li>
-          <li><span class="mx-2 text-[#e5e1d8]">/</span></li>
+        <ol class="flex items-center space-x-2 text-sm text-muted">
+          <li><a href="/" class="hover:text-accent transition-colors">Home</a></li>
+          <li><span class="mx-2 text-rule">/</span></li>
+          <li><span class="text-muted">Research</span></li>
+          <li><span class="mx-2 text-rule">/</span></li>
           <li>
-            <span class="text-[#1c1917] font-medium" aria-current="page">AI Job Impact 2026</span>
+            <span class="text-ink font-medium" aria-current="page">AI Job Impact 2026</span>
           </li>
         </ol>
       </nav>
@@ -229,18 +229,18 @@ const breadcrumbSchema = {
       <div class="mb-10">
         <div class="flex items-center gap-2 mb-4">
           <span
-            class="px-3 py-1 rounded-full text-xs font-semibold bg-[#4338ca]/10 text-[#4338ca] border border-[#4338ca]/20"
+            class="px-3 py-1 rounded-full text-xs font-semibold bg-accent/10 text-accent border border-accent/20"
           >
             Research
           </span>
-          <span class="text-xs text-[#6b6459]"
+          <span class="text-xs text-muted"
             >Published June 2026 · Source: Stanford HAI AI Index 2026</span
           >
         </div>
-        <h1 class="text-3xl sm:text-4xl font-bold text-[#1c1917] mb-4 leading-tight">
+        <h1 class="text-3xl sm:text-4xl font-bold text-ink mb-4 leading-tight">
           AI's Real Impact on Jobs in 2026:<br class="hidden sm:inline" /> What the Data Actually Shows
         </h1>
-        <p class="text-lg text-[#6b6459] leading-relaxed max-w-3xl">
+        <p class="text-lg text-muted leading-relaxed max-w-3xl">
           The Stanford AI Index 2026 is the first report to document AI-driven workforce
           displacement rather than merely forecast it. We crossed those findings with risk scores
           for 24 professions to show where the pressure is real, where it is overstated, and what
@@ -250,7 +250,7 @@ const breadcrumbSchema = {
 
       <!-- Key stats from Stanford AI Index 2026 -->
       <section class="mb-10" aria-labelledby="key-findings-heading">
-        <h2 id="key-findings-heading" class="text-2xl font-bold text-[#1c1917] mb-5">
+        <h2 id="key-findings-heading" class="text-2xl font-bold text-ink mb-5">
           Key Findings: Stanford AI Index 2026
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -294,23 +294,23 @@ const breadcrumbSchema = {
               },
             ].map((stat) => (
               <div
-                class={`bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-5 ${stat.color === 'rose' ? 'border-l-2 border-l-rose-500/50' : stat.color === 'amber' ? 'border-l-2 border-l-amber-500/50' : 'border-l-2 border-l-[#4338ca]/50'}`}
+                class={`bg-surface border border-rule rounded-xl p-5 ${stat.color === 'rose' ? 'border-l-2 border-l-rose-500/50' : stat.color === 'amber' ? 'border-l-2 border-l-amber-500/50' : 'border-l-2 border-l-accent/50'}`}
               >
                 <div
-                  class={`text-3xl font-bold mb-1 ${stat.color === 'rose' ? 'text-rose-400' : stat.color === 'amber' ? 'text-amber-400' : 'text-[#4338ca]'}`}
+                  class={`text-3xl font-bold mb-1 ${stat.color === 'rose' ? 'text-rose-400' : stat.color === 'amber' ? 'text-amber-400' : 'text-accent'}`}
                 >
                   {stat.figure}
                 </div>
-                <div class="text-sm font-medium text-[#1c1917] mb-1">{stat.label}</div>
-                <div class="text-xs text-[#6b6459]">{stat.detail}</div>
+                <div class="text-sm font-medium text-ink mb-1">{stat.label}</div>
+                <div class="text-xs text-muted">{stat.detail}</div>
               </div>
             ))
           }
         </div>
-        <p class="mt-3 text-xs text-[#6b6459]">
+        <p class="mt-3 text-xs text-muted">
           Source: <a
             href="https://hai.stanford.edu/ai-index/2026-ai-index-report"
-            class="text-[#4338ca] hover:underline"
+            class="text-accent hover:underline"
             target="_blank"
             rel="noopener noreferrer">Stanford HAI AI Index 2026</a
           >
@@ -319,28 +319,28 @@ const breadcrumbSchema = {
 
       <!-- Jagged Frontier explanation -->
       <section
-        class="mb-10 bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-6"
+        class="mb-10 bg-surface border border-rule rounded-xl p-6"
         aria-labelledby="jagged-frontier-heading"
       >
-        <h2 id="jagged-frontier-heading" class="text-xl font-bold text-[#1c1917] mb-3">
+        <h2 id="jagged-frontier-heading" class="text-xl font-bold text-ink mb-3">
           The Jagged Frontier: Why Risk Is Non-Linear
         </h2>
-        <p class="text-[#6b6459] leading-relaxed mb-4">
-          The Stanford AI Index 2026 uses the term <strong class="text-[#1c1917]"
+        <p class="text-muted leading-relaxed mb-4">
+          The Stanford AI Index 2026 uses the term <strong class="text-ink"
             >"jagged frontier"</strong
           > to describe how AI models can solve extraordinarily complex problems while failing at surprisingly
           simple ones. Gemini Deep Think earned a gold medal at the International Mathematical Olympiad
           — yet the top AI model reads analog clocks correctly only 50.1% of the time.
         </p>
-        <p class="text-[#6b6459] leading-relaxed mb-4">
+        <p class="text-muted leading-relaxed mb-4">
           For careers, this means risk is not simply "high-skill = safe, low-skill = at risk." A
           software developer (rated Low Risk at 38%) saw the sharpest entry-level employment decline
           of any profession measured. A medical coder (High Risk at 72%) is in the same sector as
           physicians, who are experiencing dramatic productivity gains from AI — but the
           <em>type</em> of work differs enormously. You must analyze the task, not just the job title.
         </p>
-        <div class="bg-[#faf9f6] rounded-lg p-4 border border-[#e5e1d8] text-sm text-[#6b6459]">
-          <strong class="text-[#1c1917]">What this means practically:</strong> Even in a "low risk" career,
+        <div class="bg-paper rounded-lg p-4 border border-rule text-sm text-muted">
+          <strong class="text-ink">What this means practically:</strong> Even in a "low risk" career,
           your entry-level tasks are more exposed than your senior-level tasks. Professionals who shift
           toward judgment-heavy, relationship-dependent work within their field are far more protected
           than those who remain in the routinized portion of their role — regardless of the career's headline
@@ -350,10 +350,10 @@ const breadcrumbSchema = {
 
       <!-- Career risk table -->
       <section class="mb-10" aria-labelledby="career-table-heading">
-        <h2 id="career-table-heading" class="text-2xl font-bold text-[#1c1917] mb-2">
+        <h2 id="career-table-heading" class="text-2xl font-bold text-ink mb-2">
           24 Careers: Risk Score + Stanford 2026 Context
         </h2>
-        <p class="text-sm text-[#6b6459] mb-5">
+        <p class="text-sm text-muted mb-5">
           Sorted by displacement risk (highest first). Risk scores are composite indices from task
           routinization, AI tool penetration, and human judgment dependency. Stanford context
           reflects the 2026 AI Index report and related primary sources.
@@ -392,13 +392,13 @@ const breadcrumbSchema = {
               const colors = getLabelColor(career.baseRiskScore);
               const ctx = stanfordContext[career.slug];
               return (
-                <div class="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-5 hover:border-[#2a3060] transition-colors">
+                <div class="bg-surface border border-rule rounded-xl p-5 hover:border-accent transition-colors">
                   <div class="flex items-start justify-between gap-4">
                     <div class="flex-1 min-w-0">
                       <div class="flex items-center gap-3 mb-2 flex-wrap">
                         <a
                           href={`/risk/${career.slug}/`}
-                          class="font-semibold text-[#1c1917] hover:text-[#4338ca] transition-colors"
+                          class="font-semibold text-ink hover:text-accent transition-colors"
                         >
                           {career.title}
                         </a>
@@ -408,17 +408,17 @@ const breadcrumbSchema = {
                           {career.riskLabel}
                         </span>
                       </div>
-                      {ctx && <p class="text-sm text-[#6b6459] leading-relaxed">{ctx}</p>}
+                      {ctx && <p class="text-sm text-muted leading-relaxed">{ctx}</p>}
                     </div>
                     <div class="flex-shrink-0 text-right">
                       <div class={`text-2xl font-bold ${colors.text}`}>{career.baseRiskScore}%</div>
-                      <div class="text-xs text-[#6b6459]">risk score</div>
+                      <div class="text-xs text-muted">risk score</div>
                     </div>
                   </div>
-                  <div class="mt-3 h-1.5 bg-[#e5e1d8] rounded-full overflow-hidden">
+                  <div class="mt-3 h-1.5 bg-rule rounded-full overflow-hidden">
                     <div
                       class="h-full rounded-full transition-all"
-                      style={`width: ${career.baseRiskScore}%; background: ${career.baseRiskScore <= 40 ? '#047857' : career.baseRiskScore <= 70 ? '#b45309' : '#dc2626'}`}
+                      style={`width: ${career.baseRiskScore}%; background: ${career.baseRiskScore <= 40 ? 'rgb(var(--risk-low))' : career.baseRiskScore <= 70 ? 'rgb(var(--risk-mid))' : 'rgb(var(--risk-high))'}`}
                     />
                   </div>
                 </div>
@@ -426,26 +426,26 @@ const breadcrumbSchema = {
             })
           }
         </div>
-        <p class="mt-4 text-xs text-[#6b6459]">
+        <p class="mt-4 text-xs text-muted">
           Methodology: scores are composite of task routinization (40%), AI tool penetration (35%),
           and human judgment dependency (25%). Based on Oxford/Frey &amp; Osborne, McKinsey Global
           Institute, WEF Future of Jobs 2025, and Stanford HAI AI Index 2026. Scores represent
           baseline risk without AI augmentation skills.
-          <a href="/about/" class="text-[#4338ca] hover:underline ml-1">Full methodology →</a>
+          <a href="/about/" class="text-accent hover:underline ml-1">Full methodology →</a>
         </p>
       </section>
 
       <!-- FAQ for AEO -->
       <section class="mb-10" aria-labelledby="faq-heading">
-        <h2 id="faq-heading" class="text-2xl font-bold text-[#1c1917] mb-5">
+        <h2 id="faq-heading" class="text-2xl font-bold text-ink mb-5">
           Frequently Asked Questions
         </h2>
         <div class="space-y-4">
           {
             faqSchema.mainEntity.map((item) => (
-              <div class="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-6">
-                <h3 class="font-semibold text-[#1c1917] mb-3">{item.name}</h3>
-                <p class="text-sm text-[#6b6459] leading-relaxed">{item.acceptedAnswer.text}</p>
+              <div class="bg-surface border border-rule rounded-xl p-6">
+                <h3 class="font-semibold text-ink mb-3">{item.name}</h3>
+                <p class="text-sm text-muted leading-relaxed">{item.acceptedAnswer.text}</p>
               </div>
             ))
           }
@@ -454,15 +454,15 @@ const breadcrumbSchema = {
 
       <!-- Sources -->
       <section
-        class="mb-10 bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-6"
+        class="mb-10 bg-surface border border-rule rounded-xl p-6"
         aria-labelledby="sources-heading"
       >
-        <h2 id="sources-heading" class="text-lg font-bold text-[#1c1917] mb-4">Primary Sources</h2>
-        <ul class="space-y-2 text-sm text-[#6b6459]">
+        <h2 id="sources-heading" class="text-lg font-bold text-ink mb-4">Primary Sources</h2>
+        <ul class="space-y-2 text-sm text-muted">
           <li>
             <a
               href="https://hai.stanford.edu/ai-index/2026-ai-index-report"
-              class="text-[#4338ca] hover:underline"
+              class="text-accent hover:underline"
               target="_blank"
               rel="noopener noreferrer">Stanford HAI · 2026 AI Index Report</a
             >
@@ -471,23 +471,23 @@ const breadcrumbSchema = {
           <li>
             <a
               href="https://hai.stanford.edu/ai-index/2026-ai-index-report/economy"
-              class="text-[#4338ca] hover:underline"
+              class="text-accent hover:underline"
               target="_blank"
               rel="noopener noreferrer">Stanford HAI · AI Index 2026, Chapter 4: Economy</a
             >
             — labor market data, junior developer employment figures
           </li>
           <li>
-            <span class="text-[#1c1917]">Oxford University · Frey &amp; Osborne (2013)</span>
+            <span class="text-ink">Oxford University · Frey &amp; Osborne (2013)</span>
             — "The Future of Employment: How Susceptible Are Jobs to Computerisation?" — foundational
             task-level automation analysis
           </li>
           <li>
-            <span class="text-[#1c1917]">McKinsey Global Institute (2024)</span>
+            <span class="text-ink">McKinsey Global Institute (2024)</span>
             — "Generative AI and the Future of Work" — automation potential by job category
           </li>
           <li>
-            <span class="text-[#1c1917]">World Economic Forum (2025)</span>
+            <span class="text-ink">World Economic Forum (2025)</span>
             — "Future of Jobs Report 2025" — 85M displaced / 97M created projection
           </li>
         </ul>
@@ -495,10 +495,10 @@ const breadcrumbSchema = {
 
       <!-- CTA -->
       <div
-        class="bg-gradient-to-br from-[#ffffff] to-[#faf9f6] border border-[#e5e1d8] rounded-xl p-8 text-center"
+        class="bg-gradient-to-br from-surface to-paper border border-rule rounded-xl p-8 text-center"
       >
-        <h2 class="text-2xl font-bold text-[#1c1917] mb-3">Check Your Personal Risk Score</h2>
-        <p class="text-[#6b6459] mb-6 max-w-lg mx-auto">
+        <h2 class="text-2xl font-bold text-ink mb-3">Check Your Personal Risk Score</h2>
+        <p class="text-muted mb-6 max-w-lg mx-auto">
           The table above shows baseline risk. Your personal risk depends on which tasks within your
           role you focus on and which AI-adjacent skills you've built. Use the calculator to get
           your adjusted score.
@@ -506,7 +506,7 @@ const breadcrumbSchema = {
         <a
           href="/"
           class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all"
-          style="background: linear-gradient(135deg, #4338ca, #3730a3)"
+          style="background: linear-gradient(135deg, rgb(var(--accent-solid)), rgb(var(--accent-deep)))"
         >
           Calculate My Risk Score →
         </a>

@@ -25,6 +25,21 @@ const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
+    <!-- Theme resolution before first paint — prevents a light flash for dark-mode
+         readers. Must stay synchronous and inline; it is ~200 bytes. -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          document.documentElement.dataset.theme =
+            stored ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
+
     <!-- Google Analytics GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5725XSLSGP"></script>
     <script is:inline>
@@ -38,6 +53,8 @@ const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131211" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="google-site-verification" content="J5-A8mBPDIDz6MT7bH3zfHahL5lFWtte3OcjgpHVXlk" />
     <meta name="robots" content="index, follow" />
@@ -46,6 +63,11 @@ const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <!-- Fonts: Fraunces (display serif) + Inter (UI) + DM Mono (data) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet"
@@ -74,7 +96,7 @@ const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <!-- JSON-LD Schemas -->
     {schemaArray.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
-  <body class="bg-[#faf9f6] text-[#1c1917] selection:bg-[#4338ca]/30 selection:text-[#4338ca]">
+  <body class="bg-paper text-ink selection:bg-accent/30 selection:text-accent">
     <slot />
   </body>
 </html>

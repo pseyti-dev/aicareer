@@ -1,36 +1,82 @@
 ---
-import { careers, specialOptions } from '../data/careers.js';
+// The "Free tool" pill that used to sit here was removed deliberately:
+// "free" badges are a lead-generation tell, and the persona whose citation
+// this site depends on reads them as marketing (PERSONA.md §5).
 ---
 
-<nav class="border-b border-[#e5e1d8] bg-[#faf9f6]/90 backdrop-blur-sm sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+<nav class="sticky top-0 z-50 border-b border-rule bg-paper/90 backdrop-blur-sm">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
     <a
       href="/"
-      class="text-xl font-bold text-[#1c1917] hover:text-[#4338ca] transition-colors"
+      class="text-xl font-bold text-ink transition-colors hover:text-accent"
       style="font-family: 'Fraunces', Georgia, serif"
     >
-      AI Career Risk<span class="text-[#4338ca]">.</span>
+      AI Career Risk<span class="text-accent">.</span>
     </a>
     <div class="flex items-center gap-5">
       <a
         href="/data/ai-career-risk-index/"
-        class="text-sm font-medium text-[#6b6459] hover:text-[#4338ca] transition-colors hidden sm:block"
+        class="hidden text-sm font-medium text-muted transition-colors hover:text-accent sm:block"
         >Data</a
       >
       <a
         href="/study/ai-job-impact-2026/"
-        class="text-sm font-medium text-[#6b6459] hover:text-[#4338ca] transition-colors hidden md:block"
+        class="hidden text-sm font-medium text-muted transition-colors hover:text-accent md:block"
         >Research</a
       >
       <a
         href="/about"
-        class="text-sm font-medium text-[#6b6459] hover:text-[#4338ca] transition-colors hidden sm:block"
+        class="hidden text-sm font-medium text-muted transition-colors hover:text-accent sm:block"
         >About</a
       >
-      <span
-        class="px-3 py-1 rounded-full text-xs font-semibold bg-[#4338ca]/8 text-[#4338ca] border border-[#4338ca]/25"
-        >Free tool</span
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Switch colour theme"
+        class="-m-1 rounded-md p-1 text-muted transition-colors hover:text-accent"
       >
+        <!-- Moon: shown in light mode (click → dark) -->
+        <svg
+          class="h-[18px] w-[18px] dark:hidden"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <!-- Sun: shown in dark mode (click → light) -->
+        <svg
+          class="hidden h-[18px] w-[18px] dark:block"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+          ></path>
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
+
+<script is:inline>
+  document.getElementById('theme-toggle')?.addEventListener('click', function () {
+    var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch (e) {
+      /* private mode — theme still applies for this page */
+    }
+  });
+</script>

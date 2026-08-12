@@ -11,18 +11,15 @@ export default function CareerSelector({ careers, specialOptions }) {
   };
 
   return (
-    <div className="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-6 sm:p-8 max-w-xl mx-auto">
-      <label
-        htmlFor="career-select"
-        className="block text-left mb-3 text-sm font-medium text-[#1c1917]"
-      >
+    <div className="bg-surface border border-rule rounded-xl p-6 sm:p-8 max-w-xl mx-auto">
+      <label htmlFor="career-select" className="block text-left mb-3 text-sm font-medium text-ink">
         Select your career or goal:
       </label>
       <select
         id="career-select"
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
-        className="w-full px-4 py-3 rounded-lg bg-[#faf9f6] border border-[#e5e1d8] text-[#1c1917] focus:outline-none focus:border-[#4338ca] transition-colors mb-4"
+        className="w-full px-4 py-3 rounded-lg bg-paper border border-rule text-ink focus:outline-none focus:border-accent transition-colors mb-4"
       >
         <option value="">Choose an option...</option>
         <optgroup label="Special Options">
@@ -45,8 +42,9 @@ export default function CareerSelector({ careers, specialOptions }) {
           href={getLinkPath()}
           className="block w-full px-6 py-3 rounded-lg font-bold text-white text-center transition-all duration-200"
           style={{
-            background: 'linear-gradient(135deg, #4338ca 0%, #3730a3 100%)',
-            boxShadow: '0 4px 12px rgba(67,56,202,0.3)',
+            background:
+              'linear-gradient(135deg, rgb(var(--accent-solid)) 0%, rgb(var(--accent-deep)) 100%)',
+            boxShadow: '0 4px 12px rgb(var(--accent-solid) / 0.3)',
           }}
         >
           Check My Risk Score →
@@ -54,7 +52,7 @@ export default function CareerSelector({ careers, specialOptions }) {
       ) : (
         <button
           disabled
-          className="w-full px-6 py-3 rounded-lg font-bold text-[#6b6459] bg-[#e5e1d8] cursor-not-allowed"
+          className="w-full px-6 py-3 rounded-lg font-bold text-muted bg-rule cursor-not-allowed"
         >
           Check My Risk Score →
         </button>
