@@ -1,0 +1,37 @@
+{
+  "title": "aicareer.me — AI Career Risk Index and HI-C Definition Framework",
+  "description": "<p>Two named, versioned, openly licensed reference works on how AI is reshaping careers, published at <a href=\"https://aicareer.me\">aicareer.me</a>.</p><p><strong>AI Career Risk Index</strong> — AI displacement risk scores (0–100%) for 24 professions, computed from three weighted dimensions: Task Routinization (40%), AI Tool Penetration (35%) and Human Judgment Dependency (25%). Derived from Frey &amp; Osborne (Oxford), McKinsey Global Institute, the WEF Future of Jobs Report and the Stanford AI Index. Published as CSV and JSON.</p><p><strong>HI-C Definition Framework</strong> — a canonical definition of the High-Impact Individual Contributor (HI-C): a senior professional with no direct reports who carries work from hypothesis to measurable business outcome end to end, staffing adjacent functions with AI rather than with a team. Includes five observable dimensions, comparison against senior IC, manager and solo-founder archetypes, organisational implications, and disambiguation from the unrelated AI-governance term Human-in-Command (HIC).</p><p>Both artifacts are versioned and licensed CC BY 4.0.</p>",
+  "upload_type": "dataset",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Nakanishi, Paulo"
+    }
+  ],
+  "keywords": [
+    "AI career risk",
+    "AI job displacement",
+    "automation risk by occupation",
+    "labor market AI impact",
+    "HI-C",
+    "High-Impact Individual Contributor",
+    "individual contributor career track",
+    "future of work",
+    "organizational design"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://aicareer.me/data/ai-career-risk-index/",
+      "relation": "isDocumentedBy",
+      "resource_type": "dataset",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://aicareer.me/hi-c/",
+      "relation": "isDocumentedBy",
+      "resource_type": "publication-other",
+      "scheme": "url"
+    }
+  ]
+}

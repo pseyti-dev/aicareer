@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: 'If you reference these scores or this definition, please cite them as below.'
+title: 'aicareer.me — AI Career Risk Index and HI-C Definition Framework'
+abstract: >-
+  Two named, versioned, openly licensed reference works on how AI is reshaping
+  careers. The AI Career Risk Index scores 24 professions for AI displacement
+  risk across three weighted dimensions. The HI-C Definition Framework defines
+  the High-Impact Individual Contributor — a senior professional with no direct
+  reports who carries work from hypothesis to measurable outcome end to end,
+  staffing adjacent functions with AI rather than with a team.
+type: dataset
+authors:
+  - family-names: Nakanishi
+    given-names: Paulo
+    website: 'https://www.linkedin.com/in/paulonakanishi/'
+repository-code: 'https://github.com/pseyti-dev/aicareer'
+url: 'https://aicareer.me'
+license: CC-BY-4.0
+keywords:
+  - AI career risk
+  - AI job displacement
+  - automation risk by occupation
+  - HI-C
+  - High-Impact Individual Contributor
+  - future of work
+references:
+  - type: dataset
+    title: AI Career Risk Index
+    version: '2026.2'
+    url: 'https://aicareer.me/data/ai-career-risk-index/'
+    license: CC-BY-4.0
+    authors:
+      - family-names: Nakanishi
+        given-names: Paulo
+  - type: generic
+    title: HI-C Definition Framework
+    version: '2026.0'
+    url: 'https://aicareer.me/hi-c/'
+    license: CC-BY-4.0
+    authors:
+      - family-names: Nakanishi
+        given-names: Paulo

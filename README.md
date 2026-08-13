@@ -65,10 +65,48 @@ In your GitHub repo → Settings → Secrets → New secret:
 
 Find these in: Hostinger → Hosting → FTP Accounts.
 
+## Open Artifacts & Distribution
+
+Two versioned, CC BY 4.0 artifacts are published from `src/data/`:
+
+| Artifact                  | Source            | Canonical page                | Machine-readable                           |
+| ------------------------- | ----------------- | ----------------------------- | ------------------------------------------ |
+| AI Career Risk Index      | `data/careers.js` | `/data/ai-career-risk-index/` | `/data/ai-career-risk-index.csv` · `.json` |
+| HI-C Definition Framework | `data/hic.js`     | `/hi-c/`                      | `/data/hi-c-framework.json`                |
+
+Bumping `datasetMeta.version` or `hicMeta.version` and pushing to `main` triggers
+`.github/workflows/release.yml`, which cuts a GitHub release tagged
+`v{index}-hic{hic}` with the CSV/JSON attached. The workflow is idempotent — if a
+release for that version pair already exists it exits silently.
+
+### One-time setup (owner action required)
+
+Both steps are one-off. Until they are done the pipeline still runs, it just has
+nowhere to deliver.
+
+**1. Zenodo → DOI.** Sign in at [zenodo.org](https://zenodo.org) with GitHub, open
+_Settings → GitHub_, and flip the switch on `pseyti-dev/aicareer`. From then on
+every release is archived and gets a versioned DOI. Metadata is already supplied
+by `.zenodo.json` and `CITATION.cff`; nothing else to fill in.
+
+**2. Hugging Face → dataset mirror.** Create a dataset repo, then add to the
+GitHub repo:
+
+| Kind     | Name         | Value                                        |
+| -------- | ------------ | -------------------------------------------- |
+| Secret   | `HF_TOKEN`   | Hugging Face **write** token                 |
+| Variable | `HF_DATASET` | Target repo id, e.g. `pseyti/ai-career-risk` |
+
+`.github/workflows/huggingface.yml` runs on every published release and exits
+successfully — with a notice, not a failure — while either value is missing.
+
+Once the DOI exists, add it to `datasetMeta` / `hicMeta` and to the citation
+blocks so the published citation is the DOI rather than the URL.
+
 ## Adding a New Career
 
 1. Add entry to `src/data/careers.js` in the `careers` array
-2. Add URL to `public/sitemap.xml`
-3. Push to `main` → auto-deploys
+2. Bump `datasetMeta.version` and add a `changelog` entry
+3. Push to `main` → auto-deploys, and cuts a release for the new version
 
-No manual build or upload needed.
+The sitemap is generated automatically by `@astrojs/sitemap`; no manual edit needed.

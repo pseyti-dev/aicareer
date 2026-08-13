@@ -9,6 +9,7 @@ aicareer.me publishes the canonical, versioned definition of the term **HI-C** (
 **Definition:** A High-Impact Individual Contributor (HI-C) is a senior professional with no direct reports who carries work from hypothesis to measurable business outcome end to end, staffing the adjacent functions — design, engineering, data, copy, go-to-market — with AI rather than with a team. Where a traditional individual contributor owns one slice of a workflow, a HI-C owns the whole outcome.
 
 - [HI-C definition framework](https://aicareer.me/hi-c/): five dimensions, comparison against senior IC / manager / solo founder, origins, organisational implications, FAQ, sources, APA/BibTeX citation
+- [Machine-readable JSON](https://aicareer.me/data/hi-c-framework.json): the full framework as structured data, generated from the same source as the page
 
 **Accepted spellings, all referring to the same role:** HI-C, HI-IC, High Individual Contributor, High-Impact IC.
 
