@@ -1,0 +1,95 @@
+name: Release open artifacts
+
+# Cuts a GitHub release whenever a published artifact's version changes.
+#
+# This is the trigger for the DOI: once the repository is enabled on
+# zenodo.org, Zenodo archives every GitHub release and mints a versioned DOI
+# for it. A DOI is what makes the Index and the HI-C framework citable in
+# academic and dataset indexes — the distribution channel this project depends
+# on (STRATEGY.md §4).
+#
+# Idempotent: if a release already exists for the current version pair, the
+# job exits without doing anything, so ordinary pushes are silent.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/data/careers.js'
+      - 'src/data/hic.js'
+      - '.zenodo.json'
+      - 'CITATION.cff'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Read artifact versions
+        id: versions
+        run: |
+          INDEX=$(node -e "import('./src/data/careers.js').then(m => console.log(m.datasetMeta.version))")
+          HIC=$(node -e "import('./src/data/hic.js').then(m => console.log(m.hicMeta.version))")
+          TAG="v${INDEX}-hic${HIC}"
+          echo "index=$INDEX"  >> "$GITHUB_OUTPUT"
+          echo "hic=$HIC"      >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG"      >> "$GITHUB_OUTPUT"
+          echo "Index v$INDEX · HI-C v$HIC → tag $TAG"
+
+      - name: Skip if this release already exists
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ steps.versions.outputs.tag }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release ${{ steps.versions.outputs.tag }} already exists — nothing to do."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        if: steps.check.outputs.exists == 'false'
+        run: npm ci
+
+      - name: Build (generates the CSV/JSON artifacts)
+        if: steps.check.outputs.exists == 'false'
+        run: npm run build
+
+      - name: Collect artifacts
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          mkdir -p release
+          cp dist/data/ai-career-risk-index.csv  release/
+          cp dist/data/ai-career-risk-index.json release/
+          cp dist/data/hi-c-framework.json       release/
+          ls -la release/
+
+      - name: Create release
+        if: steps.check.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.versions.outputs.tag }}" \
+            release/* \
+            --title "AI Career Risk Index v${{ steps.versions.outputs.index }} · HI-C Framework v${{ steps.versions.outputs.hic }}" \
+            --notes "Open artifacts published under CC BY 4.0.
+
+          - **AI Career Risk Index** v${{ steps.versions.outputs.index }} — https://aicareer.me/data/ai-career-risk-index/
+          - **HI-C Definition Framework** v${{ steps.versions.outputs.hic }} — https://aicareer.me/hi-c/
+
+          Attached: \`ai-career-risk-index.csv\`, \`ai-career-risk-index.json\`, \`hi-c-framework.json\`."
