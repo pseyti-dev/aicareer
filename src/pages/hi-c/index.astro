@@ -1,0 +1,404 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Masthead from '../../components/Masthead.astro';
+import Footer from '../../components/Footer.astro';
+import { author, datasetMeta } from '../../data/careers.js';
+import {
+  hicMeta,
+  definition,
+  definitionShort,
+  alsoKnownAs,
+  notToBeConfusedWith,
+  dimensions,
+  isNot,
+  comparison,
+  origins,
+  whyNow,
+  forOrganisations,
+  faq,
+  sources,
+} from '../../data/hic.js';
+
+const year = hicMeta.lastUpdated.slice(0, 4);
+
+const citationApa = `${author.name}. (${year}). ${hicMeta.name} (v${hicMeta.version}). aicareer.me. ${hicMeta.canonicalUrl}`;
+const citationBibtex = `@misc{aicareerhic${year},
+  author = {${author.name}},
+  title  = {${hicMeta.name} (v${hicMeta.version})},
+  year   = {${year}},
+  publisher = {aicareer.me},
+  url    = {${hicMeta.canonicalUrl}},
+  note   = {Licensed under CC BY 4.0}
+}`;
+
+// schema.org/DefinedTerm — tells answer engines exactly what to cite and under
+// which name. This is the whole point of the page (STRATEGY.md §4).
+const definedTermSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTerm',
+  '@id': hicMeta.canonicalUrl,
+  name: hicMeta.term,
+  alternateName: alsoKnownAs.map((a) => a.label),
+  termCode: hicMeta.abbr,
+  description: definition,
+  url: hicMeta.canonicalUrl,
+  inDefinedTermSet: {
+    '@type': 'DefinedTermSet',
+    name: hicMeta.name,
+    url: hicMeta.canonicalUrl,
+    version: hicMeta.version,
+    license: hicMeta.license,
+    dateModified: hicMeta.lastUpdated,
+    creator: { '@type': 'Person', name: author.name, url: author.linkedin },
+    publisher: { '@type': 'Organization', name: 'aicareer.me', url: 'https://aicareer.me' },
+  },
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What Is a HI-C? The High-Impact Individual Contributor, Defined',
+  description: hicMeta.description,
+  url: hicMeta.canonicalUrl,
+  author: { '@type': 'Person', name: author.name, url: author.linkedin },
+  publisher: { '@type': 'Organization', name: 'aicareer.me', url: 'https://aicareer.me' },
+  datePublished: hicMeta.lastUpdated,
+  dateModified: hicMeta.lastUpdated,
+  license: hicMeta.license,
+  about: { '@id': hicMeta.canonicalUrl },
+  citation: sources.map((s) => ({ '@type': 'CreativeWork', name: s.title, url: s.url })),
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://aicareer.me/' },
+    { '@type': 'ListItem', position: 2, name: 'HI-C', item: hicMeta.canonicalUrl },
+  ],
+};
+---
+
+<BaseLayout
+  title="What Is a HI-C? High-Impact Individual Contributor, Defined | aicareer.me"
+  description="HI-C (High-Impact Individual Contributor): a senior professional with no direct reports who takes work from hypothesis to outcome end to end, staffing adjacent functions with AI. Canonical, versioned definition with five dimensions, comparisons and sources."
+  canonical={hicMeta.canonicalUrl}
+  ogType="article"
+  schema={[definedTermSchema, articleSchema, faqSchema, breadcrumbSchema]}
+>
+  <Nav />
+
+  <div class="min-h-screen bg-paper">
+    <article class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center space-x-2 text-sm text-muted">
+          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
+          <li><span class="mx-2 text-rule">/</span></li>
+          <li><span class="font-medium text-ink" aria-current="page">HI-C</span></li>
+        </ol>
+      </nav>
+
+      <header class="mb-10">
+        <h1 class="mb-4 text-3xl font-bold text-ink sm:text-4xl lg:text-5xl">What Is a HI-C?</h1>
+        <p class="measure mb-4 text-lg text-muted">
+          The High-Impact Individual Contributor — defined, versioned and open to cite.
+        </p>
+        <Masthead kind="Definition framework" meta={hicMeta} showCitation={false} />
+      </header>
+
+      <!-- The definition. Written to be quoted verbatim by answer engines. -->
+      <section aria-labelledby="definition" class="mb-12">
+        <h2 id="definition" class="sr-only">Definition</h2>
+        <blockquote class="rounded-xl border-l-4 border-accent bg-accent/[0.06] p-6">
+          <p class="text-base font-medium leading-relaxed text-ink">{definition}</p>
+        </blockquote>
+        <p class="measure mt-4 text-sm text-muted">
+          Short form: {definitionShort}
+        </p>
+      </section>
+
+      <section aria-labelledby="names" class="mb-12">
+        <h2 id="names" class="mb-4 text-2xl font-bold text-ink">The term and its spellings</h2>
+        <p class="measure mb-6 text-base leading-relaxed text-ink">
+          The term is new and not yet standardised, so several forms circulate in parallel. They all
+          refer to the same role.
+        </p>
+        <dl class="mb-8 grid gap-3 sm:grid-cols-2">
+          {
+            alsoKnownAs.map((a) => (
+              <div class="lift rounded-xl border border-rule bg-surface p-4">
+                <dt class="mb-1 font-semibold text-ink">{a.label}</dt>
+                <dd class="text-sm leading-relaxed text-muted">{a.note}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="rounded-xl border border-rule bg-paper-alt p-6">
+          <h3 class="mb-2 text-base font-bold text-ink">
+            Not to be confused with: {notToBeConfusedWith.term}
+          </h3>
+          <p class="measure text-sm leading-relaxed text-muted">{notToBeConfusedWith.summary}</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="dimensions" class="mb-12">
+        <h2 id="dimensions" class="mb-4 text-2xl font-bold text-ink">The five dimensions</h2>
+        <p class="measure mb-6 text-base leading-relaxed text-ink">
+          The role is easier to recognise than to define by title. These five dimensions are
+          observable rather than aspirational — each one describes something you either can or
+          cannot currently do.
+        </p>
+        <ol class="space-y-4">
+          {
+            dimensions.map((d, i) => (
+              <li class="lift rounded-xl border border-rule bg-surface p-6">
+                <div class="mb-3 flex items-baseline gap-3">
+                  <span class="tnum text-sm font-semibold text-accent">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 class="text-lg font-bold text-ink">{d.name}</h3>
+                </div>
+                <p class="measure mb-4 text-sm italic text-muted">{d.question}</p>
+                <div class="grid gap-3 sm:grid-cols-2">
+                  <div class="rounded-lg border border-rule bg-paper-alt p-3">
+                    <p class="mb-1 text-xs font-semibold uppercase tracking-wider text-muted">
+                      Lower end
+                    </p>
+                    <p class="text-sm leading-relaxed text-ink">{d.low}</p>
+                  </div>
+                  <div class="rounded-lg border border-accent/25 bg-accent/[0.06] p-3">
+                    <p class="mb-1 text-xs font-semibold uppercase tracking-wider text-accent">
+                      Higher end
+                    </p>
+                    <p class="text-sm leading-relaxed text-ink">{d.high}</p>
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section aria-labelledby="isnot" class="mb-12">
+        <h2 id="isnot" class="mb-4 text-2xl font-bold text-ink">What a HI-C is not</h2>
+        <p class="measure mb-6 text-base leading-relaxed text-ink">
+          Each of these is a misreading the term attracts. Naming them is part of defining it.
+        </p>
+        <dl class="space-y-4">
+          {
+            isNot.map((n) => (
+              <div class="rounded-xl border border-rule bg-surface p-5">
+                <dt class="mb-2 font-semibold text-ink">
+                  <span class="mr-2 text-risk-high">✕</span>
+                  {n.claim}
+                </dt>
+                <dd class="measure text-sm leading-relaxed text-muted">{n.reality}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section aria-labelledby="comparison" class="mb-12">
+        <h2 id="comparison" class="mb-4 text-2xl font-bold text-ink">
+          HI-C compared with adjacent roles
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-rule">
+          <table class="w-full min-w-[40rem] border-collapse text-sm">
+            <thead>
+              <tr class="border-b border-rule bg-paper-alt">
+                <th scope="col" class="px-4 py-3 text-left font-semibold text-muted"></th>
+                {
+                  comparison.columns.map((c, i) => (
+                    <th
+                      scope="col"
+                      class={`px-4 py-3 text-left font-semibold ${i === 0 ? 'text-accent' : 'text-ink'}`}
+                    >
+                      {c}
+                    </th>
+                  ))
+                }
+              </tr>
+            </thead>
+            <tbody>
+              {
+                comparison.rows.map((r) => (
+                  <tr class="border-b border-rule last:border-0">
+                    <th scope="row" class="px-4 py-3 text-left font-medium text-muted">
+                      {r.label}
+                    </th>
+                    {r.values.map((v, i) => (
+                      <td class={`px-4 py-3 ${i === 0 ? 'font-medium text-ink' : 'text-muted'}`}>
+                        {v}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="origins" class="mb-12">
+        <h2 id="origins" class="mb-4 text-2xl font-bold text-ink">Where HI-Cs come from</h2>
+        <p class="measure mb-6 text-base leading-relaxed text-ink">
+          The most common origin is not an individual contributor climbing a ladder. It is a
+          manager, director or VP deliberately stepping off the management track to get back to
+          building — the path the term was originally coined to describe.
+        </p>
+        <dl class="space-y-3">
+          {
+            origins.map((o) => (
+              <div class="flex flex-col gap-1 rounded-xl border border-rule bg-surface p-5 sm:flex-row sm:gap-6">
+                <dt class="shrink-0 font-semibold text-ink sm:w-56">{o.from}</dt>
+                <dd class="text-sm leading-relaxed text-muted">{o.note}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section aria-labelledby="whynow" class="mb-12">
+        <h2 id="whynow" class="mb-4 text-2xl font-bold text-ink">Why the role exists now</h2>
+        <div class="mb-6 space-y-5">
+          {
+            whyNow.map((w) => (
+              <div>
+                <h3 class="mb-2 text-lg font-bold text-ink">{w.heading}</h3>
+                <p class="measure text-base leading-relaxed text-muted">{w.body}</p>
+              </div>
+            ))
+          }
+        </div>
+        <div class="rounded-xl border border-rule bg-paper-alt p-6">
+          <p class="measure text-sm leading-relaxed text-muted">
+            The same forces are measurable from the other direction. The
+            <a
+              href={datasetMeta.canonicalUrl}
+              class="text-accent underline decoration-rule underline-offset-2 transition-colors hover:decoration-accent"
+              >{datasetMeta.name}</a
+            > scores {' '}
+            24 professions on how exposed their task load is to automation. The roles losing the most
+            ground are those defined by coordination and routine execution — precisely the work the HI-C
+            model removes from the org chart.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="orgs" class="mb-12">
+        <h2 id="orgs" class="mb-4 text-2xl font-bold text-ink">
+          What organisations have to change
+        </h2>
+        <p class="measure mb-6 text-base leading-relaxed text-ink">
+          The role is mostly blocked by compensation and performance systems built around managing
+          people. Four changes are load-bearing.
+        </p>
+        <dl class="space-y-4">
+          {
+            forOrganisations.map((f) => (
+              <div class="rounded-xl border border-rule bg-surface p-5">
+                <dt class="mb-2 font-semibold text-ink">{f.change}</dt>
+                <dd class="measure text-sm leading-relaxed text-muted">{f.detail}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section aria-labelledby="faq" class="mb-12">
+        <h2 id="faq" class="mb-6 text-2xl font-bold text-ink">Frequently asked questions</h2>
+        <dl class="space-y-6">
+          {
+            faq.map((f) => (
+              <div class="border-b border-rule pb-6 last:border-0">
+                <dt class="mb-2 text-lg font-bold text-ink">{f.q}</dt>
+                <dd class="measure text-base leading-relaxed text-muted">{f.a}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section aria-labelledby="sources" class="mb-12">
+        <h2 id="sources" class="mb-4 text-2xl font-bold text-ink">Sources</h2>
+        <p class="measure mb-6 text-base leading-relaxed text-muted">
+          This definition synthesises the primary writing where the term emerged. It is not a
+          neutral survey — where the sources disagree, the reading taken here is stated in the text.
+        </p>
+        <ol class="space-y-4">
+          {
+            sources.map((s) => (
+              <li class="text-sm">
+                <a
+                  href={s.url}
+                  rel="noopener"
+                  target="_blank"
+                  class="font-medium text-accent underline decoration-rule underline-offset-2 transition-colors hover:decoration-accent"
+                >
+                  {s.title}
+                </a>
+                <span class="text-muted">
+                  {' '}
+                  — {s.author}. {s.note}
+                </span>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section aria-labelledby="cite" class="mb-12">
+        <h2 id="cite" class="mb-4 text-2xl font-bold text-ink">Cite this definition</h2>
+        <p class="measure mb-6 text-base leading-relaxed text-muted">
+          Published under <a
+            href={hicMeta.license}
+            rel="license noopener"
+            target="_blank"
+            class="text-accent underline decoration-rule underline-offset-2 hover:decoration-accent"
+            >{hicMeta.licenseLabel}</a
+          >. Free to quote, adapt and republish with attribution.
+        </p>
+
+        <div class="mb-4">
+          <h3 class="mb-2 text-sm font-semibold uppercase tracking-wider text-muted">APA</h3>
+          <pre
+            class="overflow-x-auto rounded-lg border border-rule bg-paper-alt p-4 text-xs leading-relaxed text-ink">{citationApa}</pre>
+        </div>
+        <div class="mb-6">
+          <h3 class="mb-2 text-sm font-semibold uppercase tracking-wider text-muted">BibTeX</h3>
+          <pre
+            class="overflow-x-auto rounded-lg border border-rule bg-paper-alt p-4 text-xs leading-relaxed text-ink">{citationBibtex}</pre>
+        </div>
+
+        <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-muted">Changelog</h3>
+        <dl class="space-y-2 text-sm">
+          {
+            hicMeta.changelog.map((c) => (
+              <div class="flex flex-col gap-1 sm:flex-row sm:gap-4">
+                <dt class="tnum shrink-0 font-medium text-ink sm:w-40">
+                  v{c.version} · {c.date}
+                </dt>
+                <dd class="text-muted">{c.note}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+    </article>
+  </div>
+
+  <Footer />
+</BaseLayout>

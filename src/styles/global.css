@@ -216,8 +216,15 @@
    ───────────────────────────────────────────────────────────────────────── */
 
 @layer utilities {
-  /* Skip rendering work for off-screen sections. Net negative cost: this
-     improves render time rather than adding to it. */
+  /* Skip rendering work for off-screen content.
+     Measured on /hi-c/ (an 11,000px text page): anchor navigation stayed
+     accurate — Chromium's scroll anchoring absorbs the ~1,800px of scrollY
+     correction as sections render, and the target element does not move
+     visually. Not applied there anyway: on a page of plain text with no images,
+     the render saving is within noise, and scroll anchoring is not implemented
+     across all engines. Reserve it for blocks that are genuinely expensive to
+     lay out (long tables, media grids) and supply an accurate
+     contain-intrinsic-size when you do. */
   .cv-auto {
     content-visibility: auto;
     contain-intrinsic-size: auto 600px;
