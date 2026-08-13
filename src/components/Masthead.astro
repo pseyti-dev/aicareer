@@ -12,14 +12,24 @@ import { datasetMeta } from '../data/careers.js';
 export interface Props {
   /** Section label shown first, e.g. "Career assessment". */
   kind?: string;
-  /** Hide the citation link on the dataset page itself. */
+  /** Hide the citation link on the canonical page itself. */
   showCitation?: boolean;
+  /**
+   * Any versioned artifact carrying { version, lastUpdated, license,
+   * licenseLabel, canonicalUrl }. Defaults to the AI Career Risk Index.
+   */
+  meta?: typeof datasetMeta;
   class?: string;
 }
 
-const { kind = 'AI Career Risk Index', showCitation = true, class: className = '' } = Astro.props;
+const {
+  kind = 'AI Career Risk Index',
+  showCitation = true,
+  meta = datasetMeta,
+  class: className = '',
+} = Astro.props;
 
-const updated = new Date(datasetMeta.lastUpdated + 'T00:00:00Z').toLocaleDateString('en-US', {
+const updated = new Date(meta.lastUpdated + 'T00:00:00Z').toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'short',
   day: 'numeric',
@@ -34,21 +44,21 @@ const updated = new Date(datasetMeta.lastUpdated + 'T00:00:00Z').toLocaleDateStr
   </div>
   <div>
     <dt>Version</dt>
-    <dd>v{datasetMeta.version}</dd>
+    <dd>v{meta.version}</dd>
   </div>
   <div>
     <dt>Updated</dt>
-    <dd><time datetime={datasetMeta.lastUpdated}>{updated}</time></dd>
+    <dd><time datetime={meta.lastUpdated}>{updated}</time></dd>
   </div>
   <div>
     <dt>Licence</dt>
     <dd>
       <a
-        href={datasetMeta.license}
+        href={meta.license}
         rel="license noopener"
         target="_blank"
         class="underline decoration-rule underline-offset-2 hover:decoration-accent hover:text-accent transition-colors"
-        >{datasetMeta.licenseLabel}</a
+        >{meta.licenseLabel}</a
       >
     </dd>
   </div>
@@ -58,7 +68,7 @@ const updated = new Date(datasetMeta.lastUpdated + 'T00:00:00Z').toLocaleDateStr
         <dt class="sr-only">Citation</dt>
         <dd class="!ml-0">
           <a
-            href={datasetMeta.canonicalUrl}
+            href={meta.canonicalUrl}
             class="underline decoration-rule underline-offset-2 transition-colors hover:text-accent hover:decoration-accent"
           >
             Cite this data
