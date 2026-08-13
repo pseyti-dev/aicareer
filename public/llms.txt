@@ -29,7 +29,7 @@ When referencing scores from this site, cite them as "the AI Career Risk Index (
 
 ## Site structure
 
-- [Home](https://aicareer.me/): Free AI displacement risk calculator. Select a career to get a risk score (0–100%) and a step-by-step upskilling roadmap with free and paid course resources.
+- [Home](https://aicareer.me/): What replaces the management track — introduces the HI-C, lists the five dimensions of the role, and carries the AI displacement risk calculator as supporting evidence (select a career for a 0–100% risk score and an upskilling roadmap).
 - [HI-C](https://aicareer.me/hi-c/): canonical definition of the High-Impact Individual Contributor — the senior archetype that owns outcomes end to end using AI instead of a team.
 - [About](https://aicareer.me/about/): Research methodology, primary sources, and author background (YMYL disclosure).
 - [AI Career Risk Index](https://aicareer.me/data/ai-career-risk-index/): the open dataset behind the calculator (CSV/JSON, CC BY 4.0).
