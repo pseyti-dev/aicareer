@@ -10,7 +10,9 @@ import {
   marketStats,
   riskRankings,
   author,
+  datasetMeta,
 } from '../data/careers.js';
+import { hicMeta, definitionShort, dimensions } from '../data/hic.js';
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -23,12 +25,22 @@ const orgSchema = {
   operatingSystem: 'Web',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   author: { '@type': 'Person', name: author.name },
+  // Points answer engines from the homepage to the canonical definition.
+  about: { '@id': hicMeta.canonicalUrl },
 };
 
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a HI-C?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'HI-C stands for High-Impact Individual Contributor: a senior professional with no direct reports who carries work from hypothesis to measurable business outcome end to end, staffing the adjacent functions — design, engineering, data, copy, go-to-market — with AI rather than with a team. Where a traditional individual contributor owns one slice of a workflow, a HI-C owns the whole outcome. It is also written HI-IC or High Individual Contributor, and is unrelated to the AI-governance term Human-in-Command (HIC).',
+      },
+    },
     {
       '@type': 'Question',
       name: 'Which jobs are most at risk of AI automation?',
@@ -85,60 +97,132 @@ const getBarColor = (score) => {
 ---
 
 <BaseLayout
-  title="AI Career Risk Calculator: Is Your Job Safe? | aicareer.me"
-  description="Check your AI job displacement risk score instantly. Free calculator for 24 careers. Get a personalized upskilling roadmap to future-proof your career."
+  title="What Replaces the Management Track: the HI-C | aicareer.me"
+  description="AI absorbed the coordination work that made large teams necessary. The High-Impact Individual Contributor (HI-C) is the senior archetype replacing it — defined, versioned and open to cite. Plus AI displacement risk scores for 24 careers."
   canonical="https://aicareer.me/"
   schema={[orgSchema, faqSchema, breadcrumbSchema]}
 >
   <Nav />
 
   <main>
-    <!-- ── Hero ── -->
-    <section class="max-w-4xl mx-auto px-6 py-16 sm:py-24 text-center">
-      <a
-        href="/data/ai-career-risk-index/"
-        class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/5 text-[11px] uppercase tracking-widest text-accent mb-8 hover:bg-accent/10 transition-colors"
-      >
-        AI Career Risk Index · v2026.2 · Open Data
-      </a>
-
-      <nav aria-label="Breadcrumb" class="mb-6 flex justify-center">
+    <!-- ── Hero ──
+         Repositioned in Phase A: the site now answers "what replaces the
+         management track", and the risk calculator moves below as the evidence
+         that the old ladder is breaking (STRATEGY.md §3). -->
+    <section class="mx-auto max-w-4xl px-6 py-16 sm:py-24">
+      <nav aria-label="Breadcrumb" class="mb-6">
         <ol class="flex items-center space-x-2 text-sm text-muted">
-          <li><span class="text-ink font-medium" aria-current="page">Home</span></li>
+          <li><span class="font-medium text-ink" aria-current="page">Home</span></li>
         </ol>
       </nav>
 
       <h1
-        class="text-4xl sm:text-5xl lg:text-7xl font-bold text-ink mb-6 leading-tight tracking-tight"
+        class="mb-6 text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl lg:text-6xl"
       >
-        Is Your Job<br />
-        <span class="text-gradient">Safe from AI?</span>
+        The management track is no longer<br class="hidden sm:block" />
+        <span class="text-gradient">the only way up.</span>
       </h1>
 
-      <p class="text-lg sm:text-xl text-muted mb-3 max-w-2xl mx-auto">
-        Find out in 30 seconds if your job is safe from AI — and what to do about it.
+      <p class="measure-wide mb-4 text-lg text-muted sm:text-xl">
+        AI absorbed the coordination work that made large teams necessary. The senior archetype
+        replacing it has a name: the <strong class="font-semibold text-ink"
+          >High-Impact Individual Contributor</strong
+        >.
       </p>
-      <p class="text-base text-muted mb-10 max-w-2xl mx-auto">
-        Free risk score for 24 careers, plus a step-by-step upskilling roadmap — based on research
-        from Oxford, McKinsey, and the World Economic Forum.
-      </p>
+      <p class="measure-wide mb-8 text-base text-muted">{definitionShort}</p>
 
-      <div class="flex flex-wrap justify-center gap-3 mb-10">
-        <span class="px-4 py-2 rounded-full bg-surface border border-rule text-sm text-ink"
-          >24 careers analyzed</span
+      <div class="mb-10 flex flex-wrap items-center gap-3">
+        <a
+          href="/hi-c/"
+          class="lift inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-bold text-on-accent"
+          style="background: linear-gradient(135deg, rgb(var(--accent-solid)) 0%, rgb(var(--accent-deep)) 100%)"
         >
-        <span class="px-4 py-2 rounded-full bg-surface border border-rule text-sm text-ink"
-          >Instant risk score</span
+          Read the definition →
+        </a>
+        <a
+          href="#evidence"
+          class="lift inline-flex items-center gap-2 rounded-lg border border-rule px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-accent"
         >
-        <span class="px-4 py-2 rounded-full bg-surface border border-rule text-sm text-ink"
-          >Reduce risk by 30–50 pts</span
-        >
-        <span class="px-4 py-2 rounded-full bg-surface border border-rule text-sm text-ink"
-          >No sign-up required</span
-        >
+          See the risk data
+        </a>
       </div>
 
-      <div class="bg-surface border border-rule rounded-2xl p-4 max-w-xl mx-auto neon-glow">
+      <!-- Two versioned artifacts, stated as fact rather than as badges. -->
+      <dl class="masthead">
+        <div>
+          <dt class="sr-only">Publication</dt>
+          <dd class="!ml-0 font-semibold tracking-normal">Two open reference works</dd>
+        </div>
+        <div>
+          <dt>HI-C framework</dt>
+          <dd><a href="/hi-c/" class="hover:text-accent">v{hicMeta.version}</a></dd>
+        </div>
+        <div>
+          <dt>Risk index</dt>
+          <dd>
+            <a href={datasetMeta.canonicalUrl} class="hover:text-accent">v{datasetMeta.version}</a>
+          </dd>
+        </div>
+        <div>
+          <dt class="sr-only">Licence</dt>
+          <dd class="!ml-0">{hicMeta.licenseLabel}</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ── The five dimensions — "how close are you" without promising a score
+         that does not exist yet (the Readiness Index is Phase C). ── -->
+    <section aria-labelledby="dimensions" class="border-y border-rule bg-paper-alt py-16">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 id="dimensions" class="mb-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+          Where do you stand?
+        </h2>
+        <p class="measure mb-8 text-base leading-relaxed text-muted">
+          A HI-C is easier to recognise than to define by title. These five dimensions are
+          observable — each describes something you either can or cannot currently do.
+        </p>
+
+        <ol class="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            dimensions.map((d, i) => (
+              <li class="lift rounded-xl border border-rule bg-surface p-5">
+                <div class="mb-2 flex items-baseline gap-2">
+                  <span class="tnum text-xs font-semibold text-accent">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 class="text-base font-bold text-ink">{d.name}</h3>
+                </div>
+                <p class="text-sm leading-relaxed text-muted">{d.question}</p>
+              </li>
+            ))
+          }
+        </ol>
+
+        <a
+          href="/hi-c/#dimensions"
+          class="text-sm font-medium text-accent underline decoration-rule underline-offset-4 transition-colors hover:decoration-accent"
+        >
+          See what the higher end of each dimension looks like →
+        </a>
+      </div>
+    </section>
+
+    <!-- ── The evidence: the risk calculator, reframed ── -->
+    <section aria-labelledby="evidence-heading" class="mx-auto max-w-4xl px-6 py-16" id="evidence">
+      <h2 id="evidence-heading" class="mb-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        The other side of the same shift
+      </h2>
+      <p class="measure mb-8 text-base leading-relaxed text-muted">
+        The roles losing the most ground are the ones defined by coordination and routine execution
+        — exactly the work the HI-C model removes from the org chart. The
+        <a
+          href={datasetMeta.canonicalUrl}
+          class="text-accent underline decoration-rule underline-offset-2 hover:decoration-accent"
+          >{datasetMeta.name}</a
+        > scores 24 professions on how exposed their task load is to automation. Check yours:
+      </p>
+
+      <div class="neon-glow mx-auto max-w-xl rounded-2xl border border-rule bg-surface p-4">
         <CareerSelector client:load careers={careers} specialOptions={specialOptions} />
       </div>
     </section>
