@@ -50,6 +50,23 @@ const updated = new Date(meta.lastUpdated + 'T00:00:00Z').toLocaleDateString('en
     <dt>Updated</dt>
     <dd><time datetime={meta.lastUpdated}>{updated}</time></dd>
   </div>
+  {
+    meta.doi && (
+      <div>
+        <dt>DOI</dt>
+        <dd>
+          <a
+            href={meta.doiUrl}
+            rel="noopener"
+            target="_blank"
+            class="underline decoration-rule underline-offset-2 transition-colors hover:text-accent hover:decoration-accent"
+          >
+            {meta.doi}
+          </a>
+        </dd>
+      </div>
+    )
+  }
   <div>
     <dt>Licence</dt>
     <dd>

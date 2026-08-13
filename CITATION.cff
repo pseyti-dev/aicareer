@@ -16,6 +16,15 @@ authors:
 repository-code: 'https://github.com/pseyti-dev/aicareer'
 url: 'https://aicareer.me'
 license: CC-BY-4.0
+# Concept DOI — always resolves to the latest archived version.
+doi: 10.5281/zenodo.21922814
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21922814
+    description: Concept DOI, resolving to the latest version
+  - type: doi
+    value: 10.5281/zenodo.21922815
+    description: Version DOI for release v2026.2-hic2026.0
 keywords:
   - AI career risk
   - AI job displacement
@@ -26,7 +35,7 @@ keywords:
 references:
   - type: dataset
     title: AI Career Risk Index
-    version: '2026.2'
+    version: '2026.3'
     url: 'https://aicareer.me/data/ai-career-risk-index/'
     license: CC-BY-4.0
     authors:
@@ -34,7 +43,7 @@ references:
         given-names: Paulo
   - type: generic
     title: HI-C Definition Framework
-    version: '2026.0'
+    version: '2026.1'
     url: 'https://aicareer.me/hi-c/'
     license: CC-BY-4.0
     authors:

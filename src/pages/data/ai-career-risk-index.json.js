@@ -7,6 +7,8 @@ export async function GET() {
     lastUpdated: datasetMeta.lastUpdated,
     license: datasetMeta.license,
     canonicalUrl: datasetMeta.canonicalUrl,
+    doi: datasetMeta.doi,
+    doiUrl: datasetMeta.doiUrl,
     publisher: 'aicareer.me',
     creator: author.name,
     methodology: {
@@ -16,7 +18,7 @@ export async function GET() {
         weight: d.weight,
       })),
     },
-    citation: `${author.name}. (${datasetMeta.lastUpdated.slice(0, 4)}). ${datasetMeta.name} (v${datasetMeta.version}) [Data set]. aicareer.me. ${datasetMeta.canonicalUrl}`,
+    citation: `${author.name}. (${datasetMeta.lastUpdated.slice(0, 4)}). ${datasetMeta.name} (v${datasetMeta.version}) [Data set]. aicareer.me. ${datasetMeta.doiUrl}`,
     careers: careers
       .slice()
       .sort((a, b) => b.baseRiskScore - a.baseRiskScore)
