@@ -268,7 +268,17 @@ const breadcrumbSchema = {
             origins.map((o) => (
               <div class="flex flex-col gap-1 rounded-xl border border-rule bg-surface p-5 sm:flex-row sm:gap-6">
                 <dt class="shrink-0 font-semibold text-ink sm:w-56">{o.from}</dt>
-                <dd class="text-sm leading-relaxed text-muted">{o.note}</dd>
+                <dd class="text-sm leading-relaxed text-muted">
+                  {o.note}
+                  {o.route && (
+                    <a
+                      href={`/hi-c/from-${o.route}/`}
+                      class="ml-1 whitespace-nowrap font-medium text-accent underline decoration-rule underline-offset-2 transition-colors hover:decoration-accent"
+                    >
+                      The route from here →
+                    </a>
+                  )}
+                </dd>
               </div>
             ))
           }

@@ -165,18 +165,22 @@ export const comparison = {
 export const origins = [
   {
     from: 'Engineering Manager',
+    route: 'engineering-manager',
     note: 'Left the management track to get back to building. Retains systems judgment and org literacy; regains hands-on leverage.',
   },
   {
     from: 'Director or VP',
+    route: 'director-or-vp',
     note: 'Traded coordination overhead and deck-building for direct output. The most-cited archetype of the term.',
   },
   {
     from: 'Head of Product or Growth',
+    route: 'director-or-vp',
     note: 'Already operated across functions; AI removes the dependency on a squad to execute.',
   },
   {
     from: 'Senior or Staff IC',
+    route: 'senior-ic',
     note: 'Levelling up rather than stepping across — the largest population, and the one for whom the ladder is least defined.',
   },
   {
