@@ -12,14 +12,25 @@ name: Sync to Hugging Face Datasets
 # Until both exist the job exits successfully without doing anything, so it
 # never shows up as a failing check.
 
+# Triggered by the completion of "Release open artifacts", NOT by `on: release`.
+# GitHub deliberately does not fire event-based workflows for releases created
+# with the default GITHUB_TOKEN (recursion guard), and release.yml uses exactly
+# that token — so an `on: release` trigger here would never run. Verified: the
+# first release (v2026.2-hic2026.0) produced no run at all.
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: ['Release open artifacts']
+    types: [completed]
   workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # On workflow_run, only proceed when the release job actually succeeded.
+    # Always proceed when triggered by hand.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Check configuration
         id: cfg
@@ -110,7 +121,11 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_DATASET: ${{ vars.HF_DATASET }}
+          GH_TOKEN: ${{ github.token }}
         run: |
+          # workflow_run does not carry the tag, so read it from the release
+          # this sync corresponds to.
+          TAG=$(gh release view --json tagName -q .tagName 2>/dev/null || echo "latest")
           pip install --quiet "huggingface_hub[cli]"
           # The CLI was renamed from `huggingface-cli` to `hf`; accept either so
           # this does not break on a future huggingface_hub release.
@@ -121,4 +136,4 @@ jobs:
           fi
           "$CLI" upload "$HF_DATASET" hf . \
             --repo-type dataset \
-            --commit-message "Sync from aicareer.me ${GITHUB_REF_NAME}"
+            --commit-message "Sync from aicareer.me $TAG"
