@@ -74,6 +74,13 @@ Each page at `/risk/[slug]/` includes: baseline risk score, automated tasks list
 | Cybersecurity Analyst | https://aicareer.me/risk/cybersecurity-analyst/ | 28% | Low Risk |
 | Registered Nurse | https://aicareer.me/risk/registered-nurse/ | 22% | Low Risk |
 
+## Career Track Guides
+
+Practical guides to the individual contributor track. Each one ends at the HI-C as the rung defined by leverage rather than by scope.
+
+- [Staff Engineer vs Manager](https://aicareer.me/guides/staff-engineer-vs-manager/): the two tracks compared on accountability, daily work, what compounds and atrophies, reversibility, and 2026 compensation bands (Staff Engineer median base ~$244K; Principal ~$243K, total comp to $630K+ at the largest employers). Argues the choice is no longer binary: AI removed management's exclusive claim to leverage.
+- [The IC Career Ladder](https://aicareer.me/guides/ic-career-ladder/): what senior, staff, principal and distinguished actually require, framed as the size of blast radius you are trusted with. Includes two tests for whether a company's IC ladder is real, and why levelling by scope underrates what a leveraged individual can now do.
+
 ## Research & Studies
 
 - [AI Job Impact 2026](https://aicareer.me/study/ai-job-impact-2026/): Stanford AI Index 2026 findings crossed with all 24 career risk scores. Key data: junior developer employment fell ~20%, 1-in-3 organizations plan cuts, productivity gains range from 14–50% by field. Explains the "jagged frontier" and why entry-level roles in even "low risk" careers face displacement pressure.
