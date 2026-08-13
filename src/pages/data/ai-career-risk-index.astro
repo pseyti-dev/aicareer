@@ -7,14 +7,17 @@ import { careers, methodology, datasetMeta, author } from '../../data/careers.js
 const sorted = careers.slice().sort((a, b) => b.baseRiskScore - a.baseRiskScore);
 
 const year = datasetMeta.lastUpdated.slice(0, 4);
-const citationApa = `${author.name}. (${year}). ${datasetMeta.name} (v${datasetMeta.version}) [Data set]. aicareer.me. ${datasetMeta.canonicalUrl}`;
+// Citations resolve through the concept DOI, which always points at the latest
+// archived version — a durable identifier that survives the domain.
+const citationApa = `${author.name}. (${year}). ${datasetMeta.name} (v${datasetMeta.version}) [Data set]. aicareer.me. ${datasetMeta.doiUrl}`;
 const citationBibtex = `@misc{aicareer${year},
-  author = {${author.name}},
-  title  = {${datasetMeta.name} (v${datasetMeta.version})},
-  year   = {${year}},
+  author    = {${author.name}},
+  title     = {${datasetMeta.name} (v${datasetMeta.version})},
+  year      = {${year}},
   publisher = {aicareer.me},
-  url    = {${datasetMeta.canonicalUrl}},
-  note   = {Licensed under CC BY 4.0}
+  doi       = {${datasetMeta.doi}},
+  url       = {${datasetMeta.doiUrl}},
+  note      = {Licensed under CC BY 4.0}
 }`;
 
 const datasetSchema = {
@@ -24,7 +27,10 @@ const datasetSchema = {
   version: datasetMeta.version,
   description: datasetMeta.description,
   url: datasetMeta.canonicalUrl,
-  sameAs: 'https://aicareer.me/',
+  // Dataset search engines key off a resolvable identifier; the DOI is the
+  // strongest one available.
+  identifier: datasetMeta.doiUrl,
+  sameAs: datasetMeta.doiUrl,
   license: datasetMeta.license,
   isAccessibleForFree: true,
   dateModified: datasetMeta.lastUpdated,

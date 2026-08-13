@@ -22,14 +22,17 @@ import {
 
 const year = hicMeta.lastUpdated.slice(0, 4);
 
-const citationApa = `${author.name}. (${year}). ${hicMeta.name} (v${hicMeta.version}). aicareer.me. ${hicMeta.canonicalUrl}`;
+// Citations resolve through the concept DOI, which always points at the latest
+// archived version — a durable identifier that survives the domain.
+const citationApa = `${author.name}. (${year}). ${hicMeta.name} (v${hicMeta.version}). aicareer.me. ${hicMeta.doiUrl}`;
 const citationBibtex = `@misc{aicareerhic${year},
-  author = {${author.name}},
-  title  = {${hicMeta.name} (v${hicMeta.version})},
-  year   = {${year}},
+  author    = {${author.name}},
+  title     = {${hicMeta.name} (v${hicMeta.version})},
+  year      = {${year}},
   publisher = {aicareer.me},
-  url    = {${hicMeta.canonicalUrl}},
-  note   = {Licensed under CC BY 4.0}
+  doi       = {${hicMeta.doi}},
+  url       = {${hicMeta.doiUrl}},
+  note      = {Licensed under CC BY 4.0}
 }`;
 
 // schema.org/DefinedTerm — tells answer engines exactly what to cite and under
@@ -48,6 +51,7 @@ const definedTermSchema = {
     name: hicMeta.name,
     url: hicMeta.canonicalUrl,
     version: hicMeta.version,
+    identifier: hicMeta.doiUrl,
     license: hicMeta.license,
     dateModified: hicMeta.lastUpdated,
     creator: { '@type': 'Person', name: author.name, url: author.linkedin },

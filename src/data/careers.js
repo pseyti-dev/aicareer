@@ -2335,14 +2335,23 @@ export const author = {
 // data citable by journalists, researchers, and AI answer engines.
 export const datasetMeta = {
   name: 'AI Career Risk Index',
-  version: '2026.2',
-  lastUpdated: '2026-07-02',
+  version: '2026.3',
+  lastUpdated: '2026-08-13',
   license: 'https://creativecommons.org/licenses/by/4.0/',
   licenseLabel: 'CC BY 4.0',
   canonicalUrl: 'https://aicareer.me/data/ai-career-risk-index/',
+  // Concept DOI — always resolves to the latest archived version. Cite this one.
+  // Each release also mints its own version DOI; see the Zenodo record.
+  doi: '10.5281/zenodo.21922814',
+  doiUrl: 'https://doi.org/10.5281/zenodo.21922814',
   description:
     'A research-backed index of AI displacement risk scores (0–100%) for 24 professions, computed from three weighted dimensions: Task Routinization (40%), AI Tool Penetration (35%), and Human Judgment Dependency (25%). Derived from Frey & Osborne (Oxford), McKinsey Global Institute, WEF Future of Jobs Report, and the Stanford AI Index.',
   changelog: [
+    {
+      version: '2026.3',
+      date: '2026-08-13',
+      note: 'Archived on Zenodo and assigned a DOI; citations now resolve through doi.org. No score or methodology changes.',
+    },
     {
       version: '2026.2',
       date: '2026-07-02',

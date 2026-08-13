@@ -12,14 +12,22 @@ export const hicMeta = {
   name: 'HI-C Definition Framework',
   term: 'High-Impact Individual Contributor',
   abbr: 'HI-C',
-  version: '2026.0',
-  lastUpdated: '2026-08-12',
+  version: '2026.1',
+  lastUpdated: '2026-08-13',
   license: 'https://creativecommons.org/licenses/by/4.0/',
   licenseLabel: 'CC BY 4.0',
   canonicalUrl: 'https://aicareer.me/hi-c/',
+  // Concept DOI — always resolves to the latest archived version. Cite this one.
+  doi: '10.5281/zenodo.21922814',
+  doiUrl: 'https://doi.org/10.5281/zenodo.21922814',
   description:
     'A canonical, versioned definition of the High-Impact Individual Contributor (HI-C): a senior professional with no direct reports who carries work from hypothesis to measurable business outcome end to end, staffing adjacent functions with AI rather than with a team. Includes the five dimensions of the role, its distinction from senior ICs, managers and solo founders, and the organisational changes it requires.',
   changelog: [
+    {
+      version: '2026.1',
+      date: '2026-08-13',
+      note: 'Archived on Zenodo and assigned a DOI; citations now resolve through doi.org. No changes to the definition or the dimensions.',
+    },
     {
       version: '2026.0',
       date: '2026-08-12',
