@@ -2,19 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   TOKENS
+   Values are space-separated RGB channels so Tailwind's `/opacity` modifier
+   works (`rgb(var(--x) / <alpha-value>)` in tailwind.config.mjs).
+   Never hardcode a hex in a component — add a token here instead.
+   ───────────────────────────────────────────────────────────────────────── */
+
 @layer base {
   :root {
-    --paper-bg: #faf9f6;
-    --paper-alt: #f4f1ea;
-    --paper-surface: #ffffff;
-    --paper-border: #e5e1d8;
-    --ink: #1c1917;
-    --ink-muted: #6b6459;
-    --accent: #4338ca;
-    --risk-high: #dc2626;
-    --risk-mid: #b45309;
-    --risk-low: #047857;
+    /* Surfaces — editorial paper */
+    --paper-bg: 250 249 246; /* #faf9f6 */
+    --paper-alt: 244 241 234; /* #f4f1ea */
+    --paper-surface: 255 255 255; /* #ffffff */
+    --paper-border: 229 225 216; /* #e5e1d8 */
+
+    /* Ink */
+    --ink: 28 25 23; /* #1c1917 */
+    --ink-muted: 107 100 89; /* #6b6459 */
+
+    /* Accent — `accent` is for text/borders, `accent-solid` for filled surfaces.
+       They diverge in dark mode: text accent lightens, filled stays saturated. */
+    --accent: 67 56 202; /* #4338ca */
+    --accent-solid: 67 56 202; /* #4338ca */
+    --accent-deep: 55 48 163; /* #3730a3 */
+    --on-accent: 255 255 255;
+
+    /* Risk bands */
+    --risk-high: 220 38 38; /* #dc2626 */
+    --risk-mid: 180 83 9; /* #b45309 */
+    --risk-low: 4 120 87; /* #047857 */
+
+    /* Depth */
+    --shadow-color: 28 25 23;
+    --grain-opacity: 0.028;
+
+    /* Motion — response, never arrival (see PERSONA.md §6) */
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --dur-fast: 120ms;
+    --dur: 180ms;
+
+    color-scheme: light;
   }
+
+  [data-theme='dark'] {
+    --paper-bg: 19 18 17;
+    --paper-alt: 26 25 23;
+    --paper-surface: 28 27 25;
+    --paper-border: 46 43 39;
+
+    --ink: 240 237 232;
+    --ink-muted: 163 156 146;
+
+    --accent: 165 180 252; /* indigo-300 — legible on dark */
+    --accent-solid: 99 102 241; /* indigo-500 — still carries white text */
+    --accent-deep: 79 70 229;
+    --on-accent: 255 255 255;
+
+    --risk-high: 248 113 113;
+    --risk-mid: 251 191 36;
+    --risk-low: 52 211 153;
+
+    --shadow-color: 0 0 0;
+    --grain-opacity: 0.05;
+
+    color-scheme: dark;
+  }
+
+  /* ── Typography ────────────────────────────────────────────────────────── */
 
   body {
     font-family:
@@ -23,11 +78,15 @@
       BlinkMacSystemFont,
       'Segoe UI',
       sans-serif;
-    background-color: var(--paper-bg);
-    color: var(--ink);
+    background-color: rgb(var(--paper-bg));
+    color: rgb(var(--ink));
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    font-synthesis-weight: none;
+    transition:
+      background-color var(--dur) var(--ease),
+      color var(--dur) var(--ease);
   }
 
   h1,
@@ -35,6 +94,24 @@
   h3 {
     font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
     letter-spacing: -0.015em;
+    /* Fraunces carries an optical-size axis; let the browser drive it.
+       This is the craft signal an editorial audience actually notices. */
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  /* Numbers must align in columns and never look proportional-spaced.
+     Rounding or misaligning figures reads as hiding data. */
+  table,
+  .tnum,
+  [data-figure] {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
   }
 
   code,
@@ -42,38 +119,171 @@
     font-family: 'DM Mono', 'Courier New', monospace;
   }
 
-  /* Modern Scrollbar */
+  ::selection {
+    background: rgb(var(--accent) / 0.25);
+    color: rgb(var(--ink));
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--paper-bg);
+    background: rgb(var(--paper-bg));
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--paper-border);
+    background: rgb(var(--paper-border));
     border-radius: 10px;
-    border: 2px solid var(--paper-bg);
+    border: 2px solid rgb(var(--paper-bg));
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
+    background: rgb(var(--accent));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   COMPONENTS
+   ───────────────────────────────────────────────────────────────────────── */
+
 @layer components {
   .glass-panel {
-    @apply bg-white/70 backdrop-blur-lg border border-[#e5e1d8] rounded-2xl;
+    @apply rounded-2xl border border-rule bg-surface/70 backdrop-blur-lg;
   }
 
   /* Editorial card lift (class name kept for compatibility) */
   .neon-glow {
     box-shadow:
-      0 1px 2px rgba(28, 25, 23, 0.05),
-      0 8px 24px rgba(28, 25, 23, 0.06);
+      0 1px 2px rgb(var(--shadow-color) / 0.05),
+      0 8px 24px rgb(var(--shadow-color) / 0.06);
   }
 
   /* Editorial accent headline (class name kept for compatibility) */
   .text-gradient {
-    color: var(--accent);
+    color: rgb(var(--accent));
     font-style: italic;
+  }
+
+  /* Reading measure — 65–75 characters is the editorial optimum. */
+  .measure {
+    max-width: 68ch;
+  }
+  .measure-wide {
+    max-width: 82ch;
+  }
+
+  /* ── Masthead ────────────────────────────────────────────────────────────
+     Journal-style evidence furniture: version, date, licence, citation.
+     These are the site's strongest trust assets and were previously fine
+     print (PERSONA.md §5). */
+  .masthead {
+    @apply flex flex-wrap items-center gap-x-4 gap-y-1 border-y border-rule py-2 text-xs;
+    color: rgb(var(--ink-muted));
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+  .masthead dt {
+    @apply inline uppercase;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    opacity: 0.75;
+  }
+  .masthead dd {
+    @apply ml-1 inline font-medium;
+    color: rgb(var(--ink));
+  }
+
+  /* ── Response motion ─────────────────────────────────────────────────────
+     Motion acknowledges what the user did. Content never animates merely
+     because it appeared — that is the marketing-site tell (PERSONA.md §6). */
+  .lift {
+    transition:
+      transform var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+    will-change: transform;
+  }
+  .lift:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   UTILITIES
+   ───────────────────────────────────────────────────────────────────────── */
+
+@layer utilities {
+  /* Skip rendering work for off-screen sections. Net negative cost: this
+     improves render time rather than adding to it. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+
+  /* Scroll-driven reveal — DATA ONLY (a gauge filling, a bar drawing).
+     Never apply to body text or headings. */
+  @supports (animation-timeline: view()) {
+    .reveal-data {
+      animation: draw-in linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+  }
+
+  @keyframes draw-in {
+    from {
+      opacity: 0.35;
+      transform: scaleX(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* Paper grain — one inline SVG, no network request. Fixed overlay, never
+   intercepts pointer events. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Native cross-document view transitions. Zero JS; browsers without support
+   simply navigate normally. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur);
+  animation-timing-function: var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  @view-transition {
+    navigation: none;
+  }
+
+  .lift:hover {
+    transform: none;
   }
 }

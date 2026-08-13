@@ -65,41 +65,41 @@ const breadcrumbSchema = {
   schema={[faqSchema ?? undefined, breadcrumbSchema].filter(Boolean)}
 >
   <Nav />
-  <div class="min-h-screen bg-[#faf9f6]">
+  <div class="min-h-screen bg-paper">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <nav aria-label="Breadcrumb" class="mb-6">
-        <ol class="flex items-center space-x-2 text-sm text-[#6b6459]">
-          <li><a href="/" class="hover:text-[#4338ca] transition-colors">Home</a></li>
-          <li><span class="mx-2 text-[#e5e1d8]">/</span></li>
+        <ol class="flex items-center space-x-2 text-sm text-muted">
+          <li><a href="/" class="hover:text-accent transition-colors">Home</a></li>
+          <li><span class="mx-2 text-rule">/</span></li>
           <li>
-            <span class="text-[#1c1917] font-medium" aria-current="page">{content.title}</span>
+            <span class="text-ink font-medium" aria-current="page">{content.title}</span>
           </li>
         </ol>
       </nav>
       <a
         href="/"
-        class="inline-flex mb-8 px-4 py-2 rounded-lg border border-[#e5e1d8] text-[#1c1917] hover:border-[#4338ca] transition-all items-center gap-2 text-sm"
+        class="inline-flex mb-8 px-4 py-2 rounded-lg border border-rule text-ink hover:border-accent transition-all items-center gap-2 text-sm"
       >
         ← Back to Home
       </a>
       <div class="text-center mb-12">
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1c1917] mb-4">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-ink mb-4">
           {content.title}
         </h1>
-        <p class="text-lg text-[#6b6459] max-w-3xl mx-auto">{content.description}</p>
+        <p class="text-lg text-muted max-w-3xl mx-auto">{content.description}</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         {
           content.cards.map((card) => (
-            <div class="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-6 hover:border-[#4338ca] transition-all">
-              <h2 class="text-xl font-bold text-[#1c1917] mb-3">{card.title}</h2>
-              <p class="text-[#6b6459] mb-6 leading-relaxed text-sm">{card.description}</p>
+            <div class="bg-surface border border-rule rounded-xl p-6 hover:border-accent transition-all">
+              <h2 class="text-xl font-bold text-ink mb-3">{card.title}</h2>
+              <p class="text-muted mb-6 leading-relaxed text-sm">{card.description}</p>
               <div class="flex flex-wrap gap-3">
                 <a
                   href={card.freeResource.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="px-4 py-2 rounded-lg border border-[#e5e1d8] text-sm font-medium text-[#1c1917] hover:border-[#4338ca] transition-all"
+                  class="px-4 py-2 rounded-lg border border-rule text-sm font-medium text-ink hover:border-accent transition-all"
                 >
                   Learn Free
                 </a>
@@ -108,7 +108,7 @@ const breadcrumbSchema = {
                   target="_blank"
                   rel="noopener noreferrer"
                   class="px-4 py-2 rounded-lg text-sm font-bold text-white"
-                  style="background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%); box-shadow: 0 4px 12px rgba(67,56,202,0.3)"
+                  style="background: linear-gradient(135deg, rgb(var(--accent-solid)) 0%, rgb(var(--accent-deep)) 100%); box-shadow: 0 4px 12px rgb(var(--accent-solid) / 0.3)"
                 >
                   Enroll on Coursera
                 </a>
@@ -121,7 +121,7 @@ const breadcrumbSchema = {
         <a
           href="/"
           class="inline-block px-8 py-4 rounded-lg font-bold text-white"
-          style="background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%); box-shadow: 0 4px 12px rgba(67,56,202,0.3)"
+          style="background: linear-gradient(135deg, rgb(var(--accent-solid)) 0%, rgb(var(--accent-deep)) 100%); box-shadow: 0 4px 12px rgb(var(--accent-solid) / 0.3)"
         >
           ← Back to Home
         </a>

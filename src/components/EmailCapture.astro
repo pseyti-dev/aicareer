@@ -7,19 +7,19 @@ const pdfUrl = `/reports/${career.slug}.pdf`;
 ---
 
 <section
-  class="bg-[#ffffff] border border-[#e5e1d8] rounded-xl p-8 mb-8 neon-glow"
+  class="bg-surface border border-rule rounded-xl p-8 mb-8 neon-glow"
   aria-labelledby={`report-heading-${career.slug}`}
 >
   <div class="flex flex-wrap items-center gap-2 mb-3">
     <span
-      class="px-3 py-1 rounded-full text-xs font-semibold bg-[#4338ca]/8 text-[#4338ca] border border-[#4338ca]/25"
+      class="px-3 py-1 rounded-full text-xs font-semibold bg-accent/8 text-accent border border-accent/25"
       >Free PDF report</span
     >
   </div>
-  <h2 id={`report-heading-${career.slug}`} class="text-2xl font-bold text-[#1c1917] mb-2">
+  <h2 id={`report-heading-${career.slug}`} class="text-2xl font-bold text-ink mb-2">
     Get your {career.title} risk report
   </h2>
-  <p class="text-sm text-[#6b6459] leading-relaxed mb-5">
+  <p class="text-sm text-muted leading-relaxed mb-5">
     The full assessment as a PDF: your {career.baseRiskScore}% score explained, the tasks AI already
     automates, and a 90-day upskilling plan ordered by impact — with free and paid resources for
     every skill.
@@ -43,13 +43,13 @@ const pdfUrl = `/reports/${career.slug}.pdf`;
             name={emailCapture.emailField}
             required
             placeholder="you@example.com"
-            class="flex-1 px-4 py-3 rounded-lg bg-[#faf9f6] border border-[#e5e1d8] text-[#1c1917] placeholder-[#6b6459] focus:outline-none focus:border-[#4338ca] transition-colors"
+            class="flex-1 px-4 py-3 rounded-lg bg-paper border border-rule text-ink placeholder-muted focus:outline-none focus:border-accent transition-colors"
           />
           <input type="hidden" name={emailCapture.careerField} value={career.slug} />
           <button
             type="submit"
             data-submit-label="Email me the report"
-            class="px-6 py-3 rounded-lg font-bold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-colors disabled:opacity-60"
+            class="px-6 py-3 rounded-lg font-bold text-white bg-accent-solid hover:bg-accent-deep transition-colors disabled:opacity-60"
           >
             Email me the report
           </button>
@@ -57,12 +57,12 @@ const pdfUrl = `/reports/${career.slug}.pdf`;
         <p
           data-report-success
           hidden
-          class="rounded-lg border border-[#047857]/30 bg-[#047857]/5 px-4 py-3 text-sm font-medium text-[#047857]"
+          class="rounded-lg border border-risk-low/30 bg-risk-low/5 px-4 py-3 text-sm font-medium text-risk-low"
         >
           ✓ Report on its way — check your inbox. If it doesn't arrive within a few minutes, look in
           your spam folder.
         </p>
-        <p data-report-error hidden class="mt-3 text-sm text-[#dc2626]">
+        <p data-report-error hidden class="mt-3 text-sm text-risk-high">
           Something went wrong. Please try again — or
           <a href={pdfUrl} download class="underline">
             download the PDF directly
@@ -74,15 +74,15 @@ const pdfUrl = `/reports/${career.slug}.pdf`;
       <a
         href={pdfUrl}
         download
-        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-colors"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-white bg-accent-solid hover:bg-accent-deep transition-colors"
       >
         ↓ Download the PDF report
       </a>
     )
   }
-  <p class="text-xs text-[#6b6459] mt-3">
+  <p class="text-xs text-muted mt-3">
     No spam. The report links back to the open
-    <a href="/data/ai-career-risk-index/" class="text-[#4338ca] hover:underline"
+    <a href="/data/ai-career-risk-index/" class="text-accent hover:underline"
       >AI Career Risk Index</a
     > so you can verify every number.
   </p>

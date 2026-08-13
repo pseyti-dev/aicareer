@@ -1,0 +1,70 @@
+---
+// Journal-style evidence furniture.
+//
+// The versioned dataset, changelog, licence and citation block are the site's
+// strongest credibility signals for the audience that matters most (see
+// PERSONA.md §3 — "The Returner" is the persona that cites, and citation is
+// the only distribution channel in STRATEGY.md §4). They were previously
+// rendered as fine print. This promotes them to something a research
+// publication would print above the fold.
+import { datasetMeta } from '../data/careers.js';
+
+export interface Props {
+  /** Section label shown first, e.g. "Career assessment". */
+  kind?: string;
+  /** Hide the citation link on the dataset page itself. */
+  showCitation?: boolean;
+  class?: string;
+}
+
+const { kind = 'AI Career Risk Index', showCitation = true, class: className = '' } = Astro.props;
+
+const updated = new Date(datasetMeta.lastUpdated + 'T00:00:00Z').toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<dl class={`masthead ${className}`}>
+  <div>
+    <dt class="sr-only">Source</dt>
+    <dd class="!ml-0 font-semibold tracking-normal">{kind}</dd>
+  </div>
+  <div>
+    <dt>Version</dt>
+    <dd>v{datasetMeta.version}</dd>
+  </div>
+  <div>
+    <dt>Updated</dt>
+    <dd><time datetime={datasetMeta.lastUpdated}>{updated}</time></dd>
+  </div>
+  <div>
+    <dt>Licence</dt>
+    <dd>
+      <a
+        href={datasetMeta.license}
+        rel="license noopener"
+        target="_blank"
+        class="underline decoration-rule underline-offset-2 hover:decoration-accent hover:text-accent transition-colors"
+        >{datasetMeta.licenseLabel}</a
+      >
+    </dd>
+  </div>
+  {
+    showCitation && (
+      <div>
+        <dt class="sr-only">Citation</dt>
+        <dd class="!ml-0">
+          <a
+            href={datasetMeta.canonicalUrl}
+            class="underline decoration-rule underline-offset-2 transition-colors hover:text-accent hover:decoration-accent"
+          >
+            Cite this data
+          </a>
+        </dd>
+      </div>
+    )
+  }
+</dl>
