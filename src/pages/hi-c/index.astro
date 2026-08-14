@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Masthead from '../../components/Masthead.astro';
+import ReadinessCapture from '../../components/ReadinessCapture.astro';
+import ToolStack from '../../components/ToolStack.astro';
 import Footer from '../../components/Footer.astro';
 import { author, datasetMeta } from '../../data/careers.js';
 import {
@@ -195,6 +197,8 @@ const breadcrumbSchema = {
         </ol>
       </section>
 
+      <ReadinessCapture />
+
       <section aria-labelledby="isnot" class="mb-12">
         <h2 id="isnot" class="mb-4 text-2xl font-bold text-ink">What a HI-C is not</h2>
         <p class="measure mb-6 text-base leading-relaxed text-ink">
@@ -311,6 +315,8 @@ const breadcrumbSchema = {
           </p>
         </div>
       </section>
+
+      <ToolStack />
 
       <section aria-labelledby="orgs" class="mb-12">
         <h2 id="orgs" class="mb-4 text-2xl font-bold text-ink">

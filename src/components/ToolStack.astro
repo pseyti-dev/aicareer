@@ -1,0 +1,56 @@
+---
+import { toolStack } from '../data/toolstack.js';
+import { toolStackRef } from '../data/config.js';
+
+// The stack that answers "adjacent-function coverage" in concrete terms.
+// Reference, not a sales wall (PERSONA.md §4). Links are plain until the owner
+// opts into referral programmes via config.
+const withRef = (url) => {
+  if (!toolStackRef.param) return url;
+  return url + (url.includes('?') ? '&' : '?') + toolStackRef.param;
+};
+---
+
+<section aria-labelledby="stack-heading" class="mb-12">
+  <h2 id="stack-heading" class="mb-4 text-2xl font-bold text-ink">The stack that does this</h2>
+  <p class="measure mb-6 text-base leading-relaxed text-muted">
+    "Staff the adjacent functions with AI" is abstract until you name the tools. These are the ones
+    that let one person cover engineering, prototyping, automation, narrative and judgment without a
+    handoff. Reference, not endorsement — pick what fits the function you are weakest in.
+  </p>
+
+  <div class="overflow-x-auto rounded-xl border border-rule">
+    <table class="w-full min-w-[38rem] border-collapse text-sm">
+      <thead>
+        <tr class="border-b border-rule bg-paper-alt">
+          <th scope="col" class="px-4 py-3 text-left font-semibold text-muted">Function</th>
+          <th scope="col" class="px-4 py-3 text-left font-semibold text-accent">Tool</th>
+          <th scope="col" class="px-4 py-3 text-left font-semibold text-muted">What it covers</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          toolStack.map((t) => (
+            <tr class="border-b border-rule last:border-0">
+              <td class="px-4 py-3 align-top">
+                <span class="font-medium text-ink">{t.function}</span>
+                <span class="mt-0.5 block text-xs text-muted">{t.covers}</span>
+              </td>
+              <td class="px-4 py-3 align-top">
+                <a
+                  href={withRef(t.url)}
+                  target="_blank"
+                  rel="noopener"
+                  class="font-semibold text-accent underline decoration-rule underline-offset-2 transition-colors hover:decoration-accent"
+                >
+                  {t.tool}
+                </a>
+              </td>
+              <td class="px-4 py-3 align-top text-muted">{t.what}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
