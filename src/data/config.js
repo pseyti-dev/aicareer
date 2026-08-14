@@ -15,3 +15,13 @@ export const emailCapture = {
   emailField: 'fields[email]',
   careerField: 'fields[career]',
 };
+
+// Tool-stack referral (STRATEGY.md §6, monetisation step 2).
+// While `param` is empty, every tool link on the HI-C surfaces is plain — no
+// affiliate relationship. When the owner joins the referral programmes, set
+// `param` to the query string to append (e.g. 'via=aicareer' or 'ref=xxxx').
+// A single param is applied to every tool; per-tool overrides can be added
+// later if the programmes differ. Same opt-in philosophy as emailCapture.action.
+export const toolStackRef = {
+  param: '',
+};
