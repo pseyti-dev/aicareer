@@ -2328,6 +2328,11 @@ export const author = {
   bio: 'Paulo is a data professional with experience in business intelligence and AI product development. He built aicareer.me to help working professionals understand and navigate the impact of artificial intelligence on their careers — combining data expertise with firsthand experience in the AI tools reshaping the job market.',
   expertise: ['Business Intelligence', 'Data Analysis', 'AI Tools & Automation', 'Career Strategy'],
   linkedin: 'https://www.linkedin.com/in/paulonakanishi/',
+  // Author portrait. The pages check at build time whether this file actually
+  // exists in public/ and fall back to an initial-letter avatar if it does not,
+  // so dropping the file in is the only step needed to switch it on — and a
+  // missing file can never ship as a broken image.
+  photo: '/author.jpg',
 };
 
 // ─── Dataset Identity (AI Career Risk Index) ────────────────────────────────
