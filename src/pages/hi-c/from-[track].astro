@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { transitions } from '../../data/transitions.js';
 import { author } from '../../data/careers.js';
 import { hicMeta, definitionShort } from '../../data/hic.js';
+import ReadinessCapture from '../../components/ReadinessCapture.astro';
 
 export function getStaticPaths() {
   return transitions.map((t) => ({ params: { track: t.slug }, props: { t } }));
@@ -190,6 +191,8 @@ const breadcrumbSchema = {
           <p class="measure-wide text-sm leading-relaxed text-muted">{t.trap.body}</p>
         </div>
       </section>
+
+      <ReadinessCapture />
 
       <section aria-labelledby="faq-heading" class="mb-12">
         <h2 id="faq-heading" class="mb-6 text-2xl font-bold text-ink">
