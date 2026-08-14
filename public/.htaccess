@@ -1,8 +1,17 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
-  RewriteRule ^ index.html [QSA,L]
+
+  # Conventional sitemap name. Astro generates sitemap-index.xml, so the URL
+  # every tool tries first (/sitemap.xml) must not fall through to the homepage.
+  # Google reported "sitemap is HTML" because it did exactly that.
+  RewriteRule ^sitemap\.xml$ /sitemap-index.xml [R=301,L]
 </IfModule>
+
+# Serve a real 404 for missing paths instead of the homepage with a 200 status
+# (a soft 404, which search engines penalise). The site is fully static — Astro
+# builds every page as /path/index.html and Apache serves those directly, so no
+# SPA fallback rewrite is needed. The previous .htaccess rewrote every unknown
+# path to index.html, which turned typos, dead links and /sitemap.xml alike into
+# soft 404s.
+ErrorDocument 404 /404.html

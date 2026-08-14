@@ -20,9 +20,20 @@ DIST = Path("dist")
 PUBLIC = Path("public")
 
 
+# Non-indexable pages exempt from the indexable-content invariants (sitemap
+# membership, canonical shape, JSON-LD). The 404 page is served with a 404
+# status, deliberately kept out of the sitemap, and never indexed.
+NON_INDEXABLE = {"404.html"}
+
+
 def load_html_pages() -> list[tuple[Path, str]]:
-    """Return list of (path, content) for all built HTML pages."""
-    return [(p, p.read_text(encoding="utf-8")) for p in sorted(DIST.glob("**/*.html"))]
+    """Return list of (path, content) for all built HTML pages, excluding
+    non-indexable pages like the 404."""
+    return [
+        (p, p.read_text(encoding="utf-8"))
+        for p in sorted(DIST.glob("**/*.html"))
+        if p.relative_to(DIST).as_posix() not in NON_INDEXABLE
+    ]
 
 
 def page_url(path: Path) -> str:
