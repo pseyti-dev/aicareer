@@ -211,3 +211,27 @@ Then verify manually:
 3. JSON-LD schemas are present and valid (paste into Google's Rich Results Test)
 4. `llms.txt` updated if new pages were added (sitemap is auto-generated)
 5. No new above-the-fold render-blocking resources introduced
+
+## SEO measurement loop
+
+The `seo/` directory implements a pre-registered, monthly experiment loop.
+`seo/README.md` has the full rationale. These rules are non-negotiable:
+
+- **Never write or edit the `verdict` or `result` fields in `seo/ledger.yaml`.**
+  Only `seo/evaluate.py` writes them. If a verdict looks wrong, the fix is a new
+  experiment, not an edit.
+- **Never change `hypothesis`, `min_effect`, `treatment`, `control`,
+  `query_filter`, `deployed`, or any window field on an experiment whose status
+  is `live` or `concluded`.** Retire it and open a new one instead.
+- **`deployed` is the date the change reached production**, not the merge date
+  and not today's date. Leave it null until deploy is confirmed.
+- **Never publish or rewrite page content autonomously.** Propose changes in a
+  PR; a human merges. This is a hard limit, not a preference — unsupervised
+  generation at scale is what Google's scaled content abuse policy targets.
+- **`inconclusive` is a valid outcome.** Do not reinterpret it, do not
+  re-slice the data to find a favourable cut, do not lower `min_impressions`
+  to make a result appear.
+- Run `python seo/validate_ledger.py` after any edit to the ledger.
+
+Every experiment PR contains both the code change and its ledger entry, in the
+same commit. They never ship separately.
