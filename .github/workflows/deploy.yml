@@ -3,6 +3,13 @@ name: Build & Deploy to Hostinger
 on:
   push:
     branches: [main]
+    # The weekly GSC pull (gsc-pull.yml) commits data/gsc to main. Without this
+    # filter, each data-only commit would trigger a full FTP redeploy — and the
+    # deploy is dangerous-clean-slate, so it would wipe and rebuild the live site
+    # every Monday for nothing. A push that also changes anything else still
+    # deploys normally.
+    paths-ignore:
+      - 'data/gsc/**'
 
 jobs:
   deploy:
