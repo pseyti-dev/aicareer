@@ -1,0 +1,30 @@
+experiments:
+- id: EXP-2026-08-002
+  site: aicareer.me
+  created: 2026-08-16
+  deployed: null
+  status: proposed
+  change_type: content_expansion
+  hypothesis: 'Expanding the page to cover the specific long-tail queries it already receives
+    impressions for, but does not answer directly, will move average position from the 8-20
+    band into the top 5, because the page currently ranks on topical proximity rather than
+    direct intent match.
+
+    '
+  treatment:
+  - /
+  control: []
+  primary_metric: position
+  query_filter: null
+  baseline_window: 28
+  settle_days: 21
+  eval_window: 28
+  min_effect: 0.15
+  min_impressions: 300
+  verdict: null
+  result: null
+  notes: 'Placeholder. Do not deploy until fetch_gsc.py has accumulated at least 28 days of
+    history and the report has named an actual page and query cluster. Running this on a guess
+    is how the ledger becomes theatre.
+
+    '
