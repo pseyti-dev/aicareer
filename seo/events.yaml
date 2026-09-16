@@ -1,0 +1,33 @@
+# Global confounders.
+# Anything that moves traffic independently of a specific experiment goes here.
+# evaluate.py flags any experiment whose measurement window overlaps an event
+# with `invalidates: true` and downgrades its verdict to `confounded`.
+#
+# Log these as they happen. Reconstructing them six months later is guesswork.
+
+events:
+  - date_start: 2026-08-16
+    date_end: 2026-08-16
+    scope: all            # all | aicareer.me | data-mani.com
+    invalidates: false
+    label: Ledger initialised. No prior experiments are attributable.
+
+  # Examples of what belongs here:
+  #
+  # - date_start: 2026-09-04
+  #   date_end: 2026-09-18
+  #   scope: all
+  #   invalidates: true
+  #   label: Google core update rollout
+  #
+  # - date_start: 2026-10-02
+  #   date_end: 2026-10-02
+  #   scope: data-mani.com
+  #   invalidates: true
+  #   label: Site-wide nav restructure — affects internal link graph everywhere
+  #
+  # - date_start: 2026-11-20
+  #   date_end: 2026-12-05
+  #   scope: aicareer.me
+  #   invalidates: false
+  #   label: TikTok video went viral — referral spike, organic likely unaffected
