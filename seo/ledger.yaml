@@ -1,30 +1,43 @@
 experiments:
-- id: EXP-2026-08-002
-  site: aicareer.me
-  created: 2026-08-16
-  deployed: null
-  status: proposed
-  change_type: content_expansion
-  hypothesis: 'Expanding the page to cover the specific long-tail queries it already receives
-    impressions for, but does not answer directly, will move average position from the 8-20
-    band into the top 5, because the page currently ranks on topical proximity rather than
-    direct intent match.
+  - id: EXP-2026-10-001
+    site: aicareer.me
+    created: 2026-10-19
+    deployed: null
+    status: proposed
+    change_type: content_expansion
+    hypothesis: 'The /hi-c/ page ranks top-5 for its head definitional terms (hi ic, high
+      ic, hi-ic, pos ~4-6) but earns an impression-weighted position of ~8 overall and surfaces
+      for a narrow query set, because it answers the "what is a HI-C" intent but not the
+      adjacent "how does HI-C relate to IC levels (senior / staff / principal)" intent that
+      the same searchers also issue. Adding two tightly-scoped FAQ entries covering that
+      adjacent intent — and deferring the ladder detail to /guides/ic-career-ladder/ to avoid
+      cannibalisation — will raise total impressions on /hi-c/ by at least min_effect, by
+      making the page eligible for the IC-leveling query cluster without diluting the
+      canonical definition.
 
-    '
-  treatment:
-  - /
-  control: []
-  primary_metric: position
-  query_filter: null
-  baseline_window: 28
-  settle_days: 21
-  eval_window: 28
-  min_effect: 0.15
-  min_impressions: 300
-  verdict: null
-  result: null
-  notes: 'Placeholder. Do not deploy until fetch_gsc.py has accumulated at least 28 days of
-    history and the report has named an actual page and query cluster. Running this on a guess
-    is how the ledger becomes theatre.
+      '
+    treatment:
+      - /hi-c/
+    control: []
+    primary_metric: impressions
+    query_filter: null
+    baseline_window: 28
+    settle_days: 21
+    eval_window: 28
+    min_effect: 0.3
+    min_impressions: 150
+    verdict: null
+    result: null
+    notes: "Named from the 2026-10 GSC analysis: the HI-C cluster is the site's emergent
+      traction (impressions roughly doubled Aug->Oct, head terms in striking distance), while
+      the AI-risk-calculator intent is stalled on page 3. Primary metric is impressions, not
+      ctr/clicks: at ~0 baseline clicks those metrics are un-evaluable (relative lift divides
+      by zero -> inconclusive by construction), and the hypothesis mechanism (new query
+      coverage) maps to impressions, not position. Before/after only — there is no comparable
+      control URL in the HI-C cluster, so this cannot separate the change from seasonality;
+      evaluate.py flags this. Expect inconclusive unless the cluster clears the 150-impression
+      floor by the eval window; that is an accepted outcome, not a failure. Set `deployed` to
+      the real production date after merge + deploy, then flip status to live. Replaces the
+      2026-08 homepage placeholder, which was a stand-in awaiting exactly this analysis.
 
-    '
+      "
