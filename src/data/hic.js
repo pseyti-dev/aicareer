@@ -247,6 +247,14 @@ export const faq = [
     a: 'A senior IC owns one slice of a workflow deeply and depends on other functions to ship. A HI-C owns the entire outcome, staffing design, engineering, data and go-to-market themselves with AI. Seniority is necessary but not sufficient — the difference is whether you can close the loop alone.',
   },
   {
+    q: 'How does a HI-C relate to the IC career ladder?',
+    a: 'The IC career ladder — junior, mid, senior, staff, principal — measures increasing depth and scope inside a single craft. The HI-C sits on top of and across it: it assumes roughly staff-level craft in one discipline, then adds adjacent-function coverage through AI and ownership of the whole outcome. In that sense it is the rung AI added above principal, defined by horizontal reach rather than another step of vertical depth. For what each rung of the ladder itself requires, see the IC career ladder guide.',
+  },
+  {
+    q: 'Is a HI-C a senior, staff, or principal-level IC?',
+    a: 'It maps loosely onto the top of the IC ladder, but the level is not the point. Senior, staff and principal measure craft depth and scope within one discipline; the HI-C distinction is horizontal reach across disciplines using AI, plus end-to-end ownership. A staff or principal engineer who still depends on design, data and go-to-market partners to ship is a senior IC, not yet a HI-C. The nearest published pay proxy is those same bands: as of 2026, Staff Engineer median base pay is roughly $244K and Principal roughly $243K in the United States (Glassdoor, 2026).',
+  },
+  {
     q: 'Is a HI-C a manager?',
     a: 'No. A HI-C has no direct reports. Influence comes from the work itself and from leverage others can reuse, not from span of control. Many HI-Cs are former managers who deliberately left the management track.',
   },
