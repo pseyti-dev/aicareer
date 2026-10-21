@@ -2,8 +2,8 @@ experiments:
   - id: EXP-2026-10-001
     site: aicareer.me
     created: 2026-10-19
-    deployed: null
-    status: proposed
+    deployed: 2026-10-20
+    status: live
     change_type: content_expansion
     hypothesis: 'The /hi-c/ page ranks top-5 for its head definitional terms (hi ic, high
       ic, hi-ic, pos ~4-6) but earns an impression-weighted position of ~8 overall and surfaces
@@ -11,16 +11,16 @@ experiments:
       adjacent "how does HI-C relate to IC levels (senior / staff / principal)" intent that
       the same searchers also issue. Adding two tightly-scoped FAQ entries covering that
       adjacent intent — and deferring the ladder detail to /guides/ic-career-ladder/ to avoid
-      cannibalisation — will raise total impressions on /hi-c/ by at least min_effect, by
-      making the page eligible for the IC-leveling query cluster without diluting the
-      canonical definition.
+      cannibalisation — will raise /hi-c/ impressions on the IC-leveling query cluster
+      (query_filter: ic) by at least min_effect, by making the page eligible for that
+      cluster without diluting the canonical definition.
 
       '
     treatment:
       - /hi-c/
     control: []
     primary_metric: impressions
-    query_filter: null
+    query_filter: ic
     baseline_window: 28
     settle_days: 21
     eval_window: 28
@@ -35,9 +35,13 @@ experiments:
       by zero -> inconclusive by construction), and the hypothesis mechanism (new query
       coverage) maps to impressions, not position. Before/after only — there is no comparable
       control URL in the HI-C cluster, so this cannot separate the change from seasonality;
-      evaluate.py flags this. Expect inconclusive unless the cluster clears the 150-impression
-      floor by the eval window; that is an accepted outcome, not a failure. Set `deployed` to
-      the real production date after merge + deploy, then flip status to live. Replaces the
-      2026-08 homepage placeholder, which was a stand-in awaiting exactly this analysis.
+      evaluate.py flags this. query_filter is `ic` (not null): the validator requires a
+      non-null filter to go live, and `ic` scopes the cohort to the IC-leveling queries the
+      new content targets, on /hi-c/ traffic (which is HI-C-specific anyway, so noise is
+      negligible). Expect inconclusive unless that filtered cohort clears the 150-impression
+      floor by the eval window; floor left at 150 on purpose — lowering it to manufacture a
+      verdict is exactly what the loop forbids. deployed = 2026-10-20, the real production
+      date (merged and deployed via Actions->FTP; /hi-c/ confirmed live with the new FAQ).
+      Replaces the 2026-08 homepage placeholder, which was a stand-in awaiting this analysis.
 
       "
