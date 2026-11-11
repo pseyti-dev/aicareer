@@ -22,10 +22,12 @@ jobs:
         env:
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
       - run: python seo/evaluate.py
+      - name: Month stamp for the PR title
+        run: echo "EVAL_MONTH=$(date +%Y-%m)" >> "$GITHUB_ENV"
       - uses: peter-evans/create-pull-request@v6
         with:
           branch: seo/evaluation-${{ github.run_number }}
-          title: "SEO evaluation — $(date +%Y-%m)"
+          title: "SEO evaluation — ${{ env.EVAL_MONTH }}"
           body: |
             Automated verdicts for experiments whose measurement window closed.
             Review `seo/reports/` before merging.
